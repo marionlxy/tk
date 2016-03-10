@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Appliance">
+	<resultMap id="applianceResultMap" type="com.taikang.iu.biz.appliance.model.ApplianceBO">
+		<result property="applianceId" column="APPLIANCE_ID"/>
+		<result property="categoryId" column="CATEGORY_ID"/>
+		<result property="qualityValueId" column="QUALITY_VALUE_ID"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="applianceCoding" column="APPLIANCE_CODING"/>
+		<result property="applianceName" column="APPLIANCE_NAME"/>
+		<result property="sellerName" column="SELLER_NAME"/>
+		<result property="applianceSettlePrice" column="APPLIANCE_SETTLE_PRICE"/>
+		<result property="applianceMarketprice" column="APPLIANCE_MARKETPRICE"/>
+		<result property="interflowPrice" column="INTERFLOW_PRICE"/>
+		<result property="serviceSite" column="SERVICE_SITE"/>
+		<result property="isReturnBills" column="IS_RETURN_BILLS"/>
+		<result property="applianceUnit" column="APPLIANCE_UNIT"/>
+		<result property="applianceCategoryId" column="APPLIANCE_CATEGORY_ID"/>
+		<result property="ismarketable" column="ISMARKETABLE"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+		<result property="sellcount" column="SELLCOUNT"/>
+		<result property="sellerId" column="SELLER_ID"/>
+		<result property="sellerCode" column="SELLER_CODE"/>
+		<result property="describe" column="DESCRIBE"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+  	</resultMap>
+  
+  	<sql id="applianceWhereCondition">
+		<where>
+		1=1
+	  	<if test=" appliance_id != null and appliance_id != '' and appliance_id != 'null' ">
+			<![CDATA[ AND A.APPLIANCE_ID = #{appliance_id} ]]>
+	  	</if>
+	  	<if test=" categoryId != null and categoryId != '' and categoryId != 'null' ">
+			<![CDATA[ AND A.CATEGORY_ID = #{categoryId} ]]>
+	  	</if>
+	  	<if test=" quality_value_id != null and quality_value_id != '' and quality_value_id != 'null' ">
+			<![CDATA[ AND A.QUALITY_VALUE_ID = #{quality_value_id} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" applianceCoding != null and applianceCoding != '' and applianceCoding != 'null' ">
+			<![CDATA[ AND A.APPLIANCE_CODING = #{applianceCoding} ]]>
+	  	</if>
+	  	<if test=" applianceName != null and applianceName != '' and applianceName != 'null' ">
+			<![CDATA[ AND A.APPLIANCE_NAME = #{applianceName} ]]>
+	  	</if>
+	  	<if test=" seller_name != null and seller_name != '' and seller_name != 'null' ">
+			<![CDATA[ AND A.SELLER_NAME = #{seller_name} ]]>
+	  	</if>
+	  	<if test=" appliance_settle_price != null ">
+	  		<![CDATA[ AND A.APPLIANCE_SETTLE_PRICE = ${appliance_settle_price} ]]>
+	  	</if>
+	  	<if test=" appliance_marketprice != null ">
+	  		<![CDATA[ AND A.APPLIANCE_MARKETPRICE = ${appliance_marketprice} ]]>
+	  	</if>
+	  	<if test=" interflow_price != null ">
+	  		<![CDATA[ AND A.INTERFLOW_PRICE = ${interflow_price} ]]>
+	  	</if>
+	  	<if test=" serviceSite != null and serviceSite != '' and serviceSite != 'null' ">
+			<![CDATA[ AND A.SERVICE_SITE = #{serviceSite} ]]>
+	  	</if>
+	  	<if test=" is_return_bills != null and is_return_bills != '' and is_return_bills != 'null' ">
+			<![CDATA[ AND A.IS_RETURN_BILLS = #{is_return_bills} ]]>
+	  	</if>
+	  	<if test=" appliance_unit != null and appliance_unit != '' and appliance_unit != 'null' ">
+			<![CDATA[ AND A.APPLIANCE_UNIT = #{appliance_unit} ]]>
+	  	</if>
+	  	<if test=" appliance_category_id != null and appliance_category_id != '' and appliance_category_id != 'null' ">
+			<![CDATA[ AND A.APPLIANCE_CATEGORY_ID = #{appliance_category_id} ]]>
+	  	</if>
+	  	<if test=" ismarketable != null and ismarketable != '' and ismarketable != 'null' ">
+			<![CDATA[ AND A.ISMARKETABLE = #{ismarketable} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+	  	<if test=" sellcount != null ">
+	  		<![CDATA[ AND A.SELLCOUNT = ${sellcount} ]]>
+	  	</if>
+	  	<if test=" seller_id != null and seller_id != '' and seller_id != 'null' ">
+			<![CDATA[ AND A.SELLER_ID = #{seller_id} ]]>
+	  	</if>
+	  	<if test=" seller_code != null and seller_code != '' and seller_code != 'null' ">
+			<![CDATA[ AND A.SELLER_CODE = #{seller_code} ]]>
+	  	</if>
+	  	<if test=" describe != null and describe != '' and describe != 'null' ">
+			<![CDATA[ AND A.DESCRIBE = #{describe} ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	 order by created_Time DESC
+		</where>
+  	</sql>
+
+  	<insert id="addAppliance"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BIZ_APPLIANCE
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+				<![CDATA[ APPLIANCE_ID , ]]>
+	  		</if>
+	  		<if test=" category_id  != null and  category_id  != ''  and  category_id  != 'null' ">
+				<![CDATA[ CATEGORY_ID , ]]>
+	  		</if>
+	  		<if test=" quality_value_id  != null and  quality_value_id  != ''  and  quality_value_id  != 'null' ">
+				<![CDATA[ QUALITY_VALUE_ID , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" appliance_coding  != null and  appliance_coding  != ''  and  appliance_coding  != 'null' ">
+				<![CDATA[ APPLIANCE_CODING , ]]>
+	  		</if>
+	  		<if test=" appliance_name  != null and  appliance_name  != ''  and  appliance_name  != 'null' ">
+				<![CDATA[ APPLIANCE_NAME , ]]>
+	  		</if>
+	  		<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+				<![CDATA[ SELLER_NAME , ]]>
+	  		</if>
+	  		<if test=" appliance_settle_price  != null ">
+				<![CDATA[ APPLIANCE_SETTLE_PRICE , ]]>
+	  		</if>
+	  		<if test=" appliance_marketprice  != null ">
+				<![CDATA[ APPLIANCE_MARKETPRICE , ]]>
+	  		</if>
+	  		<if test=" interflow_price  != null ">
+				<![CDATA[ INTERFLOW_PRICE , ]]>
+	  		</if>
+	  		<if test=" service_site  != null and  service_site  != ''  and  service_site  != 'null' ">
+				<![CDATA[ SERVICE_SITE , ]]>
+	  		</if>
+	  		<if test=" is_return_bills  != null and  is_return_bills  != ''  and  is_return_bills  != 'null' ">
+				<![CDATA[ IS_RETURN_BILLS , ]]>
+	  		</if>
+	  		<if test=" appliance_unit  != null and  appliance_unit  != ''  and  appliance_unit  != 'null' ">
+				<![CDATA[ APPLIANCE_UNIT , ]]>
+	  		</if>
+	  		<if test=" appliance_category_id  != null and  appliance_category_id  != ''  and  appliance_category_id  != 'null' ">
+				<![CDATA[ APPLIANCE_CATEGORY_ID , ]]>
+	  		</if>
+	  		<if test=" ismarketable  != null and  ismarketable  != ''  and  ismarketable  != 'null' ">
+				<![CDATA[ ISMARKETABLE , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+	  		<if test=" sellcount  != null ">
+				<![CDATA[ SELLCOUNT , ]]>
+	  		</if>
+	  		<if test=" seller_id  != null and  seller_id  != ''  and  seller_id  != 'null' ">
+				<![CDATA[ SELLER_ID , ]]>
+	  		</if>
+	  		<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+				<![CDATA[ SELLER_CODE , ]]>
+	  		</if>
+	  		<if test=" describe  != null and  describe  != ''  and  describe  != 'null' ">
+				<![CDATA[ DESCRIBE , ]]>
+	  		</if>
+	  		<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+	  			<![CDATA[ #{appliance_id} , ]]>
+	  		</if>
+	  		<if test=" category_id  != null and  category_id  != ''  and  category_id  != 'null' ">
+	  			<![CDATA[ #{category_id} , ]]>
+	  		</if>
+	  		<if test=" quality_value_id  != null and  quality_value_id  != ''  and  quality_value_id  != 'null' ">
+	  			<![CDATA[ #{quality_value_id} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" appliance_coding  != null and  appliance_coding  != ''  and  appliance_coding  != 'null' ">
+	  			<![CDATA[ #{appliance_coding} , ]]>
+	  		</if>
+	  		<if test=" appliance_name  != null and  appliance_name  != ''  and  appliance_name  != 'null' ">
+	  			<![CDATA[ #{appliance_name} , ]]>
+	  		</if>
+	  		<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+	  			<![CDATA[ #{seller_name} , ]]>
+	  		</if>
+	  		<if test=" appliance_settle_price  != null">
+	    		<![CDATA[ ${appliance_settle_price} , ]]>
+	  		</if>
+	  		<if test=" appliance_marketprice  != null">
+	    		<![CDATA[ ${appliance_marketprice} , ]]>
+	  		</if>
+	  		<if test=" interflow_price  != null">
+	    		<![CDATA[ ${interflow_price} , ]]>
+	  		</if>
+	  		<if test=" service_site  != null and  service_site  != ''  and  service_site  != 'null' ">
+	  			<![CDATA[ #{service_site} , ]]>
+	  		</if>
+	  		<if test=" is_return_bills  != null and  is_return_bills  != ''  and  is_return_bills  != 'null' ">
+	  			<![CDATA[ #{is_return_bills} , ]]>
+	  		</if>
+	  		<if test=" appliance_unit  != null and  appliance_unit  != ''  and  appliance_unit  != 'null' ">
+	  			<![CDATA[ #{appliance_unit} , ]]>
+	  		</if>
+	  		<if test=" appliance_category_id  != null and  appliance_category_id  != ''  and  appliance_category_id  != 'null' ">
+	  			<![CDATA[ #{appliance_category_id} , ]]>
+	  		</if>
+	  		<if test=" ismarketable  != null and  ismarketable  != ''  and  ismarketable  != 'null' ">
+	  			<![CDATA[ #{ismarketable} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+	  		<if test=" sellcount  != null">
+	    		<![CDATA[ ${sellcount} , ]]>
+	  		</if>
+	  		<if test=" seller_id  != null and  seller_id  != ''  and  seller_id  != 'null' ">
+	  			<![CDATA[ #{seller_id} , ]]>
+	  		</if>
+	  		<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+	  			<![CDATA[ #{seller_code} , ]]>
+	  		</if>
+	  		<if test=" describe  != null and  describe  != ''  and  describe  != 'null' ">
+	  			<![CDATA[ #{describe} , ]]>
+	  		</if>
+	  		<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+				<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+				<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateAppliance" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BIZ_APPLIANCE A ]]>
+		<set>
+	  	<if test=" category_id  != null and  category_id  != ''  and  category_id  != 'null' ">
+	  		<![CDATA[ A.CATEGORY_ID = #{category_id}, ]]>
+	  	</if>
+	  	<if test=" quality_value_id  != null and  quality_value_id  != ''  and  quality_value_id  != 'null' ">
+	  		<![CDATA[ A.QUALITY_VALUE_ID = #{quality_value_id}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" appliance_coding  != null and  appliance_coding  != ''  and  appliance_coding  != 'null' ">
+	  		<![CDATA[ A.APPLIANCE_CODING = #{appliance_coding}, ]]>
+	  	</if>
+	  	<if test=" appliance_name  != null and  appliance_name  != ''  and  appliance_name  != 'null' ">
+	  		<![CDATA[ A.APPLIANCE_NAME = #{appliance_name}, ]]>
+	  	</if>
+	  	<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+	  		<![CDATA[ A.SELLER_NAME = #{seller_name}, ]]>
+	  	</if>
+		<if test=" appliance_settle_price  != null ">
+  			<![CDATA[ A.APPLIANCE_SETTLE_PRICE = ${appliance_settle_price} , ]]>
+		</if>
+		<if test=" appliance_marketprice  != null ">
+  			<![CDATA[ A.APPLIANCE_MARKETPRICE = ${appliance_marketprice} , ]]>
+		</if>
+		<if test=" interflow_price  != null ">
+  			<![CDATA[ A.INTERFLOW_PRICE = ${interflow_price} , ]]>
+		</if>
+	  	<if test=" service_site  != null and  service_site  != ''  and  service_site  != 'null' ">
+	  		<![CDATA[ A.SERVICE_SITE = #{service_site}, ]]>
+	  	</if>
+	  	<if test=" is_return_bills  != null and  is_return_bills  != ''  and  is_return_bills  != 'null' ">
+	  		<![CDATA[ A.IS_RETURN_BILLS = #{is_return_bills}, ]]>
+	  	</if>
+	  	<if test=" appliance_unit  != null and  appliance_unit  != ''  and  appliance_unit  != 'null' ">
+	  		<![CDATA[ A.APPLIANCE_UNIT = #{appliance_unit}, ]]>
+	  	</if>
+	  	<if test=" appliance_category_id  != null and  appliance_category_id  != ''  and  appliance_category_id  != 'null' ">
+	  		<![CDATA[ A.APPLIANCE_CATEGORY_ID = #{appliance_category_id}, ]]>
+	  	</if>
+	  	<if test=" ismarketable  != null and  ismarketable  != ''  and  ismarketable  != 'null' ">
+	  		<![CDATA[ A.ISMARKETABLE = #{ismarketable}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		<if test=" sellcount  != null ">
+  			<![CDATA[ A.SELLCOUNT = ${sellcount} , ]]>
+		</if>
+	  	<if test=" seller_id  != null and  seller_id  != ''  and  seller_id  != 'null' ">
+	  		<![CDATA[ A.SELLER_ID = #{seller_id}, ]]>
+	  	</if>
+	  	<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+	  		<![CDATA[ A.SELLER_CODE = #{seller_code}, ]]>
+	  	</if>
+	  	<if test=" describe  != null and  describe  != ''  and  describe  != 'null' ">
+	  		<![CDATA[ A.DESCRIBE = #{describe}, ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.APPLIANCE_ID = #{appliance_id}]]>
+  	</update>
+  
+  	<delete id="deleteAppliance" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BIZ_APPLIANCE  where APPLIANCE_ID = #{appliance_id} ]]>
+	</delete>
+  
+	<select id="findOneAppliance" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BIZ_APPLIANCE A  ]]>
+		<include refid="applianceWhereCondition" />
+  	</select>
+    
+  	<select id="findAllAppliance" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BIZ_APPLIANCE A ]]>
+		<include refid="applianceWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapAppliance" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BIZ_APPLIANCE A ]]>
+		<include refid="applianceWhereCondition" />
+	</select>
+  
+  	<select id="findApplianceTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BIZ_APPLIANCE A ]]>
+		<include refid="applianceWhereCondition" />
+  	</select>
+  
+  	<select id="queryApplianceForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.*,(select CATEGORY_NAME from `biz_goods_category` b where A.CATEGORY_ID=b.CATEGORY_ID) as CATEGORY_NAME FROM BIZ_APPLIANCE A ]]>
+		<include refid="applianceWhereCondition" />
+  	</select>
+  	
+  	<select id="queryProductSeatForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.*,(select CATEGORY_NAME from `biz_goods_category` b where A.CATEGORY_ID=b.CATEGORY_ID) as CATEGORY_NAME FROM BIZ_APPLIANCE A ]]>
+		where 1=1
+	  	<if test=" applianceCoding != null and applianceCoding != '' and applianceCoding != 'null' ">
+            <![CDATA[ AND A.appliance_coding like concat('%', #{applianceCoding}, '%') ]]>
+        </if>
+        <if test=" applianceName != null and applianceName != '' and applianceName != 'null' ">
+            <![CDATA[ AND A.appliance_name like concat('%', #{applianceName}, '%') ]]>
+        </if>
+        <if test=" categoryId != null and categoryId != '' and categoryId != 'null' ">
+            <![CDATA[ AND A.category_id like concat('%', #{categoryId}, '%') ]]>
+        </if> 
+        <if test=" ismarketable != null and ismarketable != '' and ismarketable != 'null' ">
+			<![CDATA[ AND A.ISMARKETABLE = #{ismarketable} ]]>
+	  	</if>
+  		<if test=" sellerName != null and sellerName != '' and sellerName != 'null' ">
+			<![CDATA[ AND A.SELLER_NAME like concat('%', #{sellerName}, '%')]]>
+	  	</if>
+	  	<if test=" serviceSite != null and serviceSite != '' and serviceSite != 'null' ">
+			<![CDATA[ AND A.SERVICE_SITE = #{serviceSite} ]]>
+	  	</if>
+	  	 order by created_Time DESC	
+  	</select>
+  	
+  	
+  	<select id="queryProductForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.*,(select CATEGORY_NAME from `biz_goods_category` b where A.CATEGORY_ID=b.CATEGORY_ID) as CATEGORY_NAME FROM BIZ_APPLIANCE A 
+		where A.DELFLAG = '0' AND ISMARKETABLE in ('1','3')]]>
+		<if test=" categoryId != null and categoryId != '' and categoryId != 'null' ">
+			<![CDATA[ AND A.CATEGORY_ID = #{categoryId} ]]>
+	  	</if>	
+	  	<if test=" applianceCoding != null and applianceCoding != '' and applianceCoding != 'null' ">
+			   <![CDATA[ AND A.appliance_coding like concat('%', #{applianceCoding}, '%') ]]>
+	  	</if>
+	  	<if test=" applianceName != null and applianceName != '' and applianceName != 'null' ">
+			<![CDATA[ AND A.appliance_name like concat('%', #{applianceName}, '%') ]]>
+	  	</if>
+	  	<if test=" ismarketable != null and ismarketable != '' and ismarketable != 'null' ">
+			<![CDATA[ AND A.ISMARKETABLE = #{ismarketable} ]]>
+	  	</if>
+  		<if test=" sellerName != null and sellerName != '' and sellerName != 'null' ">
+			<![CDATA[ AND A.SELLER_NAME like concat('%', #{sellerName}, '%')]]>
+	  	</if>
+	  	<if test=" serviceSite != null and serviceSite != '' and serviceSite != 'null' ">
+			<![CDATA[ AND A.SERVICE_SITE = #{serviceSite} ]]>
+	  	</if>
+	  	<if test=" applianceName != null and applianceName != '' and applianceName != 'null' ">
+			<![CDATA[ AND A.APPLIANCE_NAME like concat('%', #{applianceName}, '%') ]]>
+	  	</if>
+	  	 order by created_Time DESC	
+  	</select>
+  	
+  	<select id="queryApplianceByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT A.*,(select CATEGORY_NAME from `biz_goods_category` b where A.CATEGORY_ID=b.CATEGORY_ID) as CATEGORY_NAME FROM BIZ_APPLIANCE A
+          where 1=1 
+          AND A.DELFLAG = '0' 
+        <if test=" applianceCoding != null and applianceCoding != '' and applianceCoding != 'null' ">
+            <![CDATA[ AND A.appliance_coding like concat('%', #{applianceCoding}, '%') ]]>
+        </if>
+        <if test=" applianceName != null and applianceName != '' and applianceName != 'null' ">
+            <![CDATA[ AND A.appliance_name like concat('%', #{applianceName}, '%') ]]>
+        </if>
+        <if test=" categoryId != null and categoryId != '' and categoryId != 'null' ">
+            <![CDATA[ AND A.category_id like concat('%', #{categoryId}, '%') ]]>
+        </if> 
+        <if test=" ismarketable != null and ismarketable != '' and ismarketable != 'null' ">
+			<![CDATA[ AND A.ISMARKETABLE = #{ismarketable} ]]>
+	  	</if>
+  		<if test=" sellerName != null and sellerName != '' and sellerName != 'null' ">
+			<![CDATA[ AND A.SELLER_NAME like concat('%', #{sellerName}, '%')]]>
+	  	</if>
+	  	<if test=" serviceSite != null and serviceSite != '' and serviceSite != 'null' ">
+			<![CDATA[ AND A.SERVICE_SITE = #{serviceSite} ]]>
+	  	</if>
+        order by created_Time DESC
+  	</select>
+  	
+</mapper>

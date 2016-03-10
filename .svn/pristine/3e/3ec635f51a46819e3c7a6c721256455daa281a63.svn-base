@@ -1,0 +1,25 @@
+package com.taikang.iu.opt.employee.action;
+
+import com.taikang.udp.framework.common.datastructre.Dto;
+import java.util.List;
+
+import com.taikang.iu.opt.employee.model.EmployeeBO;
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.udp.framework.core.action.IBaseAction;
+
+
+/**
+  * IEmployeeAction
+  */
+
+public interface IEmployeeAction extends IBaseAction { 
+
+	final String ACTION_ID = "employeeAction";
+
+	public List<EmployeeBO> finAllEmp(Dto param); 	
+	
+	/**
+     * 查询天使
+     */
+	public List<EmployeeBO> finAllEmpTS(Dto param) ;
+}

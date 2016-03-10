@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Cemetery">
+	<resultMap id="cemeteryResultMap" type="com.taikang.iu.opt.cemetery.model.CemeteryBO">
+		<result property="cemeteryId" column="CEMETERY_ID"/>
+		<result property="cemeteryCode" column="CEMETERY_CODE"/>
+		<result property="cemeteryName" column="CEMETERY_NAME"/>
+		<result property="cemeteryContent" column="CEMETERY_CONTENT"/>
+		<result property="cemeteryType" column="CEMETERY_TYPE"/>
+		<result property="cemeteryAddrass" column="CEMETERY_ADDRASS"/>
+		<result property="realUrl" column="REAL_URL"/>
+		<result property="signalUrl" column="SIGNAL_URL"/>
+		<result property="longitude" column="LONGITUDE"/>
+		<result property="site" column="SITE"/>
+		<result property="areacode" column="AREACODE"/>
+		<result property="latitude" column="LATITUDE"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="cemeteryWhereCondition">
+		<where>
+	  	<if test=" cemetery_id != null and cemetery_id != '' and cemetery_id != 'null' ">
+			<![CDATA[ AND A.CEMETERY_ID = #{cemetery_id} ]]>
+	  	</if>
+	  	<if test=" cemetery_code != null and cemetery_code != '' and cemetery_code != 'null' ">
+			<![CDATA[ AND A.CEMETERY_CODE = #{cemetery_code} ]]>
+	  	</if>
+	  	<if test=" cemetery_name != null and cemetery_name != '' and cemetery_name != 'null' ">
+			<![CDATA[ AND A.CEMETERY_NAME = #{cemetery_name} ]]>
+	  	</if>
+	  	<if test=" cemetery_content != null and cemetery_content != '' and cemetery_content != 'null' ">
+			<![CDATA[ AND A.CEMETERY_CONTENT = #{cemetery_content} ]]>
+	  	</if>
+	  	<if test=" cemetery_type != null and cemetery_type != '' and cemetery_type != 'null' ">
+			<![CDATA[ AND A.CEMETERY_TYPE = #{cemetery_type} ]]>
+	  	</if>
+	  	<if test=" cemetery_addrass != null and cemetery_addrass != '' and cemetery_addrass != 'null' ">
+			<![CDATA[ AND A.CEMETERY_ADDRASS = #{cemetery_addrass} ]]>
+	  	</if>
+	  	<if test=" real_url != null and real_url != '' and real_url != 'null' ">
+			<![CDATA[ AND A.REAL_URL = #{real_url} ]]>
+	  	</if>
+	  	<if test=" signal_url != null and signal_url != '' and signal_url != 'null' ">
+			<![CDATA[ AND A.SIGNAL_URL = #{signal_url} ]]>
+	  	</if>
+	  	<if test=" longitude != null and longitude != '' and longitude != 'null' ">
+			<![CDATA[ AND A.LONGITUDE = #{longitude} ]]>
+	  	</if>
+	  	<if test=" site != null and site != '' and site != 'null' ">
+			<![CDATA[ AND A.SITE = #{site} ]]>
+	  	</if>
+	  	
+	  	<if test=" areacode != null and areacode != '' and areacode != 'null' ">
+			<![CDATA[ AND A.AREACODE = #{areacode} ]]>
+	  	</if>
+	  	<if test=" latitude != null and latitude != '' and latitude != 'null' ">
+			<![CDATA[ AND A.LATITUDE = #{latitude} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addCemetery"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BIZ_CEMETERY
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" cemetery_id  != null and  cemetery_id  != ''  and  cemetery_id  != 'null' ">
+				<![CDATA[ CEMETERY_ID , ]]>
+	  		</if>
+	  		<if test=" cemetery_code  != null and  cemetery_code  != ''  and  cemetery_code  != 'null' ">
+				<![CDATA[ CEMETERY_CODE , ]]>
+	  		</if>
+	  		<if test=" cemetery_name  != null and  cemetery_name  != ''  and  cemetery_name  != 'null' ">
+				<![CDATA[ CEMETERY_NAME , ]]>
+	  		</if>
+	  		<if test=" cemetery_content  != null and  cemetery_content  != ''  and  cemetery_content  != 'null' ">
+				<![CDATA[ CEMETERY_CONTENT , ]]>
+	  		</if>
+	  		<if test=" cemetery_type != null and cemetery_type != '' and cemetery_type != 'null' ">
+				<![CDATA[ CEMETERY_TYPE ,]]>
+	  		</if>
+	  		<if test=" cemetery_addrass != null and cemetery_addrass != '' and cemetery_addrass != 'null' ">
+				<![CDATA[ CEMETERY_ADDRASS ,]]>
+	  		</if>
+	  		<if test=" real_url  != null and  real_url  != ''  and  real_url  != 'null' ">
+				<![CDATA[ REAL_URL , ]]>
+	  		</if>
+	  		<if test=" signal_url  != null and  signal_url  != ''  and  signal_url  != 'null' ">
+				<![CDATA[ SIGNAL_URL , ]]>
+	  		</if>
+	  		<if test=" longitude  != null and  longitude  != ''  and  longitude  != 'null' ">
+				<![CDATA[ LONGITUDE , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+				<![CDATA[ SITE , ]]>
+	  		</if>
+	  		<if test=" areacode != null and areacode != '' and areacode != 'null' ">
+				<![CDATA[ AREACODE ,]]>
+	  		</if>
+	  		<if test=" latitude  != null and  latitude  != ''  and  latitude  != 'null' ">
+				<![CDATA[ LATITUDE , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" cemetery_id  != null and  cemetery_id  != ''  and  cemetery_id  != 'null' ">
+	  			<![CDATA[ #{cemetery_id} , ]]>
+	  		</if>
+	  		<if test=" cemetery_code  != null and  cemetery_code  != ''  and  cemetery_code  != 'null' ">
+	  			<![CDATA[ #{cemetery_code} , ]]>
+	  		</if>
+	  		<if test=" cemetery_name  != null and  cemetery_name  != ''  and  cemetery_name  != 'null' ">
+	  			<![CDATA[ #{cemetery_name} , ]]>
+	  		</if>
+	  		<if test=" cemetery_content  != null and  cemetery_content  != ''  and  cemetery_content  != 'null' ">
+	  			<![CDATA[ #{cemetery_content} , ]]>
+	  		</if>
+	  		<if test=" cemetery_type != null and cemetery_type != '' and cemetery_type != 'null' ">
+				<![CDATA[ #{cemetery_type}, ]]>
+	  		</if>
+	  		<if test=" cemetery_addrass != null and cemetery_addrass != '' and cemetery_addrass != 'null' ">
+				<![CDATA[ #{cemetery_addrass}, ]]>
+	  		</if>
+	  		<if test=" real_url  != null and  real_url  != ''  and  real_url  != 'null' ">
+	  			<![CDATA[ #{real_url} , ]]>
+	  		</if>
+	  		<if test=" signal_url  != null and  signal_url  != ''  and  signal_url  != 'null' ">
+	  			<![CDATA[ #{signal_url} , ]]>
+	  		</if>
+	  		<if test=" longitude  != null and  longitude  != ''  and  longitude  != 'null' ">
+	  			<![CDATA[ #{longitude} , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  			<![CDATA[ #{site} , ]]>
+	  		</if>
+	  		<if test=" areacode != null and areacode != '' and areacode != 'null' ">
+				<![CDATA[ #{areacode}, ]]>
+	  		</if>
+	  		<if test=" latitude  != null and  latitude  != ''  and  latitude  != 'null' ">
+	  			<![CDATA[ #{latitude} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateCemetery" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BIZ_CEMETERY A ]]>
+		<set>
+	  	<if test=" cemetery_code  != null and  cemetery_code  != ''  and  cemetery_code  != 'null' ">
+	  		<![CDATA[ A.CEMETERY_CODE = #{cemetery_code}, ]]>
+	  	</if>
+	  	<if test=" cemetery_name  != null and  cemetery_name  != ''  and  cemetery_name  != 'null' ">
+	  		<![CDATA[ A.CEMETERY_NAME = #{cemetery_name}, ]]>
+	  	</if>
+	  	<if test=" cemetery_content  != null and  cemetery_content  != ''  and  cemetery_content  != 'null' ">
+	  		<![CDATA[ A.CEMETERY_CONTENT = #{cemetery_content}, ]]>
+	  	</if>
+	  	<if test=" cemetery_type != null and cemetery_type != '' and cemetery_type != 'null' ">
+			<![CDATA[  A.CEMETERY_TYPE = #{cemetery_type} ,]]>
+	  	</if>
+	  	<if test=" cemetery_addrass != null and cemetery_addrass != '' and cemetery_addrass != 'null' ">
+			<![CDATA[  A.CEMETERY_ADDRASS = #{cemetery_addrass} ,]]>
+	  	</if>
+	  	<if test=" real_url  != null and  real_url  != ''  and  real_url  != 'null' ">
+	  		<![CDATA[ A.REAL_URL = #{real_url}, ]]>
+	  	</if>
+	  	<if test=" signal_url  != null and  signal_url  != ''  and  signal_url  != 'null' ">
+	  		<![CDATA[ A.SIGNAL_URL = #{signal_url}, ]]>
+	  	</if>
+	  	<if test=" longitude  != null and  longitude  != ''  and  longitude  != 'null' ">
+	  		<![CDATA[ A.LONGITUDE = #{longitude}, ]]>
+	  	</if>
+	  	<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  		<![CDATA[ A.SITE = #{site}, ]]>
+	  	</if>
+	  	<if test=" areacode != null and areacode != '' and areacode != 'null' ">
+			<![CDATA[ A.AREACODE = #{areacode}, ]]>
+	  	</if>
+	  	<if test=" latitude  != null and  latitude  != ''  and  latitude  != 'null' ">
+	  		<![CDATA[ A.LATITUDE = #{latitude}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.CEMETERY_ID = #{cemetery_id}]]>
+  	</update>
+  
+  	<delete id="deleteCemetery" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BIZ_CEMETERY  where CEMETERY_ID = #{cemetery_id} ]]>
+	</delete>
+  
+	<select id="findOneCemetery" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BIZ_CEMETERY A  ]]>
+		<include refid="cemeteryWhereCondition" />
+  	</select>
+    
+  	<select id="findAllCemetery" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BIZ_CEMETERY A ]]>
+		<include refid="cemeteryWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapCemetery" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BIZ_CEMETERY A ]]>
+		<include refid="cemeteryWhereCondition" />
+	</select>
+  
+  	<select id="findCemeteryTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BIZ_CEMETERY A ]]>
+		<include refid="cemeteryWhereCondition" />
+  	</select>
+  
+  	<select id="queryCemeteryForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BIZ_CEMETERY A ]]>
+		<include refid="cemeteryWhereCondition" />
+  	</select>
+  	
+  	<!-- 按条件分页查询陵园列表 -->
+  	<select id="queryForPageByCondition" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BIZ_CEMETERY A ]]>
+		 where 1=1 
+          AND A.DELFLAG = '0' 
+        <if test=" cemeteryCode != null and cemeteryCode != '' and cemeteryCode != 'null' ">
+            <![CDATA[ AND A.CEMETERY_CODE like concat('%', #{cemeteryCode}, '%') ]]>
+        </if> 
+        <if test=" cemeteryName != null and cemeteryName != '' and cemeteryName != 'null' ">
+            <![CDATA[ AND A.CEMETERY_NAME like concat('%', #{cemeteryName}, '%') ]]>
+        </if> 
+        <if test=" site  != null and  site  != ''  and  site  != 'null' ">
+            <![CDATA[ AND A.SITE = #{site} ]]>
+        </if>
+        <if test=" areacode  != null and  areacode  != ''  and  areacode  != 'null' ">
+            <![CDATA[ AND A.AREACODE = #{areacode} ]]>
+        </if>
+
+          ORDER BY CREATED_TIME DESC
+  	</select>
+</mapper>

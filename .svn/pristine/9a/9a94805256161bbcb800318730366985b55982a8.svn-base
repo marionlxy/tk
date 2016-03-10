@@ -1,0 +1,44 @@
+package com.taikang.iu.opt.employee.service;
+
+import java.util.List;
+
+import com.taikang.iu.opt.employee.model.EmployeeBO;
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+import com.taikang.udp.framework.core.service.IBaseService;
+import com.taikang.udp.sys.model.UserBO;
+
+
+/**
+  * IEmployeeService
+  */
+ 
+ public interface IEmployeeService<T> extends IBaseService<T>{
+ 
+ 	final String SERVICE_ID = "employeeService";  
+
+	public List<EmployeeBO> finAllEmp(EmployeeBO employeeBO);  	
+	/**
+	 * 查询当前登录人同一站点的天使
+	 */
+	
+	public List<EmployeeBO> finAllEmpTS(EmployeeBO employeeBO);
+	/**
+     * 查询天使
+     */
+	public List<EmployeeBO> finAllEmpT(EmployeeBO employeeBO);
+
+	public CurrentPage queryAnglesForPage(CurrentPage page);
+
+	public CurrentPage queryEmployeesForPage(CurrentPage page);
+
+	public void saveEmployeeManage(EmployeeBO employeeBO);
+
+	public void saveUserManage(UserBO user);
+
+	public List<Dto> queryAllEmployeeByCondition(Dto param);
+	public void updateEmployeeManage(EmployeeBO employeeBO);
+ }
+ 
+ 
+ 

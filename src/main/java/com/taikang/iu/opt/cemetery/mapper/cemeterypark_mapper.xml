@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CemeteryPark">
+	<resultMap id="cemeteryParkResultMap" type="com.taikang.iu.opt.cemetery.model.CemeteryParkBO">
+		<result property="parkId" column="PARK_ID"/>
+		<result property="cemeteryId" column="CEMETERY_ID"/>
+		<result property="parkName" column="PARK_NAME"/>
+		<result property="parkCode" column="PARK_CODE"/>
+		<result property="parkContent" column="PARK_CONTENT"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="cemeteryParkWhereCondition">
+		<where>
+	  	<if test=" park_id != null and park_id != '' and park_id != 'null' ">
+			<![CDATA[ AND A.PARK_ID = #{park_id} ]]>
+	  	</if>
+	  	<if test=" cemetery_id != null and cemetery_id != '' and cemetery_id != 'null' ">
+			<![CDATA[ AND A.CEMETERY_ID = #{cemetery_id} ]]>
+	  	</if>
+	  	<if test=" park_name != null and park_name != '' and park_name != 'null' ">
+			<![CDATA[ AND A.PARK_NAME = #{park_name} ]]>
+	  	</if>
+	  	<if test=" park_code != null and park_code != '' and park_code != 'null' ">
+			<![CDATA[ AND A.PARK_CODE = #{park_code} ]]>
+	  	</if>
+	  	<if test=" park_content != null and park_content != '' and park_content != 'null' ">
+			<![CDATA[ AND A.PARK_CONTENT = #{park_content} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addCemeteryPark"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BIZ_CEMETERY_PARK
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" park_id  != null and  park_id  != ''  and  park_id  != 'null' ">
+				<![CDATA[ PARK_ID , ]]>
+	  		</if>
+	  		<if test=" cemetery_id  != null and  cemetery_id  != ''  and  cemetery_id  != 'null' ">
+				<![CDATA[ CEMETERY_ID , ]]>
+	  		</if>
+	  		<if test=" park_name  != null and  park_name  != ''  and  park_name  != 'null' ">
+				<![CDATA[ PARK_NAME , ]]>
+	  		</if>
+	  		<if test=" park_code  != null and  park_code  != ''  and  park_code  != 'null' ">
+				<![CDATA[ PARK_CODE , ]]>
+	  		</if>
+	  		<if test=" park_content  != null and  park_content  != ''  and  park_content  != 'null' ">
+				<![CDATA[ PARK_CONTENT , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" park_id  != null and  park_id  != ''  and  park_id  != 'null' ">
+	  			<![CDATA[ #{park_id} , ]]>
+	  		</if>
+	  		<if test=" cemetery_id  != null and  cemetery_id  != ''  and  cemetery_id  != 'null' ">
+	  			<![CDATA[ #{cemetery_id} , ]]>
+	  		</if>
+	  		<if test=" park_name  != null and  park_name  != ''  and  park_name  != 'null' ">
+	  			<![CDATA[ #{park_name} , ]]>
+	  		</if>
+	  		<if test=" park_code  != null and  park_code  != ''  and  park_code  != 'null' ">
+	  			<![CDATA[ #{park_code} , ]]>
+	  		</if>
+	  		<if test=" park_content  != null and  park_content  != ''  and  park_content  != 'null' ">
+	  			<![CDATA[ #{park_content} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateCemeteryPark" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BIZ_CEMETERY_PARK A ]]>
+		<set>
+	  	<if test=" cemetery_id  != null and  cemetery_id  != ''  and  cemetery_id  != 'null' ">
+	  		<![CDATA[ A.CEMETERY_ID = #{cemetery_id}, ]]>
+	  	</if>
+	  	<if test=" park_name  != null and  park_name  != ''  and  park_name  != 'null' ">
+	  		<![CDATA[ A.PARK_NAME = #{park_name}, ]]>
+	  	</if>
+	  	<if test=" park_code  != null and  park_code  != ''  and  park_code  != 'null' ">
+	  		<![CDATA[ A.PARK_CODE = #{park_code}, ]]>
+	  	</if>
+	  	<if test=" park_content  != null and  park_content  != ''  and  park_content  != 'null' ">
+	  		<![CDATA[ A.PARK_CONTENT = #{park_content}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.PARK_ID = #{park_id}]]>
+  	</update>
+  	
+  	<update id="newDeleteCemeteryPark" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BIZ_CEMETERY_PARK A ]]>
+		<set>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.DELFLAG = '0' and A.CEMETERY_ID = #{cemetery_id}]]>
+  	</update>
+  
+  	<delete id="deleteCemeteryPark" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BIZ_CEMETERY_PARK A where A.CEMETERY_ID = #{cemetery_id} ]]>
+	</delete>
+  
+	<select id="findOneCemeteryPark" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BIZ_CEMETERY_PARK A  ]]>
+		<include refid="cemeteryParkWhereCondition" />
+  	</select>
+  	
+  	<select id="findNewOneCemeteryPark" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BIZ_CEMETERY_PARK A where A.DELFLAG = '0' ]]>
+		<if test=" park_id  != null and  park_id  != ''  and  park_id  != 'null' ">
+	  		<![CDATA[AND A.PARK_ID = #{park_id} ]]>
+	  	</if>
+  	</select>
+    
+  	<select id="findAllCemeteryPark" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BIZ_CEMETERY_PARK A ]]>
+		<include refid="cemeteryParkWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapCemeteryPark" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BIZ_CEMETERY_PARK A]]>
+		<include refid="cemeteryParkWhereCondition" />
+	</select>
+	
+	<select id="findAllMapCemeteryParkByC" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BIZ_CEMETERY_PARK A where A.DELFLAG = '0' ]]>
+		<if test=" cemeteryId != null and cemeteryId != '' and cemeteryId != 'null' ">
+			<![CDATA[ AND A.CEMETERY_ID = #{cemeteryId} ]]>
+	  	</if>
+	</select>
+  
+  	<select id="findCemeteryParkTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BIZ_CEMETERY_PARK A ]]>
+		<include refid="cemeteryParkWhereCondition" />
+  	</select>
+  
+  	<select id="queryCemeteryParkForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BIZ_CEMETERY_PARK A ]]>
+		<include refid="cemeteryParkWhereCondition" />
+  	</select>
+  	
+  	<select id="queryNewForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.* FROM BIZ_CEMETERY_PARK A where 1=1 
+		AND A.DELFLAG = '0'
+		<if test=" cemeteryId != null and cemeteryId != '' and cemeteryId != 'null' ">
+			<![CDATA[ AND A.CEMETERY_ID = #{cemeteryId} ]]>
+	  	</if>
+  	</select>
+</mapper>

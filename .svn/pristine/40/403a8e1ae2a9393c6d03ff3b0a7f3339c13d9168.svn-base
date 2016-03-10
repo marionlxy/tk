@@ -1,0 +1,16 @@
+package com.taikang.iu.opt.finance.service;
+
+import com.taikang.udp.framework.core.service.IBaseService;
+import java.util.Arrays;
+
+/**
+  * IFinanceService
+  */
+ 
+ public interface IFinanceService<T> extends IBaseService<T>{
+ 
+ 	final String SERVICE_ID = "financeService";  	
+ }
+ 
+ 
+ 

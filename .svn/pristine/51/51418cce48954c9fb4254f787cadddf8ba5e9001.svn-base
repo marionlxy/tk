@@ -1,0 +1,99 @@
+package com.taikang.iu.opt.employee.action.impl;
+
+
+import com.taikang.udp.framework.common.datastructre.impl.BaseDto;
+import javax.annotation.Resource;
+import java.util.List;
+import com.taikang.udp.framework.core.action.impl.BaseActionImpl;
+import com.taikang.iu.opt.employee.service.IEmployeeService;
+import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.iu.opt.employee.action.IEmployeeAction;
+import com.taikang.iu.opt.employee.model.EmployeeBO;
+import org.springframework.stereotype.Service;
+
+/**
+  * EmployeeAction
+  */
+  @Service(IEmployeeAction.ACTION_ID)
+public class EmployeeActionImpl extends BaseActionImpl 
+  implements IEmployeeAction {
+
+    /**
+      * 注入service
+      */
+    @Resource(name=IEmployeeService.SERVICE_ID)
+	private IEmployeeService<EmployeeBO> employeeService;	
+	
+	/**
+	  * 增加数据
+	  */
+	public void insertObject(Dto param) {
+		logger.debug("<======EmployeeAction--addEmployee======>");
+		
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class , param);
+		employeeService.insertObject(employeeBO);
+	}
+	
+	/**
+      * 修改数据
+      */
+	public void updateObject(Dto param){
+		logger.debug("<======EmployeeAction--updateEmployee======>");
+		
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class , param);
+		employeeService.updateObject(employeeBO);
+	}
+
+	 /**
+      * 删除数据
+      */
+	public void deleteObject(Dto param) {
+		logger.debug("<======EmployeeAction--deleteEmployee======>");
+		
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class , param);
+		employeeService.deleteObject(employeeBO);
+	}
+	
+	/**
+      * 查询单条数据
+      */
+	public Dto findOne(Dto param) {
+		logger.debug("<======EmployeeAction--findOneEmployee======>");
+		
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class , param);
+		return employeeService.findOne(employeeBO).toDto();//返回的BO对象自动转换成Dto返回
+	}  
+	
+	/**
+      * 查询所有数据
+      */
+	public List<Dto> findAll(Dto param) {
+		logger.debug("<======EmployeeAction--findAllEmployee======>");
+				
+		return employeeService.findAllMap(param);
+	} 
+	
+		
+	 /**
+      * 分页查询数据
+      */
+	public CurrentPage queryForPage(CurrentPage currentPage){
+		logger.debug("<======EmployeeAction--queryEmployeeForPage======>");
+		
+		return employeeService.queryForPage(currentPage);
+	}
+
+	public List<EmployeeBO> finAllEmp(Dto param) {
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class , param);
+		return employeeService.finAllEmp(employeeBO);
+	}
+	
+	/**
+     * 查询天使
+     */
+	public List<EmployeeBO> finAllEmpTS(Dto param) {
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class , param);
+		return employeeService.finAllEmpTS(employeeBO);
+	}
+}

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Qualityvalue">
+	<resultMap id="qualityvalueResultMap" type="com.taikang.iu.biz.qualityvalue.model.QualityvalueBO">
+		<result property="qualityValueId" column="QUALITY_VALUE_ID"/>
+		<result property="qualityId" column="QUALITY_ID"/>
+		<result property="qualityValueName" column="QUALITY_VALUE_NAME"/>
+		<result property="state" column="STATE"/>
+		<result property="sort" column="SORT"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="qualityvalueWhereCondition">
+		<where>
+	  	<if test=" quality_value_id != null and quality_value_id != '' and quality_value_id != 'null' ">
+			<![CDATA[ AND A.QUALITY_VALUE_ID = #{quality_value_id} ]]>
+	  	</if>
+	  	<if test=" quality_id != null and quality_id != '' and quality_id != 'null' ">
+			<![CDATA[ AND A.QUALITY_ID = #{quality_id} ]]>
+	  	</if>
+	  	<if test=" quality_value_name != null and quality_value_name != '' and quality_value_name != 'null' ">
+			<![CDATA[ AND A.QUALITY_VALUE_NAME = #{quality_value_name} ]]>
+	  	</if>
+	  	<if test=" state != null and state != '' and state != 'null' ">
+			<![CDATA[ AND A.STATE = #{state} ]]>
+	  	</if>
+	  	<if test=" sort != null ">
+	  		<![CDATA[ AND A.SORT = ${sort} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addQualityvalue"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BIZ_QUALITY_VALUE
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" quality_value_id  != null and  quality_value_id  != ''  and  quality_value_id  != 'null' ">
+				<![CDATA[ QUALITY_VALUE_ID , ]]>
+	  		</if>
+	  		<if test=" quality_id  != null and  quality_id  != ''  and  quality_id  != 'null' ">
+				<![CDATA[ QUALITY_ID , ]]>
+	  		</if>
+	  		<if test=" quality_value_name  != null and  quality_value_name  != ''  and  quality_value_name  != 'null' ">
+				<![CDATA[ QUALITY_VALUE_NAME , ]]>
+	  		</if>
+	  		<if test=" state  != null and  state  != ''  and  state  != 'null' ">
+				<![CDATA[ STATE , ]]>
+	  		</if>
+	  		<if test=" sort  != null ">
+				<![CDATA[ SORT , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" quality_value_id  != null and  quality_value_id  != ''  and  quality_value_id  != 'null' ">
+	  			<![CDATA[ #{quality_value_id} , ]]>
+	  		</if>
+	  		<if test=" quality_id  != null and  quality_id  != ''  and  quality_id  != 'null' ">
+	  			<![CDATA[ #{quality_id} , ]]>
+	  		</if>
+	  		<if test=" quality_value_name  != null and  quality_value_name  != ''  and  quality_value_name  != 'null' ">
+	  			<![CDATA[ #{quality_value_name} , ]]>
+	  		</if>
+	  		<if test=" state  != null and  state  != ''  and  state  != 'null' ">
+	  			<![CDATA[ #{state} , ]]>
+	  		</if>
+	  		<if test=" sort  != null">
+	    		<![CDATA[ ${sort} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateQualityvalue" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BIZ_QUALITY_VALUE A ]]>
+		<set>
+	  	<if test=" quality_id  != null and  quality_id  != ''  and  quality_id  != 'null' ">
+	  		<![CDATA[ A.QUALITY_ID = #{quality_id}, ]]>
+	  	</if>
+	  	<if test=" quality_value_name  != null and  quality_value_name  != ''  and  quality_value_name  != 'null' ">
+	  		<![CDATA[ A.QUALITY_VALUE_NAME = #{quality_value_name}, ]]>
+	  	</if>
+	  	<if test=" state  != null and  state  != ''  and  state  != 'null' ">
+	  		<![CDATA[ A.STATE = #{state}, ]]>
+	  	</if>
+		<if test=" sort  != null ">
+  			<![CDATA[ A.SORT = ${sort} , ]]>
+		</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.QUALITY_VALUE_ID = #{quality_value_id}]]>
+  	</update>
+  
+  	<delete id="deleteQualityvalue" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BIZ_QUALITY_VALUE  where QUALITY_VALUE_ID = #{quality_value_id} ]]>
+	</delete>
+  
+	<select id="findOneQualityvalue" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BIZ_QUALITY_VALUE A  ]]>
+		<include refid="qualityvalueWhereCondition" />
+  	</select>
+    
+  	<select id="findAllQualityvalue" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BIZ_QUALITY_VALUE A ]]>
+		<include refid="qualityvalueWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapQualityvalue" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BIZ_QUALITY_VALUE A ]]>
+		<include refid="qualityvalueWhereCondition" />
+	</select>
+  
+  	<select id="findQualityvalueTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BIZ_QUALITY_VALUE A ]]>
+		<include refid="qualityvalueWhereCondition" />
+  	</select>
+  
+  	<select id="queryQualityvalueForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BIZ_QUALITY_VALUE A ]]>
+		<include refid="qualityvalueWhereCondition" />
+  	</select>
+  	<!-- 注意：查询语句要重新写 -->
+  	<select id="queryQualityvalueByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT A.*,(select `QUALITY_NAME` from `biz_quality_measure` B where A.quality_id=B.quality_id) as QUALITY_NAME
+		  FROM BIZ_QUALITY_VALUE A
+          where 1=1 
+          AND A.DELFLAG = '0' 
+        <if test=" qualityValueName != null and qualityValueName != '' and qualityValueName != 'null' ">
+            <![CDATA[ AND A.QUALITY_VALUE_NAME like concat('%', #{qualityValueName}, '%') ]]>
+        </if> 
+         <if test=" qualityId != null and qualityId != '' and qualityId != 'null' ">
+            <![CDATA[ AND A.QUALITY_ID like concat('%', #{qualityId}, '%') ]]>
+         </if> 
+          ORDER BY A.SORT 
+  	</select>
+</mapper>

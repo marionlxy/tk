@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Custom">
+	<resultMap id="customResultMap" type="com.taikang.iu.opt.custom.model.CustomBO">
+		<result property="customId" column="CUSTOM_ID"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="customName" column="CUSTOM_NAME"/>
+		<result property="customSex" column="CUSTOM_SEX"/>
+		<result property="customTel" column="CUSTOM_TEL"/>
+		<result property="customProvince" column="CUSTOM_PROVINCE"/>
+		<result property="customCity" column="CUSTOM_CITY"/>
+		<result property="customAddress" column="CUSTOM_ADDRESS"/>
+		<result property="customType" column="CUSTOM_TYPE"/>
+		<result property="customPwd" column="CUSTOM_PWD"/>
+		<result property="customRepwd" column="CUSTOM_REPWD"/>
+		<result property="identCode" column="IDENT_CODE"/>
+		<result property="customEmail" column="CUSTOM_EMAIL"/>
+		<result property="registerType" column="REGISTER_TYPE"/>
+		<result property="deadName" column="DEAD_NAME"/>
+		<result property="deadAge" column="DEAD_AGE"/>
+		<result property="deadSex" column="DEAD_SEX"/>
+		<result property="deadAddress" column="DEAD_ADDRESS"/>
+		<result property="deadCemetery" column="DEAD_CEMETERY"/>
+		<result property="deadRelation" column="DEAD_RELATION"/>
+		<result property="deadImg" column="DEAD_IMG"/>
+		<result property="deadLifetime" column="DEAD_LIFETIME"/>
+		<result property="loginName" column="LOGIN_NAME"/>
+		<result property="openId" column="OPEN_ID"/>
+		<result property="loginState" column="LOGIN_STATE"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="customWhereCondition">
+		<where>
+	  	<if test=" custom_id != null and custom_id != '' and custom_id != 'null' ">
+			<![CDATA[ AND A.CUSTOM_ID = #{custom_id} ]]>
+	  	</if>
+	  	<if test=" user_id != null and user_id != '' and user_id != 'null' ">
+			<![CDATA[ AND A.USER_ID = #{user_id} ]]>
+	  	</if>
+	  	<if test=" custom_name != null and custom_name != '' and custom_name != 'null' ">
+			<![CDATA[ AND A.CUSTOM_NAME = #{custom_name} ]]>
+	  	</if>
+	  	<if test=" custom_sex != null and custom_sex != '' and custom_sex != 'null' ">
+			<![CDATA[ AND A.CUSTOM_SEX = #{custom_sex} ]]>
+	  	</if>
+	  	<if test=" custom_tel != null and custom_tel != '' and custom_tel != 'null' ">
+			<![CDATA[ AND A.CUSTOM_TEL = #{custom_tel} ]]>
+	  	</if>
+	  	<if test=" custom_province != null and custom_province != '' and custom_province != 'null' ">
+			<![CDATA[ AND A.CUSTOM_PROVINCE = #{custom_province} ]]>
+	  	</if>
+	  	<if test=" custom_city != null and custom_city != '' and custom_city != 'null' ">
+			<![CDATA[ AND A.CUSTOM_CITY = #{custom_city} ]]>
+	  	</if>
+	  	<if test=" custom_address != null and custom_address != '' and custom_address != 'null' ">
+			<![CDATA[ AND A.CUSTOM_ADDRESS = #{custom_address} ]]>
+	  	</if>
+	  	<if test=" custom_type != null and custom_type != '' and custom_type != 'null' ">
+			<![CDATA[ AND A.CUSTOM_TYPE = #{custom_type} ]]>
+	  	</if>
+	  	<if test=" custom_pwd != null and custom_pwd != '' and custom_pwd != 'null' ">
+			<![CDATA[ AND A.CUSTOM_PWD = #{custom_pwd} ]]>
+	  	</if>
+	  	<if test=" custom_repwd != null and custom_repwd != '' and custom_repwd != 'null' ">
+			<![CDATA[ AND A.CUSTOM_REPWD = #{custom_repwd} ]]>
+	  	</if>
+	  	<if test=" ident_code != null and ident_code != '' and ident_code != 'null' ">
+			<![CDATA[ AND A.IDENT_CODE = #{ident_code} ]]>
+	  	</if>
+	  	<if test=" custom_email != null and custom_email != '' and custom_email != 'null' ">
+			<![CDATA[ AND A.CUSTOM_EMAIL = #{custom_email} ]]>
+	  	</if>
+	  	<if test=" register_type != null and register_type != '' and register_type != 'null' ">
+			<![CDATA[ AND A.REGISTER_TYPE = #{register_type} ]]>
+	  	</if>
+	  	<if test=" dead_name != null and dead_name != '' and dead_name != 'null' ">
+			<![CDATA[ AND A.DEAD_NAME = #{dead_name} ]]>
+	  	</if>
+	  	<if test=" dead_age != null and dead_age != '' and dead_age != 'null' ">
+			<![CDATA[ AND A.DEAD_AGE = #{dead_age} ]]>
+	  	</if>
+	  	<if test=" dead_sex != null and dead_sex != '' and dead_sex != 'null' ">
+			<![CDATA[ AND A.DEAD_SEX = #{dead_sex} ]]>
+	  	</if>
+	  	<if test=" dead_address != null and dead_address != '' and dead_address != 'null' ">
+			<![CDATA[ AND A.DEAD_ADDRESS = #{dead_address} ]]>
+	  	</if>
+	  	<if test=" dead_cemetery != null and dead_cemetery != '' and dead_cemetery != 'null' ">
+			<![CDATA[ AND A.DEAD_CEMETERY = #{dead_cemetery} ]]>
+	  	</if>
+	  	<if test=" dead_relation != null and dead_relation != '' and dead_relation != 'null' ">
+			<![CDATA[ AND A.DEAD_RELATION = #{dead_relation} ]]>
+	  	</if>
+	  	<if test=" dead_img != null and dead_img != '' and dead_img != 'null' ">
+			<![CDATA[ AND A.DEAD_IMG = #{dead_img} ]]>
+	  	</if>
+	  	<if test=" dead_lifetime != null and dead_lifetime != '' and dead_lifetime != 'null' ">
+			<![CDATA[ AND A.DEAD_LIFETIME = #{dead_lifetime} ]]>
+	  	</if>
+	  	<if test=" login_name != null and login_name != '' and login_name != 'null' ">
+			<![CDATA[ AND A.LOGIN_NAME = #{login_name} ]]>
+	  	</if>
+	  	<if test=" open_id != null and open_id != '' and open_id != 'null' ">
+			<![CDATA[ AND A.OPEN_ID = #{open_id} ]]>
+	  	</if>
+	  	<if test=" login_state != null and login_state != '' and login_state != 'null' ">
+			<![CDATA[ AND A.LOGIN_STATE = #{login_state} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addCustom"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO OPT_CUSTOM
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" custom_id  != null and  custom_id  != ''  and  custom_id  != 'null' ">
+				<![CDATA[ CUSTOM_ID , ]]>
+	  		</if>
+	  		<if test=" user_id  != null and  user_id  != ''  and  user_id  != 'null' ">
+				<![CDATA[ USER_ID , ]]>
+	  		</if>
+	  		<if test=" custom_name  != null and  custom_name  != ''  and  custom_name  != 'null' ">
+				<![CDATA[ CUSTOM_NAME , ]]>
+	  		</if>
+	  		<if test=" custom_sex  != null and  custom_sex  != ''  and  custom_sex  != 'null' ">
+				<![CDATA[ CUSTOM_SEX , ]]>
+	  		</if>
+	  		<if test=" custom_tel  != null and  custom_tel  != ''  and  custom_tel  != 'null' ">
+				<![CDATA[ CUSTOM_TEL , ]]>
+	  		</if>
+	  		<if test=" custom_province  != null and  custom_province  != ''  and  custom_province  != 'null' ">
+				<![CDATA[ CUSTOM_PROVINCE , ]]>
+	  		</if>
+	  		<if test=" custom_city  != null and  custom_city  != ''  and  custom_city  != 'null' ">
+				<![CDATA[ CUSTOM_CITY , ]]>
+	  		</if>
+	  		<if test=" custom_address  != null and  custom_address  != ''  and  custom_address  != 'null' ">
+				<![CDATA[ CUSTOM_ADDRESS , ]]>
+	  		</if>
+	  		<if test=" custom_type  != null and  custom_type  != ''  and  custom_type  != 'null' ">
+				<![CDATA[ CUSTOM_TYPE , ]]>
+	  		</if>
+	  		<if test=" custom_pwd  != null and  custom_pwd  != ''  and  custom_pwd  != 'null' ">
+				<![CDATA[ CUSTOM_PWD , ]]>
+	  		</if>
+	  		<if test=" custom_repwd  != null and  custom_repwd  != ''  and  custom_repwd  != 'null' ">
+				<![CDATA[ CUSTOM_REPWD , ]]>
+	  		</if>
+	  		<if test=" ident_code  != null and  ident_code  != ''  and  ident_code  != 'null' ">
+				<![CDATA[ IDENT_CODE , ]]>
+	  		</if>
+	  		<if test=" custom_email  != null and  custom_email  != ''  and  custom_email  != 'null' ">
+				<![CDATA[ CUSTOM_EMAIL , ]]>
+	  		</if>
+	  		<if test=" register_type  != null and  register_type  != ''  and  register_type  != 'null' ">
+				<![CDATA[ REGISTER_TYPE , ]]>
+	  		</if>
+	  		<if test=" dead_name  != null and  dead_name  != ''  and  dead_name  != 'null' ">
+				<![CDATA[ DEAD_NAME , ]]>
+	  		</if>
+	  		<if test=" dead_age  != null and  dead_age  != ''  and  dead_age  != 'null' ">
+				<![CDATA[ DEAD_AGE , ]]>
+	  		</if>
+	  		<if test=" dead_sex  != null and  dead_sex  != ''  and  dead_sex  != 'null' ">
+				<![CDATA[ DEAD_SEX , ]]>
+	  		</if>
+	  		<if test=" dead_address  != null and  dead_address  != ''  and  dead_address  != 'null' ">
+				<![CDATA[ DEAD_ADDRESS , ]]>
+	  		</if>
+	  		<if test=" dead_cemetery  != null and  dead_cemetery  != ''  and  dead_cemetery  != 'null' ">
+				<![CDATA[ DEAD_CEMETERY , ]]>
+	  		</if>
+	  		<if test=" dead_relation  != null and  dead_relation  != ''  and  dead_relation  != 'null' ">
+				<![CDATA[ DEAD_RELATION , ]]>
+	  		</if>
+	  		<if test=" dead_img  != null and  dead_img  != ''  and  dead_img  != 'null' ">
+				<![CDATA[ DEAD_IMG , ]]>
+	  		</if>
+	  		<if test=" dead_lifetime  != null and  dead_lifetime  != ''  and  dead_lifetime  != 'null' ">
+				<![CDATA[ DEAD_LIFETIME , ]]>
+	  		</if>
+	  		<if test=" login_name  != null and  login_name  != ''  and  login_name  != 'null' ">
+				<![CDATA[ LOGIN_NAME , ]]>
+	  		</if>
+	  		<if test=" open_id  != null and  open_id  != ''  and  open_id  != 'null' ">
+				<![CDATA[ OPEN_ID , ]]>
+	  		</if>
+	  		<if test=" login_state  != null and  login_state  != ''  and  login_state  != 'null' ">
+				<![CDATA[ LOGIN_STATE , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" custom_id  != null and  custom_id  != ''  and  custom_id  != 'null' ">
+	  			<![CDATA[ #{custom_id} , ]]>
+	  		</if>
+	  		<if test=" user_id  != null and  user_id  != ''  and  user_id  != 'null' ">
+	  			<![CDATA[ #{user_id} , ]]>
+	  		</if>
+	  		<if test=" custom_name  != null and  custom_name  != ''  and  custom_name  != 'null' ">
+	  			<![CDATA[ #{custom_name} , ]]>
+	  		</if>
+	  		<if test=" custom_sex  != null and  custom_sex  != ''  and  custom_sex  != 'null' ">
+	  			<![CDATA[ #{custom_sex} , ]]>
+	  		</if>
+	  		<if test=" custom_tel  != null and  custom_tel  != ''  and  custom_tel  != 'null' ">
+	  			<![CDATA[ #{custom_tel} , ]]>
+	  		</if>
+	  		<if test=" custom_province  != null and  custom_province  != ''  and  custom_province  != 'null' ">
+	  			<![CDATA[ #{custom_province} , ]]>
+	  		</if>
+	  		<if test=" custom_city  != null and  custom_city  != ''  and  custom_city  != 'null' ">
+	  			<![CDATA[ #{custom_city} , ]]>
+	  		</if>
+	  		<if test=" custom_address  != null and  custom_address  != ''  and  custom_address  != 'null' ">
+	  			<![CDATA[ #{custom_address} , ]]>
+	  		</if>
+	  		<if test=" custom_type  != null and  custom_type  != ''  and  custom_type  != 'null' ">
+	  			<![CDATA[ #{custom_type} , ]]>
+	  		</if>
+	  		<if test=" custom_pwd  != null and  custom_pwd  != ''  and  custom_pwd  != 'null' ">
+	  			<![CDATA[ #{custom_pwd} , ]]>
+	  		</if>
+	  		<if test=" custom_repwd  != null and  custom_repwd  != ''  and  custom_repwd  != 'null' ">
+	  			<![CDATA[ #{custom_repwd} , ]]>
+	  		</if>
+	  		<if test=" ident_code  != null and  ident_code  != ''  and  ident_code  != 'null' ">
+	  			<![CDATA[ #{ident_code} , ]]>
+	  		</if>
+	  		<if test=" custom_email  != null and  custom_email  != ''  and  custom_email  != 'null' ">
+	  			<![CDATA[ #{custom_email} , ]]>
+	  		</if>
+	  		<if test=" register_type  != null and  register_type  != ''  and  register_type  != 'null' ">
+	  			<![CDATA[ #{register_type} , ]]>
+	  		</if>
+	  		<if test=" dead_name  != null and  dead_name  != ''  and  dead_name  != 'null' ">
+	  			<![CDATA[ #{dead_name} , ]]>
+	  		</if>
+	  		<if test=" dead_age  != null and  dead_age  != ''  and  dead_age  != 'null' ">
+	  			<![CDATA[ #{dead_age} , ]]>
+	  		</if>
+	  		<if test=" dead_sex  != null and  dead_sex  != ''  and  dead_sex  != 'null' ">
+	  			<![CDATA[ #{dead_sex} , ]]>
+	  		</if>
+	  		<if test=" dead_address  != null and  dead_address  != ''  and  dead_address  != 'null' ">
+	  			<![CDATA[ #{dead_address} , ]]>
+	  		</if>
+	  		<if test=" dead_cemetery  != null and  dead_cemetery  != ''  and  dead_cemetery  != 'null' ">
+	  			<![CDATA[ #{dead_cemetery} , ]]>
+	  		</if>
+	  		<if test=" dead_relation  != null and  dead_relation  != ''  and  dead_relation  != 'null' ">
+	  			<![CDATA[ #{dead_relation} , ]]>
+	  		</if>
+	  		<if test=" dead_img  != null and  dead_img  != ''  and  dead_img  != 'null' ">
+	  			<![CDATA[ #{dead_img} , ]]>
+	  		</if>
+	  		<if test=" dead_lifetime  != null and  dead_lifetime  != ''  and  dead_lifetime  != 'null' ">
+	  			<![CDATA[ #{dead_lifetime} , ]]>
+	  		</if>
+	  		<if test=" login_name  != null and  login_name  != ''  and  login_name  != 'null' ">
+	  			<![CDATA[ #{login_name} , ]]>
+	  		</if>
+	  		<if test=" open_id  != null and  open_id  != ''  and  open_id  != 'null' ">
+	  			<![CDATA[ #{open_id} , ]]>
+	  		</if>
+	  		<if test=" login_state  != null and  login_state  != ''  and  login_state  != 'null' ">
+	  			<![CDATA[ #{login_state} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateCustom" parameterType="java.util.Map">
+		<![CDATA[ UPDATE OPT_CUSTOM A ]]>
+		<set>
+		<if test=" user_id  != null and  user_id  != ''  and  user_id  != 'null' ">
+	  		<![CDATA[ A.USER_ID = #{user_id}, ]]>
+	  	</if>
+	  	<if test=" custom_name  != null and  custom_name  != ''  and  custom_name  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_NAME = #{custom_name}, ]]>
+	  	</if>
+	  	<if test=" custom_sex  != null and  custom_sex  != ''  and  custom_sex  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_SEX = #{custom_sex}, ]]>
+	  	</if>
+	  	<if test=" custom_tel  != null and  custom_tel  != ''  and  custom_tel  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_TEL = #{custom_tel}, ]]>
+	  	</if>
+	  	<if test=" custom_province  != null and  custom_province  != ''  and  custom_province  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_PROVINCE = #{custom_province}, ]]>
+	  	</if>
+	  	<if test=" custom_city  != null and  custom_city  != ''  and  custom_city  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_CITY = #{custom_city}, ]]>
+	  	</if>
+	  	<if test=" custom_address  != null and  custom_address  != ''  and  custom_address  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_ADDRESS = #{custom_address}, ]]>
+	  	</if>
+	  	<if test=" custom_type  != null and  custom_type  != ''  and  custom_type  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_TYPE = #{custom_type}, ]]>
+	  	</if>
+	  	<if test=" custom_pwd  != null and  custom_pwd  != ''  and  custom_pwd  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_PWD = #{custom_pwd}, ]]>
+	  	</if>
+	  	<if test=" custom_repwd  != null and  custom_repwd  != ''  and  custom_repwd  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_REPWD = #{custom_repwd}, ]]>
+	  	</if>
+	  	<if test=" ident_code  != null and  ident_code  != ''  and  ident_code  != 'null' ">
+	  		<![CDATA[ A.IDENT_CODE = #{ident_code}, ]]>
+	  	</if>
+	  	<if test=" custom_email  != null and  custom_email  != ''  and  custom_email  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_EMAIL = #{custom_email}, ]]>
+	  	</if>
+	  	<if test=" register_type  != null and  register_type  != ''  and  register_type  != 'null' ">
+	  		<![CDATA[ A.REGISTER_TYPE = #{register_type}, ]]>
+	  	</if>
+	  	<if test=" dead_name  != null and  dead_name  != ''  and  dead_name  != 'null' ">
+	  		<![CDATA[ A.DEAD_NAME = #{dead_name}, ]]>
+	  	</if>
+	  	<if test=" dead_age  != null and  dead_age  != ''  and  dead_age  != 'null' ">
+	  		<![CDATA[ A.DEAD_AGE = #{dead_age}, ]]>
+	  	</if>
+	  	<if test=" dead_sex  != null and  dead_sex  != ''  and  dead_sex  != 'null' ">
+	  		<![CDATA[ A.DEAD_SEX = #{dead_sex}, ]]>
+	  	</if>
+	  	<if test=" dead_address  != null and  dead_address  != ''  and  dead_address  != 'null' ">
+	  		<![CDATA[ A.DEAD_ADDRESS = #{dead_address}, ]]>
+	  	</if>
+	  	<if test=" dead_cemetery  != null and  dead_cemetery  != ''  and  dead_cemetery  != 'null' ">
+	  		<![CDATA[ A.DEAD_CEMETERY = #{dead_cemetery}, ]]>
+	  	</if>
+	  	<if test=" dead_relation  != null and  dead_relation  != ''  and  dead_relation  != 'null' ">
+	  		<![CDATA[ A.DEAD_RELATION = #{dead_relation}, ]]>
+	  	</if>
+	  	<if test=" dead_img  != null and  dead_img  != ''  and  dead_img  != 'null' ">
+	  		<![CDATA[ A.DEAD_IMG = #{dead_img}, ]]>
+	  	</if>
+	  	<if test=" dead_lifetime  != null and  dead_lifetime  != ''  and  dead_lifetime  != 'null' ">
+	  		<![CDATA[ A.DEAD_LIFETIME = #{dead_lifetime}, ]]>
+	  	</if>
+	  	<if test=" login_name  != null and  login_name  != ''  and  login_name  != 'null' ">
+	  		<![CDATA[ A.LOGIN_NAME = #{login_name}, ]]>
+	  	</if>
+	  	<if test=" open_id  != null and  open_id  != ''  and  open_id  != 'null' ">
+	  		<![CDATA[ A.OPEN_ID = #{open_id}, ]]>
+	  	</if>
+	  	<if test=" login_state  != null and  login_state  != ''  and  login_state  != 'null' ">
+	  		<![CDATA[ A.LOGIN_STATE = #{login_state}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.CUSTOM_ID = #{custom_id}]]>
+  	</update>
+  
+  	<delete id="deleteCustom" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM OPT_CUSTOM A where A.CUSTOM_ID = #{custom_id} ]]>
+	</delete>
+  
+	<select id="findOneCustom" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM OPT_CUSTOM A  ]]>
+		<include refid="customWhereCondition" />
+  	</select>
+    
+  	<select id="findAllCustom" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM OPT_CUSTOM A ]]>
+		<include refid="customWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapCustom" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM OPT_CUSTOM A ]]>
+		<include refid="customWhereCondition" />
+	</select>
+  
+  	<select id="findCustomTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM OPT_CUSTOM A ]]>
+		<include refid="customWhereCondition" />
+  	</select>
+  
+  	<select id="queryCustomForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM OPT_CUSTOM A ]]>
+		<include refid="customWhereCondition" />
+  	</select>
+</mapper>

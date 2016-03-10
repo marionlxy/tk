@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cloSeller">
+	<resultMap id="cloSellerResultMap" type="com.taikang.iu.opt.finance.cloaccount.model.cloSellerBO">
+		<result property="sellerId" column="SELLER_ID"/>
+		<result property="sellerName" column="SELLER_NAME"/>
+		<result property="sellerCode" column="SELLER_CODE"/>
+		<result property="sellerLinkman" column="SELLER_LINKMAN"/>
+		<result property="sellerTel" column="SELLER_TEL"/>
+		<result property="sellerAddress" column="SELLER_ADDRESS"/>
+		<result property="site" column="SITE"/>
+		<result property="bankName" column="BANK_NAME"/>
+		<result property="bankAccount" column="BANK_ACCOUNT"/>
+		<result property="sellerType" column="SELLER_TYPE"/>
+		<result property="accountHolder" column="ACCOUNT_HOLDER"/>
+		<result property="sellerState" column="SELLER_STATE"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="delflag" column="DELFLAG"/>
+		<result property="version" column="VERSION"/>
+  	</resultMap>
+  
+  	<sql id="cloSellerWhereCondition">
+		<where>
+	  	<if test=" seller_id != null and seller_id != '' and seller_id != 'null' ">
+			<![CDATA[ AND A.SELLER_ID = #{seller_id} ]]>
+	  	</if>
+	  	<if test=" seller_name != null and seller_name != '' and seller_name != 'null' ">
+			<![CDATA[ AND A.SELLER_NAME = #{seller_name} ]]>
+	  	</if>
+	  	<if test=" seller_code != null and seller_code != '' and seller_code != 'null' ">
+			<![CDATA[ AND A.SELLER_CODE = #{seller_code} ]]>
+	  	</if>
+	  	<if test=" seller_linkman != null and seller_linkman != '' and seller_linkman != 'null' ">
+			<![CDATA[ AND A.SELLER_LINKMAN = #{seller_linkman} ]]>
+	  	</if>
+	  	<if test=" seller_tel != null and seller_tel != '' and seller_tel != 'null' ">
+			<![CDATA[ AND A.SELLER_TEL = #{seller_tel} ]]>
+	  	</if>
+	  	<if test=" seller_address != null and seller_address != '' and seller_address != 'null' ">
+			<![CDATA[ AND A.SELLER_ADDRESS = #{seller_address} ]]>
+	  	</if>
+	  	<if test=" site != null and site != '' and site != 'null' ">
+			<![CDATA[ AND A.SITE = #{site} ]]>
+	  	</if>
+	  	<if test=" bank_name != null and bank_name != '' and bank_name != 'null' ">
+			<![CDATA[ AND A.BANK_NAME = #{bank_name} ]]>
+	  	</if>
+	  	<if test=" bank_account != null and bank_account != '' and bank_account != 'null' ">
+			<![CDATA[ AND A.BANK_ACCOUNT = #{bank_account} ]]>
+	  	</if>
+	  	<if test=" seller_type != null and seller_type != '' and seller_type != 'null' ">
+			<![CDATA[ AND A.SELLER_TYPE = #{seller_type} ]]>
+	  	</if>
+	  	<if test=" account_holder != null and account_holder != '' and account_holder != 'null' ">
+			<![CDATA[ AND A.ACCOUNT_HOLDER = #{account_holder} ]]>
+	  	</if>
+	  	<if test=" seller_state != null and seller_state != '' and seller_state != 'null' ">
+			<![CDATA[ AND A.SELLER_STATE = #{seller_state} ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addcloSeller"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BIZ_SELLER
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" seller_id  != null and  seller_id  != ''  and  seller_id  != 'null' ">
+				<![CDATA[ SELLER_ID , ]]>
+	  		</if>
+	  		<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+				<![CDATA[ SELLER_NAME , ]]>
+	  		</if>
+	  		<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+				<![CDATA[ SELLER_CODE , ]]>
+	  		</if>
+	  		<if test=" seller_linkman  != null and  seller_linkman  != ''  and  seller_linkman  != 'null' ">
+				<![CDATA[ SELLER_LINKMAN , ]]>
+	  		</if>
+	  		<if test=" seller_tel  != null and  seller_tel  != ''  and  seller_tel  != 'null' ">
+				<![CDATA[ SELLER_TEL , ]]>
+	  		</if>
+	  		<if test=" seller_address  != null and  seller_address  != ''  and  seller_address  != 'null' ">
+				<![CDATA[ SELLER_ADDRESS , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+				<![CDATA[ SITE , ]]>
+	  		</if>
+	  		<if test=" bank_name  != null and  bank_name  != ''  and  bank_name  != 'null' ">
+				<![CDATA[ BANK_NAME , ]]>
+	  		</if>
+	  		<if test=" bank_account  != null and  bank_account  != ''  and  bank_account  != 'null' ">
+				<![CDATA[ BANK_ACCOUNT , ]]>
+	  		</if>
+	  		<if test=" seller_type  != null and  seller_type  != ''  and  seller_type  != 'null' ">
+				<![CDATA[ SELLER_TYPE , ]]>
+	  		</if>
+	  		<if test=" account_holder  != null and  account_holder  != ''  and  account_holder  != 'null' ">
+				<![CDATA[ ACCOUNT_HOLDER , ]]>
+	  		</if>
+	  		<if test=" seller_state  != null and  seller_state  != ''  and  seller_state  != 'null' ">
+				<![CDATA[ SELLER_STATE , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" seller_id  != null and  seller_id  != ''  and  seller_id  != 'null' ">
+	  			<![CDATA[ #{seller_id} , ]]>
+	  		</if>
+	  		<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+	  			<![CDATA[ #{seller_name} , ]]>
+	  		</if>
+	  		<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+	  			<![CDATA[ #{seller_code} , ]]>
+	  		</if>
+	  		<if test=" seller_linkman  != null and  seller_linkman  != ''  and  seller_linkman  != 'null' ">
+	  			<![CDATA[ #{seller_linkman} , ]]>
+	  		</if>
+	  		<if test=" seller_tel  != null and  seller_tel  != ''  and  seller_tel  != 'null' ">
+	  			<![CDATA[ #{seller_tel} , ]]>
+	  		</if>
+	  		<if test=" seller_address  != null and  seller_address  != ''  and  seller_address  != 'null' ">
+	  			<![CDATA[ #{seller_address} , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  			<![CDATA[ #{site} , ]]>
+	  		</if>
+	  		<if test=" bank_name  != null and  bank_name  != ''  and  bank_name  != 'null' ">
+	  			<![CDATA[ #{bank_name} , ]]>
+	  		</if>
+	  		<if test=" bank_account  != null and  bank_account  != ''  and  bank_account  != 'null' ">
+	  			<![CDATA[ #{bank_account} , ]]>
+	  		</if>
+	  		<if test=" seller_type  != null and  seller_type  != ''  and  seller_type  != 'null' ">
+	  			<![CDATA[ #{seller_type} , ]]>
+	  		</if>
+	  		<if test=" account_holder  != null and  account_holder  != ''  and  account_holder  != 'null' ">
+	  			<![CDATA[ #{account_holder} , ]]>
+	  		</if>
+	  		<if test=" seller_state  != null and  seller_state  != ''  and  seller_state  != 'null' ">
+	  			<![CDATA[ #{seller_state} , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updatecloSeller" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BIZ_SELLER A ]]>
+		<set>
+	  	<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+	  		<![CDATA[ A.SELLER_NAME = #{seller_name}, ]]>
+	  	</if>
+	  	<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+	  		<![CDATA[ A.SELLER_CODE = #{seller_code}, ]]>
+	  	</if>
+	  	<if test=" seller_linkman  != null and  seller_linkman  != ''  and  seller_linkman  != 'null' ">
+	  		<![CDATA[ A.SELLER_LINKMAN = #{seller_linkman}, ]]>
+	  	</if>
+	  	<if test=" seller_tel  != null and  seller_tel  != ''  and  seller_tel  != 'null' ">
+	  		<![CDATA[ A.SELLER_TEL = #{seller_tel}, ]]>
+	  	</if>
+	  	<if test=" seller_address  != null and  seller_address  != ''  and  seller_address  != 'null' ">
+	  		<![CDATA[ A.SELLER_ADDRESS = #{seller_address}, ]]>
+	  	</if>
+	  	<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  		<![CDATA[ A.SITE = #{site}, ]]>
+	  	</if>
+	  	<if test=" bank_name  != null and  bank_name  != ''  and  bank_name  != 'null' ">
+	  		<![CDATA[ A.BANK_NAME = #{bank_name}, ]]>
+	  	</if>
+	  	<if test=" bank_account  != null and  bank_account  != ''  and  bank_account  != 'null' ">
+	  		<![CDATA[ A.BANK_ACCOUNT = #{bank_account}, ]]>
+	  	</if>
+	  	<if test=" seller_type  != null and  seller_type  != ''  and  seller_type  != 'null' ">
+	  		<![CDATA[ A.SELLER_TYPE = #{seller_type}, ]]>
+	  	</if>
+	  	<if test=" account_holder  != null and  account_holder  != ''  and  account_holder  != 'null' ">
+	  		<![CDATA[ A.ACCOUNT_HOLDER = #{account_holder}, ]]>
+	  	</if>
+	  	<if test=" seller_state  != null and  seller_state  != ''  and  seller_state  != 'null' ">
+	  		<![CDATA[ A.SELLER_STATE = #{seller_state}, ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+		</set>
+		<![CDATA[ where A.SELLER_ID = #{seller_id}]]>
+  	</update>
+  
+  	<delete id="deletecloSeller" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BIZ_SELLER A where A.SELLER_ID = #{seller_id} ]]>
+	</delete>
+  
+	<select id="findOnecloSeller" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BIZ_SELLER A  ]]>
+		<include refid="cloSellerWhereCondition" />
+  	</select>
+    
+  	<select id="findAllcloSeller" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BIZ_SELLER A ]]>
+		<include refid="cloSellerWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapcloSeller" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BIZ_SELLER A ]]>
+		<include refid="cloSellerWhereCondition" />
+	</select>
+  
+  	<select id="findcloSellerTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BIZ_SELLER A ]]>
+		<include refid="cloSellerWhereCondition" />
+  	</select>
+  
+  	<select id="querycloSellerForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ 		
+		SELECT * FROM 
+		(SELECT 
+		A.ORDER_ID, A.ORDER_CODE,OS.SUB_CODE  AS subCode ,OS.SUB_ID AS subID,
+		A.ORDER_TYPE,A.SETTLE_PRICE AS sellerPrice,S.SELLER_TYPE AS sellerType,A.CREATED_TIME as createTime,
+    		A.SELLER_CODE AS sellerCode,A.BALANCE_STATE AS BalanceState,A.SELLER_NAME AS sellerName
+		 FROM 
+		opt_order A
+		LEFT JOIN 
+		opt_order_sub OS 
+		ON A.ORDER_ID = OS.ORDER_ID AND A.ORDER_CODE = OS.ORDER_CODE  join biz_seller S
+    		ON A.SELLER_CODE=S.SELLER_CODE 
+    		WHERE A.ORDER_STATE=16
+       		UNION 
+       		SELECT 
+		A.ORDER_ID, A.ORDER_CODE,OS.SUB_CODE  AS subCode ,OS.SUB_ID,
+		A.ORDER_TYPE,OS.SETTLE_PRICE AS sellerPrice,S.SELLER_TYPE AS sellerType,A.CREATED_TIME as createTime,
+    		OS.SELLER_CODE AS sellerCode,OS.BALANCE_STATE AS BalanceState,OS.SELLER_NAME AS sellerName
+		 FROM 
+		opt_order A
+		LEFT JOIN 
+		opt_order_sub OS 
+		ON A.ORDER_ID = OS.ORDER_ID AND A.ORDER_CODE = OS.ORDER_CODE  join biz_seller S
+    		ON  S.SELLER_CODE=OS.SELLER_CODE 
+    		WHERE A.ORDER_STATE=16) AS L where 1=1 ]]>
+		<include refid="cloSellerWhereCondition" />
+        	<if test=" sellerCode != null and sellerCode != '' and sellerCode != 'null' ">
+           		 <![CDATA[ AND sellerCode like concat('%', #{sellerCode}, '%') ]]>
+        	</if>
+        	<if test=" sellerName != null and sellerName != '' and sellerName != 'null' ">
+           		 <![CDATA[ AND sellerName like concat('%', #{sellerName}, '%') ]]>
+        	</if> 
+        	<if test=" sellerType != null and sellerType != '' and sellerType != 'null' ">
+           		 <![CDATA[ AND sellerType = #{sellerType} ]]>
+        	</if>
+        	ORDER BY createTime DESC
+  	</select>
+  	<select id="queryCountPrice" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ 
+		SELECT sum(sellerPrice) as countPrice FROM 
+		(SELECT 
+		A.ORDER_ID, A.ORDER_CODE,OS.SUB_CODE  AS subCode ,OS.SUB_ID AS subID,
+		A.ORDER_TYPE,A.SETTLE_PRICE AS sellerPrice,S.SELLER_TYPE AS sellerType,
+    		A.SELLER_CODE AS sellerCode,A.BALANCE_STATE AS BalanceState,A.SELLER_NAME AS sellerName
+		 FROM 
+		opt_order A
+		LEFT JOIN 
+		opt_order_sub OS 
+		ON A.ORDER_ID = OS.ORDER_ID AND A.ORDER_CODE = OS.ORDER_CODE  join biz_seller S
+    		ON A.SELLER_CODE=S.SELLER_CODE 
+    		WHERE A.ORDER_STATE=16]]>
+    		<if test=" sellerCode != null and sellerCode != '' and sellerCode != 'null' ">
+           		 <![CDATA[ AND A.SELLER_CODE like concat('%', #{sellerCode}, '%') ]]>
+        	</if>
+        	<if test=" sellerName != null and sellerName != '' and sellerName != 'null' ">
+           		 <![CDATA[ AND A.SELLER_NAME like concat('%', #{sellerName}, '%') ]]>
+        	</if> 
+        	<if test=" sellerType != null and sellerType != '' and sellerType != 'null' ">
+           		 <![CDATA[ AND S.SELLER_TYPE = #{sellerType} ]]>
+        	</if>
+       		<![CDATA[ UNION ]]>
+       	<![CDATA[ 	SELECT 
+		A.ORDER_ID, A.ORDER_CODE,OS.SUB_CODE  AS subCode ,OS.SUB_ID,
+		A.ORDER_TYPE,OS.SETTLE_PRICE AS sellerPrice,S.SELLER_TYPE AS sellerType,
+    		OS.SELLER_CODE AS sellerCode,OS.BALANCE_STATE AS BalanceState,OS.SELLER_NAME AS sellerName
+		 FROM 
+		opt_order A
+		LEFT JOIN 
+		opt_order_sub OS 
+		ON A.ORDER_ID = OS.ORDER_ID AND A.ORDER_CODE = OS.ORDER_CODE  join biz_seller S
+    		ON  S.SELLER_CODE=OS.SELLER_CODE 
+    		WHERE A.ORDER_STATE=16 ]]>
+    			<if test=" sellerCode != null and sellerCode != '' and sellerCode != 'null' ">
+           		 <![CDATA[ AND OS.SELLER_CODE like concat('%', #{sellerCode}, '%') ]]>
+        	</if>
+        	<if test=" sellerName != null and sellerName != '' and sellerName != 'null' ">
+           		 <![CDATA[ AND OS.SELLER_NAME like concat('%', #{sellerName}, '%') ]]>
+        	</if> 
+        	<if test=" sellerType != null and sellerType != '' and sellerType != 'null' ">
+           		 <![CDATA[ AND S.SELLER_TYPE = #{sellerType} ]]>
+        	</if>
+    		<![CDATA[ ) AS L where 1=1 
+    		]]>
+		<include refid="cloSellerWhereCondition" />
+  	</select>
+
+</mapper>

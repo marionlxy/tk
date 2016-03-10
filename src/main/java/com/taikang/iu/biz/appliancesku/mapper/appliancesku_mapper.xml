@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Appliancesku">
+	<resultMap id="applianceskuResultMap" type="com.taikang.iu.biz.appliancesku.model.ApplianceskuBO">
+		<result property="skuId" column="SKU_ID"/>
+		<result property="applianceId" column="APPLIANCE_ID"/>
+		<result property="stock" column="STOCK"/>
+		<result property="price" column="PRICE"/>
+		<result property="code" column="CODE"/>
+		<result property="state" column="STATE"/>
+		<result property="skuName" column="SKU_NAME"/>
+		<result property="qualityNames" column="QUALITY_NAMES"/>
+		<result property="qualityMeasuresId" column="QUALITY_MEASURES_ID"/>
+		<result property="qualityValuesId" column="QUALITY_VALUES_ID"/>
+		<result property="sellerId" column="SELLER_ID"/>
+		<result property="sellerCode" column="SELLER_CODE"/>
+		<result property="sellerName" column="SELLER_NAME"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="qualityIds" column="QUALITY_IDS"/>
+  	</resultMap>
+  
+  	<sql id="applianceskuWhereCondition">
+		<where>
+	  	<if test=" sku_id != null and sku_id != '' and sku_id != 'null' ">
+			<![CDATA[ AND A.SKU_ID = #{sku_id} ]]>
+	  	</if>
+	  	<if test=" applianceId != null and applianceId != '' and applianceId != 'null' ">
+			<![CDATA[ AND A.APPLIANCE_ID = #{applianceId} ]]>
+	  	</if>	  	
+	  	<if test=" stock != null ">
+	  		<![CDATA[ AND A.STOCK = ${stock} ]]>
+	  	</if>
+	  	<if test=" price != null ">
+	  		<![CDATA[ AND A.PRICE = ${price} ]]>
+	  	</if>
+	  	<if test=" code != null and code != '' and code != 'null' ">
+			<![CDATA[ AND A.CODE = #{code} ]]>
+	  	</if>
+	  	<if test=" state != null and state != '' and state != 'null' ">
+			<![CDATA[ AND A.STATE = #{state} ]]>
+	  	</if>
+	  	<if test=" sku_name != null and sku_name != '' and sku_name != 'null' ">
+			<![CDATA[ AND A.SKU_NAME = #{sku_name} ]]>
+	  	</if>
+	  	<if test=" quality_names != null and quality_names != '' and quality_names != 'null' ">
+			<![CDATA[ AND A.QUALITY_NAMES = #{quality_names} ]]>
+	  	</if>
+	  	<if test=" quality_measures_id != null and quality_measures_id != '' and quality_measures_id != 'null' ">
+			<![CDATA[ AND A.QUALITY_MEASURES_ID = #{quality_measures_id} ]]>
+	  	</if>
+	  	<if test=" quality_values_id != null and quality_values_id != '' and quality_values_id != 'null' ">
+			<![CDATA[ AND A.QUALITY_VALUES_ID = #{quality_values_id} ]]>
+	  	</if>
+	  	<if test=" seller_id != null and seller_id != '' and seller_id != 'null' ">
+			<![CDATA[ AND A.SELLER_ID = #{seller_id} ]]>
+	  	</if>
+	  	<if test=" seller_code != null and seller_code != '' and seller_code != 'null' ">
+			<![CDATA[ AND A.SELLER_CODE = #{seller_code} ]]>
+	  	</if>
+	  	<if test=" seller_name != null and seller_name != '' and seller_name != 'null' ">
+			<![CDATA[ AND A.SELLER_NAME = #{seller_name} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" quality_ids != null and quality_ids != '' and quality_ids != 'null' ">
+			<![CDATA[ AND A.QUALITY_IDS = #{quality_ids} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addAppliancesku"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BIZ_APPLIANCE_SKU
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" sku_id  != null and  sku_id  != ''  and  sku_id  != 'null' ">
+				<![CDATA[ SKU_ID , ]]>
+	  		</if>
+	  		<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+				<![CDATA[ APPLIANCE_ID , ]]>
+	  		</if>
+	  		<if test=" stock  != null ">
+				<![CDATA[ STOCK , ]]>
+	  		</if>
+	  		<if test=" price  != null ">
+				<![CDATA[ PRICE , ]]>
+	  		</if>
+	  		<if test=" code  != null and  code  != ''  and  code  != 'null' ">
+				<![CDATA[ CODE , ]]>
+	  		</if>
+	  		<if test=" state  != null and  state  != ''  and  state  != 'null' ">
+				<![CDATA[ STATE , ]]>
+	  		</if>
+	  		<if test=" sku_name  != null and  sku_name  != ''  and  sku_name  != 'null' ">
+				<![CDATA[ SKU_NAME , ]]>
+	  		</if>
+	  		<if test=" quality_names  != null and  quality_names  != ''  and  quality_names  != 'null' ">
+				<![CDATA[ QUALITY_NAMES , ]]>
+	  		</if>
+	  		<if test=" quality_measures_id  != null and  quality_measures_id  != ''  and  quality_measures_id  != 'null' ">
+				<![CDATA[ QUALITY_MEASURES_ID , ]]>
+	  		</if>
+	  		<if test=" quality_values_id  != null and  quality_values_id  != ''  and  quality_values_id  != 'null' ">
+				<![CDATA[ QUALITY_VALUES_ID , ]]>
+	  		</if>
+	  		<if test=" seller_id  != null and  seller_id  != ''  and  seller_id  != 'null' ">
+				<![CDATA[ SELLER_ID , ]]>
+	  		</if>
+	  		<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+				<![CDATA[ SELLER_CODE , ]]>
+	  		</if>
+	  		<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+				<![CDATA[ SELLER_NAME , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" quality_ids  != null and  quality_ids  != ''  and  quality_ids  != 'null' ">
+				<![CDATA[ QUALITY_IDS , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" sku_id  != null and  sku_id  != ''  and  sku_id  != 'null' ">
+	  			<![CDATA[ #{sku_id} , ]]>
+	  		</if>
+	  		<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+	  			<![CDATA[ #{appliance_id} , ]]>
+	  		</if>
+	  		<if test=" stock  != null">
+	    		<![CDATA[ ${stock} , ]]>
+	  		</if>
+	  		<if test=" price  != null">
+	    		<![CDATA[ ${price} , ]]>
+	  		</if>
+	  		<if test=" code  != null and  code  != ''  and  code  != 'null' ">
+	  			<![CDATA[ #{code} , ]]>
+	  		</if>
+	  		<if test=" state  != null and  state  != ''  and  state  != 'null' ">
+	  			<![CDATA[ #{state} , ]]>
+	  		</if>
+	  		<if test=" sku_name  != null and  sku_name  != ''  and  sku_name  != 'null' ">
+	  			<![CDATA[ #{sku_name} , ]]>
+	  		</if>
+	  		<if test=" quality_names  != null and  quality_names  != ''  and  quality_names  != 'null' ">
+	  			<![CDATA[ #{quality_names} , ]]>
+	  		</if>
+	  		<if test=" quality_measures_id  != null and  quality_measures_id  != ''  and  quality_measures_id  != 'null' ">
+	  			<![CDATA[ #{quality_measures_id} , ]]>
+	  		</if>
+	  		<if test=" quality_values_id  != null and  quality_values_id  != ''  and  quality_values_id  != 'null' ">
+	  			<![CDATA[ #{quality_values_id} , ]]>
+	  		</if>
+	  		<if test=" seller_id  != null and  seller_id  != ''  and  seller_id  != 'null' ">
+	  			<![CDATA[ #{seller_id} , ]]>
+	  		</if>
+	  		<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+	  			<![CDATA[ #{seller_code} , ]]>
+	  		</if>
+	  		<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+	  			<![CDATA[ #{seller_name} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" quality_ids  != null and  quality_ids  != ''  and  quality_ids  != 'null' ">
+	  			<![CDATA[ #{quality_ids} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 		<update id="updateSKUByApplianceId" parameterType="java.util.Map">
+			<![CDATA[ UPDATE BIZ_APPLIANCE_SKU set price=${price} where APPLIANCE_ID=#{appliance_id}  ]]>
+		</update>
+  	<update id="updateAppliancesku" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BIZ_APPLIANCE_SKU A ]]>
+		<set>
+	  	<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+	  		<![CDATA[ A.APPLIANCE_ID = #{appliance_id}, ]]>
+	  	</if>
+		<if test=" stock  != null ">
+  			<![CDATA[ A.STOCK = ${stock} , ]]>
+		</if>
+		<if test=" price  != null ">
+  			<![CDATA[ A.PRICE = ${price} , ]]>
+		</if>
+	  	<if test=" code  != null and  code  != ''  and  code  != 'null' ">
+	  		<![CDATA[ A.CODE = #{code}, ]]>
+	  	</if>
+	  	<if test=" state  != null and  state  != ''  and  state  != 'null' ">
+	  		<![CDATA[ A.STATE = #{state}, ]]>
+	  	</if>
+	  	<if test=" sku_name  != null and  sku_name  != ''  and  sku_name  != 'null' ">
+	  		<![CDATA[ A.SKU_NAME = #{sku_name}, ]]>
+	  	</if>
+	  	<if test=" quality_names  != null and  quality_names  != ''  and  quality_names  != 'null' ">
+	  		<![CDATA[ A.QUALITY_NAMES = #{quality_names}, ]]>
+	  	</if>
+	  	<if test=" quality_measures_id  != null and  quality_measures_id  != ''  and  quality_measures_id  != 'null' ">
+	  		<![CDATA[ A.QUALITY_MEASURES_ID = #{quality_measures_id}, ]]>
+	  	</if>
+	  	<if test=" quality_values_id  != null and  quality_values_id  != ''  and  quality_values_id  != 'null' ">
+	  		<![CDATA[ A.QUALITY_VALUES_ID = #{quality_values_id}, ]]>
+	  	</if>
+	  	<if test=" seller_id  != null and  seller_id  != ''  and  seller_id  != 'null' ">
+	  		<![CDATA[ A.SELLER_ID = #{seller_id}, ]]>
+	  	</if>
+	  	<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+	  		<![CDATA[ A.SELLER_CODE = #{seller_code}, ]]>
+	  	</if>
+	  	<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+	  		<![CDATA[ A.SELLER_NAME = #{seller_name}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" quality_ids  != null and  quality_ids  != ''  and  quality_ids  != 'null' ">
+	  		<![CDATA[ A.QUALITY_IDS = #{quality_ids}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.SKU_ID = #{sku_id}]]>
+  	</update>
+  
+  	<delete id="deleteAppliancesku" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BIZ_APPLIANCE_SKU  where SKU_ID = #{sku_id} ]]>
+	</delete>
+  
+	<select id="findOneAppliancesku" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BIZ_APPLIANCE_SKU A  ]]>
+		<include refid="applianceskuWhereCondition" />
+  	</select>
+    
+  	<select id="findAllAppliancesku" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BIZ_APPLIANCE_SKU A ]]>
+		<include refid="applianceskuWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapAppliancesku" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BIZ_APPLIANCE_SKU A ]]>
+		<include refid="applianceskuWhereCondition" />
+	</select>
+  
+  	<select id="findApplianceskuTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BIZ_APPLIANCE_SKU A ]]>
+		<include refid="applianceskuWhereCondition" />
+  	</select>
+  
+  	<select id="queryApplianceskuForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BIZ_APPLIANCE_SKU A ]]>
+		<include refid="applianceskuWhereCondition" />
+  	</select>
+  	
+  	<select id="queryApplianceIdnull" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BIZ_APPLIANCE_SKU A where A.APPLIANCE_ID is null]]>
+  	</select>
+</mapper>

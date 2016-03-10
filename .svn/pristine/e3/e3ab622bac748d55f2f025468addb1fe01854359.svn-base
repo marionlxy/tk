@@ -1,0 +1,158 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<%@ include file="/include.jsp"%>
+    <title></title>
+</head>
+<body >
+<div class="easyui-layout" fit="true" data-options="border:false" >
+	<div class="easyui-panel" data-options="region:'north',border:false,height:225"  style="overflow: hidden">
+	<div style="margin-top: 10px;">
+		<form id="dataOrder">
+			<div class="fitem" >
+		    	<label><font color="red">订单状态:</font></label>
+		        <input name="orderState"  class="easyui-combobox" style="width:200px" panelHeight="auto"
+		 	url="${rootPath}/getDictCombox?dictType=ORDER_STATUS" valueField="dictId" textField="dictName" disabled="true">
+			</div>
+			<div class="fitem" style="float:left;">
+		    	<label>订单编号:</label>
+		        <input name="orderCode" class="easyui-textbox" disabled="true">
+			</div> <div class="fitem" >
+		    	<label>创建日期:</label>
+		        <input name="createdTime" class="easyui-textbox" disabled="true">
+			</div>	
+			<div class="fitem" style="float:left;">
+		    	<label>收货人姓名:</label>
+		        <input name="receiverName" class="easyui-textbox" disabled="true">
+			</div> 
+			<div class="fitem" >
+		    	<label>收货人邮编:</label>
+		        <input name="receiverPostcode" class="easyui-textbox" disabled="true">
+			</div>
+			<div class="fitem" style="float:left;">
+		    	<label>收货人电话:</label>
+		        <input name="receiverPhone" class="easyui-textbox" disabled="true">
+			</div> <div class="fitem">
+		    	<label>收货人地址:</label>
+		        <input name="receiverAddress" class="easyui-textbox" disabled="true">
+			</div>
+			<div class="fitem" style="float:left; width: 100%;" >
+		    	<label>物流单号:</label>
+		        <input name="oddnum" class="easyui-textbox" disabled="true">
+			</div>
+			<div class="fitem" style="float:left;">
+		    	<label>物流公司:</label>
+		        <input name="logistics" class="easyui-textbox" disabled="true">
+			</div> <div class="fitem" >
+		    	<label>物流费用:</label>
+		        <input name="logisticsCost" class="easyui-textbox" disabled="true">
+			</div>
+			<div class="fitem" style="float:left;">
+		    	<label>发票抬头:</label>
+		        <input name="invoiceName" class="easyui-textbox" disabled="true">
+			</div> <div class="fitem" >
+		    	<label>发票内容:</label>
+		        <input name="invoiceContent" class="easyui-textbox" disabled="true">
+			</div>
+			<c:if test="${not empty subCode}">
+			<div class="fitem" style="float:left;">
+		    	<label>商户名称:</label>
+		        <input name="sellerName" class="easyui-textbox" disabled="true" >
+			</div> 
+			<div class="fitem" >
+		    	<label>商户电话:</label>
+		        <input name="sellerMobile" class="easyui-textbox" disabled="true">
+			</div>
+			</c:if>
+		 	<c:if test="${orderType == 0}" >
+			<div class="fitem" style="float:left; ">
+		    	<label>商户名称:</label>
+		        <input name="sellerName" class="easyui-textbox" disabled="true" >
+			</div> 
+			<div class="fitem" >
+		    	<label>商户电话:</label>
+		        <input name="sellerMobile" class="easyui-textbox" disabled="true">
+			</div>
+			</c:if>
+		</form>
+	</div>	
+	</div>
+	
+	<div data-options="region:'center',border:false" style="overflow:hidden;" >
+	<div style=" height:90% ">
+		<table id="dataOrder1" title="用品列表" style="width:100%;height:100%;" >
+   		</table>
+	</div>
+   	<div id="dlg-buttons" align="center" style="height:10%">
+       <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="closeWin()" style="width:90px">关闭</a>
+   </div>      
+	</div>
+</div>
+<script type="text/javascript">
+	var orderId='${orderId}';
+	var subCode ='${subCode}';
+	var orderState = '${orderState}';
+	var orderType = '${orderType}';
+	
+	jQuery(function(){	  
+		jQuery.ajaxSetup({
+			cache : false
+		});	
+		
+		//获取【列表】全部字典数据[订单类型、订单状态]
+		var dictList = getDictList('ORDER_STATUS,SITE');
+		
+		if (orderId != null && orderId != "" && orderId!=0){
+			var url;
+			 if(orderType == 1){
+				if(subCode != null && subCode != "" && subCode!=0 ){
+					url='${rootPath}/order/getOneSev?subCode='+subCode;
+				}else{
+					url='${rootPath}/order/getOne?orderId='+orderId;
+				}
+			}else{
+				url='${rootPath}/order/getOneApp?orderId='+orderId+'&subCode='+subCode;
+			}
+			$('#dataOrder').form('load', url);
+		}
+		
+		
+		$('#dataOrder1').datagrid({
+
+	   		singleSelect : true,
+	   		rownumbers:true,
+	   		pagination:true,
+	   		fitColumns:true,
+	   		url:'${rootPath}/orderApp/orderIdForPage?orderId='+orderId+"&subCode="+subCode,
+	   		method : 'post',		
+			idField : 'ORDER_APP_ID',//此处根据实际情况进行填写
+			columns:[[
+								{field:'ORDER_APP_ID',title:'用品ID',width:80,hidden:true},
+								{field:'APPLIANCE_CODING',title:'用品编号',width:60},
+								{field:'APPLIANCE_NAME',title:'用品名称',width:60},
+								{field:'APPLIANCE_MARKET_PRICE',title:'销售价',width:40},
+								{field:'APPLIANCE_COUNT',title:'数量',width:30},
+								{field:'APP_STATE',title:'用品状态',width:60,hidden:true},
+								{field:'SITE',title:'站点',width:50,formatter : function(value, row, index) {
+									return getDictName(dictList,"SITE",value);}},
+								{field:'SEND_TIME',title:'发货时间',width:50},
+								{field:'TAKE_TIME',title:'收货时间',width:50},
+								{field:'APPLIANCE_PRICE',title:'用品总价',width:80}
+			]],
+			onLoadSuccess : function(data) {
+				$('#dataTable').datagrid('clearSelections'); //一定要加上这一句，要不然datagrid会记住之前的选择状态，删除时会出问题
+			}
+		});
+   });	
+	function closeWin(){
+		$('#divDialog').window('close');	
+	}
+</script>
+</body>
+
+</html>

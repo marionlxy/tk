@@ -1,0 +1,146 @@
+package com.taikang.iu.opt.order.service.impl;
+ 
+import com.taikang.iu.opt.order.model.OrderBO;
+
+import java.util.List;
+
+import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.udp.framework.common.datastructre.impl.BaseBO;
+import com.taikang.iu.opt.order.service.IOrderService;
+
+import org.springframework.stereotype.Service;
+
+import com.taikang.udp.framework.core.service.impl.BaseServiceImpl;
+ 
+  
+/**
+  * OrderServiceImpl
+  */
+ @Service(IOrderService.SERVICE_ID)
+ public class OrderServiceImpl extends BaseServiceImpl 
+ implements IOrderService<OrderBO>  
+  {
+  	 	 	
+ 	/**
+	  * 增加数据
+	  */
+	public void insertObject(OrderBO order) {
+		logger.debug("<======OrderServiceImpl--insertOrder======>");		
+		appDao.insert("Order.addOrder",order);
+	} 	
+ 	
+ 	/**
+      * 修改数据
+      */
+	public void updateObject(OrderBO order) {
+		logger.debug("<======OrderServiceImpl--updateOrder======>");
+		appDao.update("Order.updateOrder",order);
+	}
+
+	 /**
+      * 删除数据
+      */
+	public void deleteObject(OrderBO order) {
+		logger.debug("<======OrderServiceImpl--deleteOrder======>");
+		appDao.delete("Order.deleteOrder",order);
+	}
+	
+	/**
+      * 查询数据
+      */
+	public OrderBO findOne(OrderBO order) {
+		logger.debug("<======OrderServiceImpl--findOrder======>");
+		
+		OrderBO orderBackBO=appDao.queryOneObject("Order.findOneOrder", order);
+		return orderBackBO;		
+	}
+	
+	//TODO
+	
+	/**
+     * 查询所有数据
+     */
+	public OrderBO findOneOrder(OrderBO order) {
+		logger.debug("<======OrderServiceImpl--findOrder======>");
+		return appDao.queryOneObject("Order.findOneOrderB", order);
+	}
+	
+	/**
+      * 查询所有数据
+      */
+	public List<OrderBO> findAll(OrderBO  order) {
+		logger.debug("<======OrderServiceImpl--findAllOrder======>");
+		return appDao.queryForEntityList("Order.findAllOrder", order);
+	}
+	
+	/**
+     * 查询所有数据
+     */
+	public List<OrderBO> findAllOrder(OrderBO  order) {
+		logger.debug("<======OrderServiceImpl--findAllOrderByCondition======>");
+		return appDao.queryForEntityList("Order.findAllOrderByCondition", order);
+	}
+	
+	 /**
+      * 分页查询数据
+      */
+	public CurrentPage queryForPage(CurrentPage currentPage) {
+		logger.debug("<======OrderServiceImpl--queryOrderForPage======>");
+		return appDao.queryForPage("Order.queryOrderForPage", currentPage);
+	}
+	
+	
+		
+	/**
+      * 查询所有数据 ，重新组装为map
+      */
+	public List<Dto> findAllMap(Dto param){
+		logger.debug("<======OrderServiceImpl--findAllMapOrder======>");		
+		return appDao.queryForMapList("Order.findAllMapOrder", param);
+	}
+    /**
+     * 根据id查找订单信息
+     */
+	public OrderBO findOrderByIdInfo(OrderBO order) {
+		OrderBO orderBackBO=appDao.queryOneObject("Order.findOneOrder", order);
+		return orderBackBO;
+	}
+
+	public CurrentPage queryAllSevOrderPage(CurrentPage currentPage) {
+		logger.debug("<======OrderServiceImpl--queryVitisOrderPage======>");	
+		return appDao.queryForPage("Order.queryVitisOrderPage", currentPage);
+	}
+
+	public CurrentPage queryReferenceOrderPage(CurrentPage currentPage) {
+		logger.debug("<======OrderServiceImpl--queryReferenceOrderPage======>");	
+		return appDao.queryForPage("Order.queryReferenceOrderPage", currentPage);
+	}
+
+	public List<Dto> findOrderIsTypeSD(Dto param) {
+		logger.debug("<======OrderServiceImpl--findOrderIsTypeSD======>");	
+		return appDao.queryForMapList("Order.findOrderIsTypeSD", param);
+	}
+
+	public List<Dto> findOneSeller(Dto param) {
+		logger.debug("<======OrderServiceImpl--findOneSeller======>");	
+		return appDao.queryForMapList("Order.findOneSeller", param);
+	}
+
+	public BaseBO findOneSeller(OrderBO orderBO) {
+	logger.debug("<======OrderServiceImpl--findOneSeller======>");
+		
+		OrderBO orderBackBO=appDao.queryOneObject("Order.findOneSeller", orderBO);
+		return orderBackBO;	
+	}
+
+	public BaseBO findOneApp(OrderBO orderBO) {
+	logger.debug("<======OrderServiceImpl--findOneApp======>");
+		
+		OrderBO orderBackBO=appDao.queryOneObject("Order.findOneApp", orderBO);
+		return orderBackBO;
+	}
+
+	
+ }
+  

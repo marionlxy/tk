@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="refund">
+	<resultMap id="refundResultMap" type="com.taikang.iu.opt.finance.refund.model.refundBO">
+		<result property="returnId" column="RETURN_ID"/>
+		<result property="returnCode" column="RETURN_CODE"/>
+		<result property="returnState" column="RETURN_STATE"/>
+		<result property="returnReason" column="RETURN_REASON"/>
+		<result property="sellerName" column="SELLER_NAME"/>
+		<result property="sellerCode" column="SELLER_CODE"/>
+		<result property="orderAppId" column="ORDER_APP_ID"/>
+		<result property="subCode" column="SUB_CODE"/>
+		<result property="orderCode" column="ORDER_CODE"/>
+		<result property="applianceId" column="APPLIANCE_ID"/>
+		<result property="applianceCoding" column="APPLIANCE_CODING"/>
+		<result property="categoryId" column="CATEGORY_ID"/>
+		<result property="categoryCode" column="CATEGORY_CODE"/>
+		<result property="categoryName" column="CATEGORY_NAME"/>
+		<result property="applianceName" column="APPLIANCE_NAME"/>
+		<result property="applianceUnit" column="APPLIANCE_UNIT"/>
+		<result property="applianceCount" column="APPLIANCE_COUNT"/>
+		<result property="appliancePrice" column="APPLIANCE_PRICE"/>
+		<result property="applianceSettlePrice" column="APPLIANCE_SETTLE_PRICE"/>
+		<result property="applianceMarketPrice" column="APPLIANCE_MARKET_PRICE"/>
+		<result property="skuCode" column="SKU_CODE"/>
+		<result property="skuPropertyStr" column="SKU_PROPERTY_STR"/>
+		<result property="site" column="SITE"/>
+		<result property="oddnum" column="ODDNUM"/>
+		<result property="logistics" column="LOGISTICS"/>
+		<result property="logisticsCost" column="LOGISTICS_COST"/>
+		<result property="refundState" column="REFUND_STATE"/>
+		<result property="balanceState" column="BALANCE_STATE"/>
+		<result property="applyName" column="APPLY_NAME"/>
+		<result property="applyTel" column="APPLY_TEL"/>
+		<result property="applyTime" column="APPLY_TIME"/>
+		<result property="auditBy" column="AUDIT_BY"/>
+		<result property="auditTime" column="AUDIT_TIME"/>
+		<result property="sendBy" column="SEND_BY"/>
+		<result property="sendTime" column="SEND_TIME"/>
+		<result property="cancelBy" column="CANCEL_BY"/>
+		<result property="cancelTime" column="CANCEL_TIME"/>
+		<result property="remindBy" column="REMIND_BY"/>
+		<result property="remindTime" column="REMIND_TIME"/>
+		<result property="takeBy" column="TAKE_BY"/>
+		<result property="takeTime" column="TAKE_TIME"/>
+		<result property="lockBy" column="LOCK_BY"/>
+		<result property="lockTime" column="LOCK_TIME"/>
+		<result property="checkBy" column="CHECK_BY"/>
+		<result property="checkTime" column="CHECK_TIME"/>
+		<result property="checkResult" column="CHECK_RESULT"/>
+		<result property="applyReturnBy" column="APPLY_RETURN_BY"/>
+		<result property="applyReturnTime" column="APPLY_RETURN_TIME"/>
+		<result property="returnBy" column="RETURN_BY"/>
+		<result property="returnTime" column="RETURN_TIME"/>
+		<result property="agreeBy" column="AGREE_BY"/>
+		<result property="agreeTime" column="AGREE_TIME"/>
+		<result property="refundBy" column="REFUND_BY"/>
+		<result property="refundTime" column="REFUND_TIME"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="refundWhereCondition">
+		<where>
+	  	<if test=" return_id != null and return_id != '' and return_id != 'null' ">
+			<![CDATA[ AND A.RETURN_ID = #{return_id} ]]>
+	  	</if>
+	  	<if test=" return_code != null and return_code != '' and return_code != 'null' ">
+			<![CDATA[ AND A.RETURN_CODE = #{return_code} ]]>
+	  	</if>
+	  	<if test=" return_state != null and return_state != '' and return_state != 'null' ">
+			<![CDATA[ AND A.RETURN_STATE = #{return_state} ]]>
+	  	</if>
+	  	<if test=" return_reason != null and return_reason != '' and return_reason != 'null' ">
+			<![CDATA[ AND A.RETURN_REASON = #{return_reason} ]]>
+	  	</if>
+	  	<if test=" seller_name != null and seller_name != '' and seller_name != 'null' ">
+			<![CDATA[ AND A.SELLER_NAME = #{seller_name} ]]>
+	  	</if>
+	  	<if test=" seller_code != null and seller_code != '' and seller_code != 'null' ">
+			<![CDATA[ AND A.SELLER_CODE = #{seller_code} ]]>
+	  	</if>
+	  	<if test=" order_app_id != null and order_app_id != '' and order_app_id != 'null' ">
+			<![CDATA[ AND A.ORDER_APP_ID = #{order_app_id} ]]>
+	  	</if>
+	  	<if test=" sub_code != null and sub_code != '' and sub_code != 'null' ">
+			<![CDATA[ AND A.SUB_CODE = #{sub_code} ]]>
+	  	</if>
+	  	<if test=" order_code != null and order_code != '' and order_code != 'null' ">
+			<![CDATA[ AND A.ORDER_CODE = #{order_code} ]]>
+	  	</if>
+	  	<if test=" appliance_id != null and appliance_id != '' and appliance_id != 'null' ">
+			<![CDATA[ AND A.APPLIANCE_ID = #{appliance_id} ]]>
+	  	</if>
+	  	<if test=" appliance_coding != null and appliance_coding != '' and appliance_coding != 'null' ">
+			<![CDATA[ AND A.APPLIANCE_CODING = #{appliance_coding} ]]>
+	  	</if>
+	  	<if test=" category_id != null and category_id != '' and category_id != 'null' ">
+			<![CDATA[ AND A.CATEGORY_ID = #{category_id} ]]>
+	  	</if>
+	  	<if test=" category_code != null and category_code != '' and category_code != 'null' ">
+			<![CDATA[ AND A.CATEGORY_CODE = #{category_code} ]]>
+	  	</if>
+	  	<if test=" category_name != null and category_name != '' and category_name != 'null' ">
+			<![CDATA[ AND A.CATEGORY_NAME = #{category_name} ]]>
+	  	</if>
+	  	<if test=" appliance_name != null and appliance_name != '' and appliance_name != 'null' ">
+			<![CDATA[ AND A.APPLIANCE_NAME = #{appliance_name} ]]>
+	  	</if>
+	  	<if test=" appliance_unit != null and appliance_unit != '' and appliance_unit != 'null' ">
+			<![CDATA[ AND A.APPLIANCE_UNIT = #{appliance_unit} ]]>
+	  	</if>
+	  	<if test=" appliance_count != null ">
+	  		<![CDATA[ AND A.APPLIANCE_COUNT = ${appliance_count} ]]>
+	  	</if>
+	  	<if test=" appliance_price != null ">
+	  		<![CDATA[ AND A.APPLIANCE_PRICE = ${appliance_price} ]]>
+	  	</if>
+	  	<if test=" appliance_settle_price != null ">
+	  		<![CDATA[ AND A.APPLIANCE_SETTLE_PRICE = ${appliance_settle_price} ]]>
+	  	</if>
+	  	<if test=" appliance_market_price != null ">
+	  		<![CDATA[ AND A.APPLIANCE_MARKET_PRICE = ${appliance_market_price} ]]>
+	  	</if>
+	  	<if test=" sku_code != null and sku_code != '' and sku_code != 'null' ">
+			<![CDATA[ AND A.SKU_CODE = #{sku_code} ]]>
+	  	</if>
+	  	<if test=" sku_property_str != null and sku_property_str != '' and sku_property_str != 'null' ">
+			<![CDATA[ AND A.SKU_PROPERTY_STR = #{sku_property_str} ]]>
+	  	</if>
+	  	<if test=" site != null and site != '' and site != 'null' ">
+			<![CDATA[ AND A.SITE = #{site} ]]>
+	  	</if>
+	  	<if test=" oddnum != null and oddnum != '' and oddnum != 'null' ">
+			<![CDATA[ AND A.ODDNUM = #{oddnum} ]]>
+	  	</if>
+	  	<if test=" logistics != null and logistics != '' and logistics != 'null' ">
+			<![CDATA[ AND A.LOGISTICS = #{logistics} ]]>
+	  	</if>
+	  	<if test=" logistics_cost != null ">
+	  		<![CDATA[ AND A.LOGISTICS_COST = ${logistics_cost} ]]>
+	  	</if>
+	  	<if test=" refund_state != null and refund_state != '' and refund_state != 'null' ">
+			<![CDATA[ AND A.REFUND_STATE = #{refund_state} ]]>
+	  	</if>
+	  	<if test=" balance_state != null and balance_state != '' and balance_state != 'null' ">
+			<![CDATA[ AND A.BALANCE_STATE = #{balance_state} ]]>
+	  	</if>
+	  	<if test=" apply_name != null and apply_name != '' and apply_name != 'null' ">
+			<![CDATA[ AND A.APPLY_NAME = #{apply_name} ]]>
+	  	</if>
+	  	<if test=" apply_tel != null and apply_tel != '' and apply_tel != 'null' ">
+			<![CDATA[ AND A.APPLY_TEL = #{apply_tel} ]]>
+	  	</if>
+	  	<if test=" apply_time != null and apply_time != '' and apply_time  != 'null' ">
+	    	<![CDATA[ AND A.APPLY_TIME = DATE_FORMAT(#{apply_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" audit_by != null and audit_by != '' and audit_by != 'null' ">
+			<![CDATA[ AND A.AUDIT_BY = #{audit_by} ]]>
+	  	</if>
+	  	<if test=" audit_time != null and audit_time != '' and audit_time  != 'null' ">
+	    	<![CDATA[ AND A.AUDIT_TIME = DATE_FORMAT(#{audit_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" send_by != null and send_by != '' and send_by != 'null' ">
+			<![CDATA[ AND A.SEND_BY = #{send_by} ]]>
+	  	</if>
+	  	<if test=" send_time != null and send_time != '' and send_time  != 'null' ">
+	    	<![CDATA[ AND A.SEND_TIME = DATE_FORMAT(#{send_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" cancel_by != null and cancel_by != '' and cancel_by != 'null' ">
+			<![CDATA[ AND A.CANCEL_BY = #{cancel_by} ]]>
+	  	</if>
+	  	<if test=" cancel_time != null and cancel_time != '' and cancel_time  != 'null' ">
+	    	<![CDATA[ AND A.CANCEL_TIME = DATE_FORMAT(#{cancel_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" remind_by != null and remind_by != '' and remind_by != 'null' ">
+			<![CDATA[ AND A.REMIND_BY = #{remind_by} ]]>
+	  	</if>
+	  	<if test=" remind_time != null and remind_time != '' and remind_time  != 'null' ">
+	    	<![CDATA[ AND A.REMIND_TIME = DATE_FORMAT(#{remind_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" take_by != null and take_by != '' and take_by != 'null' ">
+			<![CDATA[ AND A.TAKE_BY = #{take_by} ]]>
+	  	</if>
+	  	<if test=" take_time != null and take_time != '' and take_time  != 'null' ">
+	    	<![CDATA[ AND A.TAKE_TIME = DATE_FORMAT(#{take_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" lock_by != null and lock_by != '' and lock_by != 'null' ">
+			<![CDATA[ AND A.LOCK_BY = #{lock_by} ]]>
+	  	</if>
+	  	<if test=" lock_time != null and lock_time != '' and lock_time  != 'null' ">
+	    	<![CDATA[ AND A.LOCK_TIME = DATE_FORMAT(#{lock_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" check_by != null and check_by != '' and check_by != 'null' ">
+			<![CDATA[ AND A.CHECK_BY = #{check_by} ]]>
+	  	</if>
+	  	<if test=" check_time != null and check_time != '' and check_time  != 'null' ">
+	    	<![CDATA[ AND A.CHECK_TIME = DATE_FORMAT(#{check_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" check_result != null and check_result != '' and check_result != 'null' ">
+			<![CDATA[ AND A.CHECK_RESULT = #{check_result} ]]>
+	  	</if>
+	  	<if test=" apply_return_by != null and apply_return_by != '' and apply_return_by != 'null' ">
+			<![CDATA[ AND A.APPLY_RETURN_BY = #{apply_return_by} ]]>
+	  	</if>
+	  	<if test=" apply_return_time != null and apply_return_time != '' and apply_return_time  != 'null' ">
+	    	<![CDATA[ AND A.APPLY_RETURN_TIME = DATE_FORMAT(#{apply_return_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" return_by != null and return_by != '' and return_by != 'null' ">
+			<![CDATA[ AND A.RETURN_BY = #{return_by} ]]>
+	  	</if>
+	  	<if test=" return_time != null and return_time != '' and return_time  != 'null' ">
+	    	<![CDATA[ AND A.RETURN_TIME = DATE_FORMAT(#{return_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" agree_by != null and agree_by != '' and agree_by != 'null' ">
+			<![CDATA[ AND A.AGREE_BY = #{agree_by} ]]>
+	  	</if>
+	  	<if test=" agree_time != null and agree_time != '' and agree_time  != 'null' ">
+	    	<![CDATA[ AND A.AGREE_TIME = DATE_FORMAT(#{agree_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" refund_by != null and refund_by != '' and refund_by != 'null' ">
+			<![CDATA[ AND A.REFUND_BY = #{refund_by} ]]>
+	  	</if>
+	  	<if test=" refund_time != null and refund_time != '' and refund_time  != 'null' ">
+	    	<![CDATA[ AND A.REFUND_TIME = DATE_FORMAT(#{refund_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addrefund"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO OPT_RETURN
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" return_id  != null and  return_id  != ''  and  return_id  != 'null' ">
+				<![CDATA[ RETURN_ID , ]]>
+	  		</if>
+	  		<if test=" return_code  != null and  return_code  != ''  and  return_code  != 'null' ">
+				<![CDATA[ RETURN_CODE , ]]>
+	  		</if>
+	  		<if test=" return_state  != null and  return_state  != ''  and  return_state  != 'null' ">
+				<![CDATA[ RETURN_STATE , ]]>
+	  		</if>
+	  		<if test=" return_reason  != null and  return_reason  != ''  and  return_reason  != 'null' ">
+				<![CDATA[ RETURN_REASON , ]]>
+	  		</if>
+	  		<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+				<![CDATA[ SELLER_NAME , ]]>
+	  		</if>
+	  		<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+				<![CDATA[ SELLER_CODE , ]]>
+	  		</if>
+	  		<if test=" order_app_id  != null and  order_app_id  != ''  and  order_app_id  != 'null' ">
+				<![CDATA[ ORDER_APP_ID , ]]>
+	  		</if>
+	  		<if test=" sub_code  != null and  sub_code  != ''  and  sub_code  != 'null' ">
+				<![CDATA[ SUB_CODE , ]]>
+	  		</if>
+	  		<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+				<![CDATA[ ORDER_CODE , ]]>
+	  		</if>
+	  		<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+				<![CDATA[ APPLIANCE_ID , ]]>
+	  		</if>
+	  		<if test=" appliance_coding  != null and  appliance_coding  != ''  and  appliance_coding  != 'null' ">
+				<![CDATA[ APPLIANCE_CODING , ]]>
+	  		</if>
+	  		<if test=" category_id  != null and  category_id  != ''  and  category_id  != 'null' ">
+				<![CDATA[ CATEGORY_ID , ]]>
+	  		</if>
+	  		<if test=" category_code  != null and  category_code  != ''  and  category_code  != 'null' ">
+				<![CDATA[ CATEGORY_CODE , ]]>
+	  		</if>
+	  		<if test=" category_name  != null and  category_name  != ''  and  category_name  != 'null' ">
+				<![CDATA[ CATEGORY_NAME , ]]>
+	  		</if>
+	  		<if test=" appliance_name  != null and  appliance_name  != ''  and  appliance_name  != 'null' ">
+				<![CDATA[ APPLIANCE_NAME , ]]>
+	  		</if>
+	  		<if test=" appliance_unit  != null and  appliance_unit  != ''  and  appliance_unit  != 'null' ">
+				<![CDATA[ APPLIANCE_UNIT , ]]>
+	  		</if>
+	  		<if test=" appliance_count  != null ">
+				<![CDATA[ APPLIANCE_COUNT , ]]>
+	  		</if>
+	  		<if test=" appliance_price  != null ">
+				<![CDATA[ APPLIANCE_PRICE , ]]>
+	  		</if>
+	  		<if test=" appliance_settle_price  != null ">
+				<![CDATA[ APPLIANCE_SETTLE_PRICE , ]]>
+	  		</if>
+	  		<if test=" appliance_market_price  != null ">
+				<![CDATA[ APPLIANCE_MARKET_PRICE , ]]>
+	  		</if>
+	  		<if test=" sku_code  != null and  sku_code  != ''  and  sku_code  != 'null' ">
+				<![CDATA[ SKU_CODE , ]]>
+	  		</if>
+	  		<if test=" sku_property_str  != null and  sku_property_str  != ''  and  sku_property_str  != 'null' ">
+				<![CDATA[ SKU_PROPERTY_STR , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+				<![CDATA[ SITE , ]]>
+	  		</if>
+	  		<if test=" oddnum  != null and  oddnum  != ''  and  oddnum  != 'null' ">
+				<![CDATA[ ODDNUM , ]]>
+	  		</if>
+	  		<if test=" logistics  != null and  logistics  != ''  and  logistics  != 'null' ">
+				<![CDATA[ LOGISTICS , ]]>
+	  		</if>
+	  		<if test=" logistics_cost  != null ">
+				<![CDATA[ LOGISTICS_COST , ]]>
+	  		</if>
+	  		<if test=" refund_state  != null and  refund_state  != ''  and  refund_state  != 'null' ">
+				<![CDATA[ REFUND_STATE , ]]>
+	  		</if>
+	  		<if test=" balance_state  != null and  balance_state  != ''  and  balance_state  != 'null' ">
+				<![CDATA[ BALANCE_STATE , ]]>
+	  		</if>
+	  		<if test=" apply_name  != null and  apply_name  != ''  and  apply_name  != 'null' ">
+				<![CDATA[ APPLY_NAME , ]]>
+	  		</if>
+	  		<if test=" apply_tel  != null and  apply_tel  != ''  and  apply_tel  != 'null' ">
+				<![CDATA[ APPLY_TEL , ]]>
+	  		</if>
+	  		<if test=" apply_time  != null and  apply_time  != ''  and  apply_time  != 'null' ">
+				<![CDATA[ APPLY_TIME , ]]>
+	  		</if>
+	  		<if test=" audit_by  != null and  audit_by  != ''  and  audit_by  != 'null' ">
+				<![CDATA[ AUDIT_BY , ]]>
+	  		</if>
+	  		<if test=" audit_time  != null and  audit_time  != ''  and  audit_time  != 'null' ">
+				<![CDATA[ AUDIT_TIME , ]]>
+	  		</if>
+	  		<if test=" send_by  != null and  send_by  != ''  and  send_by  != 'null' ">
+				<![CDATA[ SEND_BY , ]]>
+	  		</if>
+	  		<if test=" send_time  != null and  send_time  != ''  and  send_time  != 'null' ">
+				<![CDATA[ SEND_TIME , ]]>
+	  		</if>
+	  		<if test=" cancel_by  != null and  cancel_by  != ''  and  cancel_by  != 'null' ">
+				<![CDATA[ CANCEL_BY , ]]>
+	  		</if>
+	  		<if test=" cancel_time  != null and  cancel_time  != ''  and  cancel_time  != 'null' ">
+				<![CDATA[ CANCEL_TIME , ]]>
+	  		</if>
+	  		<if test=" remind_by  != null and  remind_by  != ''  and  remind_by  != 'null' ">
+				<![CDATA[ REMIND_BY , ]]>
+	  		</if>
+	  		<if test=" remind_time  != null and  remind_time  != ''  and  remind_time  != 'null' ">
+				<![CDATA[ REMIND_TIME , ]]>
+	  		</if>
+	  		<if test=" take_by  != null and  take_by  != ''  and  take_by  != 'null' ">
+				<![CDATA[ TAKE_BY , ]]>
+	  		</if>
+	  		<if test=" take_time  != null and  take_time  != ''  and  take_time  != 'null' ">
+				<![CDATA[ TAKE_TIME , ]]>
+	  		</if>
+	  		<if test=" lock_by  != null and  lock_by  != ''  and  lock_by  != 'null' ">
+				<![CDATA[ LOCK_BY , ]]>
+	  		</if>
+	  		<if test=" lock_time  != null and  lock_time  != ''  and  lock_time  != 'null' ">
+				<![CDATA[ LOCK_TIME , ]]>
+	  		</if>
+	  		<if test=" check_by  != null and  check_by  != ''  and  check_by  != 'null' ">
+				<![CDATA[ CHECK_BY , ]]>
+	  		</if>
+	  		<if test=" check_time  != null and  check_time  != ''  and  check_time  != 'null' ">
+				<![CDATA[ CHECK_TIME , ]]>
+	  		</if>
+	  		<if test=" check_result  != null and  check_result  != ''  and  check_result  != 'null' ">
+				<![CDATA[ CHECK_RESULT , ]]>
+	  		</if>
+	  		<if test=" apply_return_by  != null and  apply_return_by  != ''  and  apply_return_by  != 'null' ">
+				<![CDATA[ APPLY_RETURN_BY , ]]>
+	  		</if>
+	  		<if test=" apply_return_time  != null and  apply_return_time  != ''  and  apply_return_time  != 'null' ">
+				<![CDATA[ APPLY_RETURN_TIME , ]]>
+	  		</if>
+	  		<if test=" return_by  != null and  return_by  != ''  and  return_by  != 'null' ">
+				<![CDATA[ RETURN_BY , ]]>
+	  		</if>
+	  		<if test=" return_time  != null and  return_time  != ''  and  return_time  != 'null' ">
+				<![CDATA[ RETURN_TIME , ]]>
+	  		</if>
+	  		<if test=" agree_by  != null and  agree_by  != ''  and  agree_by  != 'null' ">
+				<![CDATA[ AGREE_BY , ]]>
+	  		</if>
+	  		<if test=" agree_time  != null and  agree_time  != ''  and  agree_time  != 'null' ">
+				<![CDATA[ AGREE_TIME , ]]>
+	  		</if>
+	  		<if test=" refund_by  != null and  refund_by  != ''  and  refund_by  != 'null' ">
+				<![CDATA[ REFUND_BY , ]]>
+	  		</if>
+	  		<if test=" refund_time  != null and  refund_time  != ''  and  refund_time  != 'null' ">
+				<![CDATA[ REFUND_TIME , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" return_id  != null and  return_id  != ''  and  return_id  != 'null' ">
+	  			<![CDATA[ #{return_id} , ]]>
+	  		</if>
+	  		<if test=" return_code  != null and  return_code  != ''  and  return_code  != 'null' ">
+	  			<![CDATA[ #{return_code} , ]]>
+	  		</if>
+	  		<if test=" return_state  != null and  return_state  != ''  and  return_state  != 'null' ">
+	  			<![CDATA[ #{return_state} , ]]>
+	  		</if>
+	  		<if test=" return_reason  != null and  return_reason  != ''  and  return_reason  != 'null' ">
+	  			<![CDATA[ #{return_reason} , ]]>
+	  		</if>
+	  		<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+	  			<![CDATA[ #{seller_name} , ]]>
+	  		</if>
+	  		<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+	  			<![CDATA[ #{seller_code} , ]]>
+	  		</if>
+	  		<if test=" order_app_id  != null and  order_app_id  != ''  and  order_app_id  != 'null' ">
+	  			<![CDATA[ #{order_app_id} , ]]>
+	  		</if>
+	  		<if test=" sub_code  != null and  sub_code  != ''  and  sub_code  != 'null' ">
+	  			<![CDATA[ #{sub_code} , ]]>
+	  		</if>
+	  		<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+	  			<![CDATA[ #{order_code} , ]]>
+	  		</if>
+	  		<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+	  			<![CDATA[ #{appliance_id} , ]]>
+	  		</if>
+	  		<if test=" appliance_coding  != null and  appliance_coding  != ''  and  appliance_coding  != 'null' ">
+	  			<![CDATA[ #{appliance_coding} , ]]>
+	  		</if>
+	  		<if test=" category_id  != null and  category_id  != ''  and  category_id  != 'null' ">
+	  			<![CDATA[ #{category_id} , ]]>
+	  		</if>
+	  		<if test=" category_code  != null and  category_code  != ''  and  category_code  != 'null' ">
+	  			<![CDATA[ #{category_code} , ]]>
+	  		</if>
+	  		<if test=" category_name  != null and  category_name  != ''  and  category_name  != 'null' ">
+	  			<![CDATA[ #{category_name} , ]]>
+	  		</if>
+	  		<if test=" appliance_name  != null and  appliance_name  != ''  and  appliance_name  != 'null' ">
+	  			<![CDATA[ #{appliance_name} , ]]>
+	  		</if>
+	  		<if test=" appliance_unit  != null and  appliance_unit  != ''  and  appliance_unit  != 'null' ">
+	  			<![CDATA[ #{appliance_unit} , ]]>
+	  		</if>
+	  		<if test=" appliance_count  != null">
+	    		<![CDATA[ ${appliance_count} , ]]>
+	  		</if>
+	  		<if test=" appliance_price  != null">
+	    		<![CDATA[ ${appliance_price} , ]]>
+	  		</if>
+	  		<if test=" appliance_settle_price  != null">
+	    		<![CDATA[ ${appliance_settle_price} , ]]>
+	  		</if>
+	  		<if test=" appliance_market_price  != null">
+	    		<![CDATA[ ${appliance_market_price} , ]]>
+	  		</if>
+	  		<if test=" sku_code  != null and  sku_code  != ''  and  sku_code  != 'null' ">
+	  			<![CDATA[ #{sku_code} , ]]>
+	  		</if>
+	  		<if test=" sku_property_str  != null and  sku_property_str  != ''  and  sku_property_str  != 'null' ">
+	  			<![CDATA[ #{sku_property_str} , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  			<![CDATA[ #{site} , ]]>
+	  		</if>
+	  		<if test=" oddnum  != null and  oddnum  != ''  and  oddnum  != 'null' ">
+	  			<![CDATA[ #{oddnum} , ]]>
+	  		</if>
+	  		<if test=" logistics  != null and  logistics  != ''  and  logistics  != 'null' ">
+	  			<![CDATA[ #{logistics} , ]]>
+	  		</if>
+	  		<if test=" logistics_cost  != null">
+	    		<![CDATA[ ${logistics_cost} , ]]>
+	  		</if>
+	  		<if test=" refund_state  != null and  refund_state  != ''  and  refund_state  != 'null' ">
+	  			<![CDATA[ #{refund_state} , ]]>
+	  		</if>
+	  		<if test=" balance_state  != null and  balance_state  != ''  and  balance_state  != 'null' ">
+	  			<![CDATA[ #{balance_state} , ]]>
+	  		</if>
+	  		<if test=" apply_name  != null and  apply_name  != ''  and  apply_name  != 'null' ">
+	  			<![CDATA[ #{apply_name} , ]]>
+	  		</if>
+	  		<if test=" apply_tel  != null and  apply_tel  != ''  and  apply_tel  != 'null' ">
+	  			<![CDATA[ #{apply_tel} , ]]>
+	  		</if>
+	  		<if test=" apply_time != null and apply_time != '' and apply_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{apply_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" audit_by  != null and  audit_by  != ''  and  audit_by  != 'null' ">
+	  			<![CDATA[ #{audit_by} , ]]>
+	  		</if>
+	  		<if test=" audit_time != null and audit_time != '' and audit_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{audit_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" send_by  != null and  send_by  != ''  and  send_by  != 'null' ">
+	  			<![CDATA[ #{send_by} , ]]>
+	  		</if>
+	  		<if test=" send_time != null and send_time != '' and send_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{send_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" cancel_by  != null and  cancel_by  != ''  and  cancel_by  != 'null' ">
+	  			<![CDATA[ #{cancel_by} , ]]>
+	  		</if>
+	  		<if test=" cancel_time != null and cancel_time != '' and cancel_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{cancel_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" remind_by  != null and  remind_by  != ''  and  remind_by  != 'null' ">
+	  			<![CDATA[ #{remind_by} , ]]>
+	  		</if>
+	  		<if test=" remind_time != null and remind_time != '' and remind_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{remind_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" take_by  != null and  take_by  != ''  and  take_by  != 'null' ">
+	  			<![CDATA[ #{take_by} , ]]>
+	  		</if>
+	  		<if test=" take_time != null and take_time != '' and take_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{take_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" lock_by  != null and  lock_by  != ''  and  lock_by  != 'null' ">
+	  			<![CDATA[ #{lock_by} , ]]>
+	  		</if>
+	  		<if test=" lock_time != null and lock_time != '' and lock_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{lock_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" check_by  != null and  check_by  != ''  and  check_by  != 'null' ">
+	  			<![CDATA[ #{check_by} , ]]>
+	  		</if>
+	  		<if test=" check_time != null and check_time != '' and check_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{check_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" check_result  != null and  check_result  != ''  and  check_result  != 'null' ">
+	  			<![CDATA[ #{check_result} , ]]>
+	  		</if>
+	  		<if test=" apply_return_by  != null and  apply_return_by  != ''  and  apply_return_by  != 'null' ">
+	  			<![CDATA[ #{apply_return_by} , ]]>
+	  		</if>
+	  		<if test=" apply_return_time != null and apply_return_time != '' and apply_return_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{apply_return_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" return_by  != null and  return_by  != ''  and  return_by  != 'null' ">
+	  			<![CDATA[ #{return_by} , ]]>
+	  		</if>
+	  		<if test=" return_time != null and return_time != '' and return_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{return_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" agree_by  != null and  agree_by  != ''  and  agree_by  != 'null' ">
+	  			<![CDATA[ #{agree_by} , ]]>
+	  		</if>
+	  		<if test=" agree_time != null and agree_time != '' and agree_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{agree_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" refund_by  != null and  refund_by  != ''  and  refund_by  != 'null' ">
+	  			<![CDATA[ #{refund_by} , ]]>
+	  		</if>
+	  		<if test=" refund_time != null and refund_time != '' and refund_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{refund_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updaterefund" parameterType="java.util.Map">
+		<![CDATA[ UPDATE OPT_RETURN A ]]>
+		<set>
+	  	<if test=" return_code  != null and  return_code  != ''  and  return_code  != 'null' ">
+	  		<![CDATA[ A.RETURN_CODE = #{return_code}, ]]>
+	  	</if>
+	  	<if test=" return_state  != null and  return_state  != ''  and  return_state  != 'null' ">
+	  		<![CDATA[ A.RETURN_STATE = #{return_state}, ]]>
+	  	</if>
+	  	<if test=" return_reason  != null and  return_reason  != ''  and  return_reason  != 'null' ">
+	  		<![CDATA[ A.RETURN_REASON = #{return_reason}, ]]>
+	  	</if>
+	  	<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+	  		<![CDATA[ A.SELLER_NAME = #{seller_name}, ]]>
+	  	</if>
+	  	<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+	  		<![CDATA[ A.SELLER_CODE = #{seller_code}, ]]>
+	  	</if>
+	  	<if test=" order_app_id  != null and  order_app_id  != ''  and  order_app_id  != 'null' ">
+	  		<![CDATA[ A.ORDER_APP_ID = #{order_app_id}, ]]>
+	  	</if>
+	  	<if test=" sub_code  != null and  sub_code  != ''  and  sub_code  != 'null' ">
+	  		<![CDATA[ A.SUB_CODE = #{sub_code}, ]]>
+	  	</if>
+	  	<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+	  		<![CDATA[ A.ORDER_CODE = #{order_code}, ]]>
+	  	</if>
+	  	<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+	  		<![CDATA[ A.APPLIANCE_ID = #{appliance_id}, ]]>
+	  	</if>
+	  	<if test=" appliance_coding  != null and  appliance_coding  != ''  and  appliance_coding  != 'null' ">
+	  		<![CDATA[ A.APPLIANCE_CODING = #{appliance_coding}, ]]>
+	  	</if>
+	  	<if test=" category_id  != null and  category_id  != ''  and  category_id  != 'null' ">
+	  		<![CDATA[ A.CATEGORY_ID = #{category_id}, ]]>
+	  	</if>
+	  	<if test=" category_code  != null and  category_code  != ''  and  category_code  != 'null' ">
+	  		<![CDATA[ A.CATEGORY_CODE = #{category_code}, ]]>
+	  	</if>
+	  	<if test=" category_name  != null and  category_name  != ''  and  category_name  != 'null' ">
+	  		<![CDATA[ A.CATEGORY_NAME = #{category_name}, ]]>
+	  	</if>
+	  	<if test=" appliance_name  != null and  appliance_name  != ''  and  appliance_name  != 'null' ">
+	  		<![CDATA[ A.APPLIANCE_NAME = #{appliance_name}, ]]>
+	  	</if>
+	  	<if test=" appliance_unit  != null and  appliance_unit  != ''  and  appliance_unit  != 'null' ">
+	  		<![CDATA[ A.APPLIANCE_UNIT = #{appliance_unit}, ]]>
+	  	</if>
+		<if test=" appliance_count  != null ">
+  			<![CDATA[ A.APPLIANCE_COUNT = ${appliance_count} , ]]>
+		</if>
+		<if test=" appliance_price  != null ">
+  			<![CDATA[ A.APPLIANCE_PRICE = ${appliance_price} , ]]>
+		</if>
+		<if test=" appliance_settle_price  != null ">
+  			<![CDATA[ A.APPLIANCE_SETTLE_PRICE = ${appliance_settle_price} , ]]>
+		</if>
+		<if test=" appliance_market_price  != null ">
+  			<![CDATA[ A.APPLIANCE_MARKET_PRICE = ${appliance_market_price} , ]]>
+		</if>
+	  	<if test=" sku_code  != null and  sku_code  != ''  and  sku_code  != 'null' ">
+	  		<![CDATA[ A.SKU_CODE = #{sku_code}, ]]>
+	  	</if>
+	  	<if test=" sku_property_str  != null and  sku_property_str  != ''  and  sku_property_str  != 'null' ">
+	  		<![CDATA[ A.SKU_PROPERTY_STR = #{sku_property_str}, ]]>
+	  	</if>
+	  	<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  		<![CDATA[ A.SITE = #{site}, ]]>
+	  	</if>
+	  	<if test=" oddnum  != null and  oddnum  != ''  and  oddnum  != 'null' ">
+	  		<![CDATA[ A.ODDNUM = #{oddnum}, ]]>
+	  	</if>
+	  	<if test=" logistics  != null and  logistics  != ''  and  logistics  != 'null' ">
+	  		<![CDATA[ A.LOGISTICS = #{logistics}, ]]>
+	  	</if>
+		<if test=" logistics_cost  != null ">
+  			<![CDATA[ A.LOGISTICS_COST = ${logistics_cost} , ]]>
+		</if>
+	  	<if test=" refund_state  != null and  refund_state  != ''  and  refund_state  != 'null' ">
+	  		<![CDATA[ A.REFUND_STATE = #{refund_state}, ]]>
+	  	</if>
+	  	<if test=" balance_state  != null and  balance_state  != ''  and  balance_state  != 'null' ">
+	  		<![CDATA[ A.BALANCE_STATE = #{balance_state}, ]]>
+	  	</if>
+	  	<if test=" apply_name  != null and  apply_name  != ''  and  apply_name  != 'null' ">
+	  		<![CDATA[ A.APPLY_NAME = #{apply_name}, ]]>
+	  	</if>
+	  	<if test=" apply_tel  != null and  apply_tel  != ''  and  apply_tel  != 'null' ">
+	  		<![CDATA[ A.APPLY_TEL = #{apply_tel}, ]]>
+	  	</if>
+	  	<if test=" apply_time != null and apply_time != '' and apply_time  != 'null' ">
+	    	<![CDATA[ A.APPLY_TIME = DATE_FORMAT(#{apply_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" audit_by  != null and  audit_by  != ''  and  audit_by  != 'null' ">
+	  		<![CDATA[ A.AUDIT_BY = #{audit_by}, ]]>
+	  	</if>
+	  	<if test=" audit_time != null and audit_time != '' and audit_time  != 'null' ">
+	    	<![CDATA[ A.AUDIT_TIME = DATE_FORMAT(#{audit_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" send_by  != null and  send_by  != ''  and  send_by  != 'null' ">
+	  		<![CDATA[ A.SEND_BY = #{send_by}, ]]>
+	  	</if>
+	  	<if test=" send_time != null and send_time != '' and send_time  != 'null' ">
+	    	<![CDATA[ A.SEND_TIME = DATE_FORMAT(#{send_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" cancel_by  != null and  cancel_by  != ''  and  cancel_by  != 'null' ">
+	  		<![CDATA[ A.CANCEL_BY = #{cancel_by}, ]]>
+	  	</if>
+	  	<if test=" cancel_time != null and cancel_time != '' and cancel_time  != 'null' ">
+	    	<![CDATA[ A.CANCEL_TIME = DATE_FORMAT(#{cancel_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" remind_by  != null and  remind_by  != ''  and  remind_by  != 'null' ">
+	  		<![CDATA[ A.REMIND_BY = #{remind_by}, ]]>
+	  	</if>
+	  	<if test=" remind_time != null and remind_time != '' and remind_time  != 'null' ">
+	    	<![CDATA[ A.REMIND_TIME = DATE_FORMAT(#{remind_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" take_by  != null and  take_by  != ''  and  take_by  != 'null' ">
+	  		<![CDATA[ A.TAKE_BY = #{take_by}, ]]>
+	  	</if>
+	  	<if test=" take_time != null and take_time != '' and take_time  != 'null' ">
+	    	<![CDATA[ A.TAKE_TIME = DATE_FORMAT(#{take_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" lock_by  != null and  lock_by  != ''  and  lock_by  != 'null' ">
+	  		<![CDATA[ A.LOCK_BY = #{lock_by}, ]]>
+	  	</if>
+	  	<if test=" lock_time != null and lock_time != '' and lock_time  != 'null' ">
+	    	<![CDATA[ A.LOCK_TIME = DATE_FORMAT(#{lock_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" check_by  != null and  check_by  != ''  and  check_by  != 'null' ">
+	  		<![CDATA[ A.CHECK_BY = #{check_by}, ]]>
+	  	</if>
+	  	<if test=" check_time != null and check_time != '' and check_time  != 'null' ">
+	    	<![CDATA[ A.CHECK_TIME = DATE_FORMAT(#{check_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" check_result  != null and  check_result  != ''  and  check_result  != 'null' ">
+	  		<![CDATA[ A.CHECK_RESULT = #{check_result}, ]]>
+	  	</if>
+	  	<if test=" apply_return_by  != null and  apply_return_by  != ''  and  apply_return_by  != 'null' ">
+	  		<![CDATA[ A.APPLY_RETURN_BY = #{apply_return_by}, ]]>
+	  	</if>
+	  	<if test=" apply_return_time != null and apply_return_time != '' and apply_return_time  != 'null' ">
+	    	<![CDATA[ A.APPLY_RETURN_TIME = DATE_FORMAT(#{apply_return_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" return_by  != null and  return_by  != ''  and  return_by  != 'null' ">
+	  		<![CDATA[ A.RETURN_BY = #{return_by}, ]]>
+	  	</if>
+	  	<if test=" return_time != null and return_time != '' and return_time  != 'null' ">
+	    	<![CDATA[ A.RETURN_TIME = DATE_FORMAT(#{return_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" agree_by  != null and  agree_by  != ''  and  agree_by  != 'null' ">
+	  		<![CDATA[ A.AGREE_BY = #{agree_by}, ]]>
+	  	</if>
+	  	<if test=" agree_time != null and agree_time != '' and agree_time  != 'null' ">
+	    	<![CDATA[ A.AGREE_TIME = DATE_FORMAT(#{agree_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" refund_by  != null and  refund_by  != ''  and  refund_by  != 'null' ">
+	  		<![CDATA[ A.REFUND_BY = #{refund_by}, ]]>
+	  	</if>
+	  	<if test=" refund_time != null and refund_time != '' and refund_time  != 'null' ">
+	    	<![CDATA[ A.REFUND_TIME = DATE_FORMAT(#{refund_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.RETURN_ID = #{return_id}]]>
+  	</update>
+  
+  	<delete id="deleterefund" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM OPT_RETURN A where A.RETURN_ID = #{return_id} ]]>
+	</delete>
+  
+	<select id="findOnerefund" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM OPT_RETURN A  ]]>
+		<include refid="refundWhereCondition" />
+  	</select>
+    
+  	<select id="findAllrefund" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM OPT_RETURN A ]]>
+		<include refid="refundWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMaprefund" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM OPT_RETURN A ]]>
+		<include refid="refundWhereCondition" />
+	</select>
+  
+  	<select id="findrefundTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM OPT_RETURN A ]]>
+		<include refid="refundWhereCondition" />
+  	</select>
+  
+  	<select id="queryrefundForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ select  RETURN_ID, RETURN_CODE,ORDER_CODE,SUB_CODE,APPLY_TIME,APPLIANCE_PRICE,REFUND_STATE ,BALANCE_STATE from opt_return where 1=1]]>
+		<include refid="refundWhereCondition" />
+		<if test=" applyTime != null and applyTime != '' and applyTime != 'null' ">
+<!--             		 <![CDATA[ AND APPLY_TIME like DATE_FORMAT(#{applyTime}, '%Y-%m-%d %H:%i:%s') ]]> -->
+            		 <![CDATA[ AND APPLY_TIME >= DATE_FORMAT(#{applyTime}, '%Y-%m-%d %H:%i:%s') ]]>
+       		</if>
+         	 <if test=" returnState != null and returnState != '' and returnState != 'null' ">
+            		<![CDATA[ AND RETURN_STATE = #{returnState} ]]>
+        	</if>
+        	ORDER BY  APPLY_TIME DESC
+  	</select>
+  	
+  	 <select id="queryCountPrice" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ select  sum(APPLIANCE_PRICE) as countPrice from opt_return]]>
+		<include refid="refundWhereCondition" />
+  	</select>
+</mapper>

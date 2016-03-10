@@ -1,0 +1,233 @@
+package com.taikang.iu.opt.clue.model;
+
+import java.sql.Timestamp;
+import java.lang.Integer;
+import java.lang.String;
+import java.util.Arrays;
+import com.taikang.udp.framework.common.datastructre.impl.BaseBO;
+
+
+/**
+  * ClueBO 
+  */
+public class ClueBO  extends BaseBO {
+	
+	private static final long serialVersionUID = 1L;
+	
+	public ClueBO(){
+		init();
+	}
+	
+	protected void init(){
+		super.init();
+		this.addList(Arrays.asList("clue_id","clue_code","clue_state","custom_id","custom_name","custom_sex","custom_tel","custom_address","custom_require","door_time","invalid_reason","proxy_tel","remark","created_time","created_by","modified_time","modified_by","version","delflag"));
+	}
+	
+		
+		
+	private String clueId;
+		public void setClueId(String clueId){
+		getData().put("clue_id",clueId);
+		this.clueId=clueId;
+	}
+	
+		
+	public String getClueId(){
+		return (String)getData().get("clue_id");
+	}	
+	private String clueCode;
+	public void setclueCode(String clueCode){
+	getData().put("clue_code",clueCode);
+	this.clueCode=clueCode;
+}
+	public String getclueCode(){
+		return (String)getData().get("clue_code");
+	}	
+		
+	private String clueState;
+		public void setClueState(String clueState){
+		getData().put("clue_state",clueState);
+		this.clueState=clueState;
+	}
+	
+	public String getClueState(){
+		return (String)getData().get("clue_state");
+	}	
+		
+		
+	private String customId;
+		public void setCustomId(String customId){
+		getData().put("custom_id",customId);
+		this.customId=customId;
+	}
+	
+	public String getCustomId(){
+		return (String)getData().get("custom_id");
+	}	
+		
+		
+	private String customName;
+		public void setCustomName(String customName){
+		getData().put("custom_name",customName);
+		this.customName=customName;
+	}
+	
+	public String getCustomName(){
+		return (String)getData().get("custom_name");
+	}	
+		
+		
+	private String customSex;
+		public void setCustomSex(String customSex){
+		getData().put("custom_sex",customSex);
+		this.customSex=customSex;
+	}
+	
+	public String getCustomSex(){
+		return (String)getData().get("custom_sex");
+	}	
+		
+		
+	private String customTel;
+		public void setCustomTel(String customTel){
+		getData().put("custom_tel",customTel);
+		this.customTel=customTel;
+	}
+	
+	public String getCustomTel(){
+		return (String)getData().get("custom_tel");
+	}	
+		
+		
+	private String customAddress;
+		public void setCustomAddress(String customAddress){
+		getData().put("custom_address",customAddress);
+		this.customAddress=customAddress;
+	}
+	
+	public String getCustomAddress(){
+		return (String)getData().get("custom_address");
+	}	
+		
+		
+	private String customRequire;
+		public void setCustomRequire(String customRequire){
+		getData().put("custom_require",customRequire);
+		this.customRequire=customRequire;
+	}
+	
+	public String getCustomRequire(){
+		return (String)getData().get("custom_require");
+	}	
+		
+		
+	private Timestamp doorTime;
+		public void setDoorTime(Timestamp doorTime){
+		getData().put("door_time",doorTime);
+		this.doorTime=doorTime;
+	}
+	
+	public Timestamp getDoorTime(){
+		return (Timestamp)getData().get("door_time");
+	}	
+		
+		
+	private String invalidReason;
+		public void setInvalidReason(String invalidReason){
+		getData().put("invalid_reason",invalidReason);
+		this.invalidReason=invalidReason;
+	}
+	
+	public String getInvalidReason(){
+		return (String)getData().get("invalid_reason");
+	}	
+		
+		
+	private String proxyTel;
+		public void setProxyTel(String proxyTel){
+		getData().put("proxy_tel",proxyTel);
+		this.proxyTel=proxyTel;
+	}
+	
+	public String getProxyTel(){
+		return (String)getData().get("proxy_tel");
+	}	
+		
+		
+	private String remark;
+		public void setRemark(String remark){
+		getData().put("remark",remark);
+		this.remark=remark;
+	}
+	
+	public String getRemark(){
+		return (String)getData().get("remark");
+	}	
+		
+		
+	private Timestamp createdTime;
+		public void setCreatedTime(Timestamp createdTime){
+		getData().put("created_time",createdTime);
+		this.createdTime=createdTime;
+	}
+	
+	public Timestamp getCreatedTime(){
+		return (Timestamp)getData().get("created_time");
+	}	
+		
+		
+	private String createdBy;
+		public void setCreatedBy(String createdBy){
+		getData().put("created_by",createdBy);
+		this.createdBy=createdBy;
+	}
+	
+	public String getCreatedBy(){
+		return (String)getData().get("created_by");
+	}	
+		
+		
+	private Timestamp modifiedTime;
+		public void setModifiedTime(Timestamp modifiedTime){
+		getData().put("modified_time",modifiedTime);
+		this.modifiedTime=modifiedTime;
+	}
+	
+	public Timestamp getModifiedTime(){
+		return (Timestamp)getData().get("modified_time");
+	}	
+		
+		
+	private String modifiedBy;
+		public void setModifiedBy(String modifiedBy){
+		getData().put("modified_by",modifiedBy);
+		this.modifiedBy=modifiedBy;
+	}
+	
+	public String getModifiedBy(){
+		return (String)getData().get("modified_by");
+	}	
+		
+		
+	private Integer version;
+		public void setVersion(Integer version){
+		getData().put("version",version);
+		this.version=version;
+	}
+	
+	public Integer getVersion(){
+		return (Integer)getData().get("version");
+	}	
+		
+		
+	private String delflag;
+		public void setDelflag(String delflag){
+		getData().put("delflag",delflag);
+		this.delflag=delflag;
+	}
+	
+	public String getDelflag(){
+		return (String)getData().get("delflag");
+	}	
+	 }
+

@@ -1,0 +1,255 @@
+package com.taikang.iu.opt.seller.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.taikang.iu.opt.seller.action.ISellerAction;
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.udp.framework.common.datastructre.impl.BaseDto;
+import com.taikang.udp.framework.common.util.TKDateTimeUtils;
+import com.taikang.udp.framework.core.exception.TKCheckedException;
+import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+import com.taikang.udp.framework.core.web.BaseController;
+import com.taikang.udp.sys.action.IUserAction;
+import com.taikang.udp.sys.util.UserUtils;
+import com.taikang.udp.sys.util.sequence.BusinessSeqGenerator;
+import com.taikang.udp.sys.util.vo.LoginUser;
+
+/**
+ * 商户信息管理
+ * @author t-wuke
+ * @version [版本号，默认V1.0.0]
+ * @Credited 2015年3月18日 上午10:14:22
+ */
+@Controller("sellerController")
+@RequestMapping(value="/seller")
+public class SellerController extends BaseController  {
+		
+	@Resource(name=ISellerAction.ACTION_ID)
+	private ISellerAction sellerAction;
+		
+	@Resource(name=IUserAction.ACTION_ID)
+	private IUserAction userAction;
+	
+	/**
+	 * 打开主查询页面
+	 * @return 页面地址
+	 */
+	@RequestMapping("")
+	public String showSellerIndexPage() {
+		return "seller/sellerIndex"; 
+	}
+	
+	/**
+	 * 查询信息列表
+	 * @return 分页列表数据
+	 */
+	@RequestMapping("/list")
+	@ResponseBody
+	public Map<String,Object> getSellerList(HttpServletRequest request,CurrentPage page){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		page.setParamObject(getParamAsDto(request));
+		CurrentPage currentPage = sellerAction.queryForPage(page);
+		
+		map.put("rows", currentPage.getPageItems());
+		map.put("total", currentPage.getTotalRows());
+		
+		return map;
+	}
+
+	/**
+	 * 打开新增页面
+	 * @return   
+	 * String
+	 */
+	@RequestMapping("/add")
+	public String oneRole() {
+		return "seller/sellerAdd"; 
+	}
+	
+	/**
+	 * 打开修改页面
+	 * @return
+	 * String
+	 */
+	@RequestMapping("edit")
+	public String showSellerEditPage(String sellerId,Model model) {
+		
+		if(sellerId!=null && !sellerId.equals(""))
+		{
+			model.addAttribute("sellerId",sellerId );
+		}
+		
+		return "seller/sellerEdit"; 
+	}
+	
+	/**
+	 * 打开详细页面
+	 * @return
+	 * String
+	 */
+	@RequestMapping("/view")
+	public String showSellerViewPage(String sellerId,Model model) {
+		
+		if(sellerId!=null && !sellerId.equals(""))
+		{
+			model.addAttribute("sellerId",sellerId );
+		}
+		
+		return "seller/sellerView"; 
+	}
+	
+	/**
+	 * 获取一条记录详细信息，用来填充修改界面
+	 * @return
+	 */
+	@RequestMapping("/getOne")
+	@ResponseBody
+	public Dto getSellerById(@RequestParam("sellerId")String sellerId)
+	{
+		Dto param = new BaseDto();
+		param.put("sellerId", sellerId);
+		return sellerAction.findOne(param);
+	}
+	
+	/**
+	 * 保存新增或修改的记录，将其持久化到数据库中
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/save")
+	@ResponseBody
+	private Map<String,String> saveSellerInfo(HttpServletRequest request)
+	{
+		Map<String,String> map=new HashMap<String,String>();
+		LoginUser user = UserUtils.getUser();
+		String loginId = String.valueOf(user.getUserId());
+		Dto param = getParamAsDto(request);
+		if(param.get("sellerId") ==null ||"".equals(param.get("sellerId")))
+		{
+			Dto oldParam = new BaseDto();
+			oldParam.put("userCode", param.get("loginName"));
+			Dto oldOne = userAction.findOne(oldParam);
+			
+			// 校验登录名是有已存在
+			if(oldOne != null && oldOne.get("userCode") != null){
+				map.put(MESSAGE_INFO, "登录名已存在！");
+				map.put(RTN_RESULT, "false");
+				return map;
+			}
+			
+			param.put("sellerId", UUID.randomUUID().toString().replace("-", ""));
+			param.put("sellerState", "1"); // “1”代表“使用中”
+			param.put("sellerCode", "SH"+TKDateTimeUtils.getCurrentDate().toString().replace("-", "")+BusinessSeqGenerator.getInstance("SELLER_CODE").nextId()); 
+			param.put("createdBy", loginId);
+			param.put("createdTime", TKDateTimeUtils.getTodayTimeStamp());
+			param.put("delflag", "0"); // “0”代表“未删除”
+			param.put("version", 1);
+			
+			// 添加商户
+			sellerAction.insertObject(param);
+			map.put(MESSAGE_INFO, "添加成功！");
+		}
+		else
+		{
+			Dto oldParam = new BaseDto();
+			oldParam.put("sellerId", param.get("sellerId"));
+			
+			// 查询数据库里商户数据
+			Dto oldOne = sellerAction.findOne(oldParam);
+			oldOne.put("sellerType", param.get("sellerType"));
+			oldOne.put("modifiedBy", loginId);
+			oldOne.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+			oldOne.put("version", Integer.parseInt(oldOne.get("version").toString())+1);
+			
+			// 更新商户数据
+			sellerAction.updateObject(oldOne);
+			map.put(MESSAGE_INFO, "修改成功！");
+		}
+		map.put(RTN_RESULT, "true");
+		
+		return map;
+	}
+	
+	/**
+	*删除一条或多条记录
+	*/
+	@RequestMapping(value="/del")
+	@ResponseBody
+	public Map<String, String> deleteSeller(@RequestParam("sellerId") String sellerId, @RequestParam("version") String version) {
+		Map<String, String> map = new HashMap<String, String>();
+		Dto param = new BaseDto();
+		param.put("sellerId", sellerId);
+		// 删除改为逻辑删除
+//		sellerAction.deleteObject(param);
+		LoginUser user = UserUtils.getUser();
+		String loginId = String.valueOf(user.getUserId());
+		param.put("modifiedBy", loginId);
+		param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+		param.put("delflag", "1"); // “1”代表“已删除”
+		param.put("version", Integer.parseInt(version)+1);
+		sellerAction.updateObject(param);
+		
+		map.put(RTN_RESULT, "true");
+		map.put(MESSAGE_INFO, "操作成功！");
+		
+		return map;
+	}
+	
+	/**
+	*	重置密码
+	*/
+	@RequestMapping(value="/resetPwd")
+	@ResponseBody
+	public Map<String, String> resetPwd(HttpServletRequest request) {
+		Map<String, String> map = new HashMap<String, String>();
+		Dto param = getParamAsDto(request);
+		
+		if(param.get("sellerId") != null){
+			// 获取商户初始密码
+			Dto sellerParam = new BaseDto();
+			sellerParam.put("sellerId", param.get("sellerId"));
+			Dto seller = sellerAction.findOne(sellerParam);
+			
+			// 获取用户数据
+			Dto userParam = new BaseDto();
+			userParam.put("userId", seller.get("userId"));
+			Dto user = userAction.findOne(userParam);
+			
+			// 更新用户密码
+			if(seller.get("loginInitPwd") != null){
+				try {
+					user.put("userPwd", UserUtils.entryptPassword(seller.get("loginInitPwd").toString()));
+					userAction.updateObject(user);
+					
+					map.put(RTN_RESULT, "true");
+					map.put(MESSAGE_INFO, "操作成功！");
+				} catch (TKCheckedException e) {
+					logger.error("<======SellerController--resetPwd--此商户初始密码加密时出错（"+param.get("sellerCode")+"）======>");
+					e.printStackTrace();
+					
+					map.put(MESSAGE_INFO, "初始密码加密时出错，初始密码失败！");
+					map.put(RTN_RESULT, "false");
+				}
+			}else {
+				logger.error("<======SellerController--resetPwd--此商户没有初始密码（"+param.get("sellerCode")+"）======>");
+				map.put(MESSAGE_INFO, "没有初始密码，初始密码失败！");
+				map.put(RTN_RESULT, "false");
+			}
+		}
+		
+		return map;
+	}
+}
+

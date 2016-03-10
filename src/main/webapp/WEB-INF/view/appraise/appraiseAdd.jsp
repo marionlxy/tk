@@ -1,0 +1,188 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<%@ include file="/include.jsp"%>
+    <title></title>
+</head>
+<body>
+	<div>
+		<form id="dataForm" method="post">
+		<input type = "hidden"  name="orderSevId" value="${orderSevId}">
+		<input type = "hidden" name="subId" value="${subId}">
+		<input type = "hidden" name="apprasiState">
+				<div class="fitem">
+		        	<label>评价人:</label>
+		        	 <c:if test='${apprasiState == 0}'>
+		        	<input name="appraiseNum" class="easyui-textbox" validType="length[0,20]" required="required">
+		        	</c:if>
+		        	 <c:if test='${apprasiState == 1}'>
+		        	<input name="appraiseNum" class="easyui-textbox"  required="required" disabled>
+		        	</c:if>
+		    	</div>
+		       <div class="fitem">
+			    	<label style="vertical-align:top;">评价信息:</label>
+			    	 <c:if test='${apprasiState == 0}'>
+					<textarea name="appraiseMsg" style=" border:1px solid #99bbe8;"  rows="8" cols="33" class="easyui-validatebox" validType="length[0,120]" required="required" ></textarea>
+					</c:if>
+					<c:if test='${apprasiState == 1}'>
+					<textarea name="appraiseMsg" style=" border:1px solid #99bbe8;"  rows="8" cols="33" class="easyui-validatebox"  required="required" disabled></textarea>
+					</c:if>
+		      </div>
+				<!-- <div class="fitem">
+		        	<label>服务评价:</label>
+		    	</div> -->
+				<!-- <div class="fitem">
+		        	<label>商品包装满意度:</label>
+		        	<input type="hidden" name="dimensionField1" value="商品包装满意度-">
+	                <select id="cc" style="width:210px" ></select>
+					<div id="sp">
+						<div style="color:#99BBE8;background:#fafafa;padding:5px;">选择分值</div>
+						<input type="radio" name="lang" value="1"><span>1星</span><br/>
+						<input type="radio" name="lang" value="2"><span>2星</span><br/>
+						<input type="radio" name="lang" value="3"><span>3星</span><br/>
+						<input type="radio" name="lang" value="4"><span>4星</span><br/>
+						<input type="radio" name="lang" value="5"><span>5星</span>
+					</div>
+		    	</div>
+				<div class="fitem">
+		        	<label>送货速度满意度:</label>
+		        	<input type="hidden" name="dimensionField1" value="送货速度满意度-">
+		        	<select id="bb" style="width:210px"  ></select>
+					<div id="sb">
+						<div style="color:#99BBE8;background:#fafafa;padding:5px;">选择分值</div>
+						<input type="radio" name="langw" value="1"><span>1星</span><br/>
+						<input type="radio" name="langw" value="2"><span>2星</span><br/>
+						<input type="radio" name="langw" value="3"><span>3星</span><br/>
+						<input type="radio" name="langw" value="4"><span>4星</span><br/>
+						<input type="radio" name="langw" value="5"><span>5星</span>
+					</div>
+		    	</div>
+				<div class="fitem">
+		        	<label>天使服务满意度:</label>
+		        	<input type="hidden" name="dimensionField1" value="天使服务满意度">
+		        	<select id="dd" style="width:210px" ></select>
+					<div id="sd">
+						<div style="color:#99BBE8;background:#fafafa;padding:5px;">选择分值</div>
+						<input type="radio" name="lange" value="1"><span>1星</span><br/>
+						<input type="radio" name="lange" value="2"><span>2星</span><br/>
+						<input type="radio" name="lange" value="3"><span>3星</span><br/>
+						<input type="radio" name="lange" value="4"><span>4星</span><br/>
+						<input type="radio" name="lange" value="5"><span>5星</span>
+					</div>
+		    	</div>
+		    	<input type="hidden" name="customId" value="SH1000101">
+		    	<input type="hidden" name="subOrder" value="KL8999203">
+		    	<input type="hidden" id="dimensionFieldAgo" name="dimensionFieldAgo" >
+		    	<input type="hidden" id="dimensionScore1" name="dimensionScore1" > -->
+				</form>
+	  <div id="dlg-buttons" align="center">
+	  <c:if test='${apprasiState == 0}'>
+       <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" id="save" onclick="saveOrUpdate()" style="width:90px">提交</a>
+        </c:if>
+       <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="returnParent()" style="width:90px">取消</a>
+       
+   </div>
+</div>
+<script type="text/javascript">
+/* $(function(){
+	$('#cc').combo({
+		required:true,
+		editable:false,
+		panelWidth:210,
+		panelHeight:120
+	});
+	$('#sp').appendTo($('#cc').combo('panel'));
+	$('#sp input').click(function(){
+		var v = $(this).val();
+		var s = $(this).next('span').text();
+		$('#cc').combo('setValue', v).combo('setText', s).combo('hidePanel');
+	});
+	$('#dd').combo({
+		required:true,
+		editable:false,
+		panelWidth:210,
+		panelHeight:120
+	});
+	$('#sd').appendTo($('#dd').combo('panel'));
+	$('#sd input').click(function(){
+		var v = $(this).val();
+		$("#dd").val(v);
+		var s = $(this).next('span').text();
+		$('#dd').combo('setValue', v).combo('setText', s).combo('hidePanel');
+	});
+	$('#bb').combo({
+		required:true,
+		editable:false,
+		panelWidth:210,
+		panelHeight:120
+	});
+	$('#sb').appendTo($('#bb').combo('panel'));
+	$('#sb input').click(function(){
+		var v = $(this).val();
+		var s = $(this).next('span').text();
+		$('#bb').combo('setValue', v).combo('setText', s).combo('hidePanel');
+	});
+});
+ */
+ 
+jQuery(function(){ 
+	
+	jQuery.ajaxSetup({
+		contentType:"application/x-www-form-urlencoded; charset=utf-8",
+		cache : false
+	});
+	var appraiseState ='${apprasiState}';
+	var orderSevId ='${orderSevId}';
+	var subId = '${subId}';
+	 if(appraiseState == 1){
+		var url='${rootPath}/appraise/getOneAppraise?orderSevId=' + orderSevId+'&subId='+subId;
+		$('#dataForm').form('load', url);
+	} 
+	
+});
+
+//保存记录
+function saveOrUpdate()
+{  /*  var field = "";
+	var score = "";
+	 $("input[name='dimensionField1']").each(function(i){
+		 field += $(this).val();
+		 
+	});
+	 $("#dimensionFieldAgo").val(field)
+	
+	$("input[type='radio']:checked").each(function(i){
+		score+=$(this).val()+",";
+	}); 
+	$("#dimensionScore1").val(score);*/
+	var r = $('#dataForm').form('validate');
+	if(!r) {
+		return false;
+	}
+	else
+	{		
+		$('#save').linkbutton('disable');
+		$.post("${rootPath}/appraise/save",$("#dataForm").serializeArray(),
+		function(data)
+		{			
+			if(data.result == 'true' || data.result == true)
+			{
+			 	$.messager.alert("提示", data.msg);
+			 	returnParent(1);
+			}
+			else
+			{
+				$.messager.alert("提示", data.msg);
+				$('#save').linkbutton('enable');
+			}
+		});
+	}
+}		
+</script>
+</body>
+</html>

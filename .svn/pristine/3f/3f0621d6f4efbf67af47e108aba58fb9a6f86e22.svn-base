@@ -1,0 +1,14 @@
+package com.taikang.iu.opt.worksheet.action;
+
+import com.taikang.udp.framework.core.action.IBaseAction;
+import java.util.Arrays;
+
+
+/**
+  * IWorksheetAction
+  */
+
+public interface IWorksheetAction extends IBaseAction { 
+
+	final String ACTION_ID = "worksheetAction"; 	
+}

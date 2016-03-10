@@ -1,0 +1,16 @@
+package com.taikang.iu.opt.worksheet.service;
+
+import com.taikang.udp.framework.core.service.IBaseService;
+import java.util.Arrays;
+
+/**
+  * IWorksheetService
+  */
+ 
+ public interface IWorksheetService<T> extends IBaseService<T>{
+ 
+ 	final String SERVICE_ID = "worksheetService";  	
+ }
+ 
+ 
+ 

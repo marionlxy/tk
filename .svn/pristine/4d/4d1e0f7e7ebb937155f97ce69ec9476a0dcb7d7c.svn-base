@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Prefer">
+	<resultMap id="preferResultMap" type="com.taikang.iu.opt.prefer.model.PreferBO">
+		<result property="preferId" column="PREFER_ID"/>
+		<result property="lowerLimit" column="LOWER_LIMIT"/>
+		<result property="upperLimit" column="UPPER_LIMIT"/>
+		<result property="preferMini" column="PREFER_MINI"/>
+		<result property="preferMax" column="PREFER_MAX"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="preferWhereCondition">
+		<where>
+	  	<if test=" prefer_id != null and prefer_id != '' and prefer_id != 'null' ">
+			<![CDATA[ AND A.PREFER_ID = #{prefer_id} ]]>
+	  	</if>
+	  	<if test=" lower_limit != null ">
+	  		<![CDATA[ AND A.LOWER_LIMIT = ${lower_limit} ]]>
+	  	</if>
+	  	<if test=" upper_limit != null ">
+	  		<![CDATA[ AND A.UPPER_LIMIT = ${upper_limit} ]]>
+	  	</if>
+	  	<if test=" prefer_mini != null ">
+	  		<![CDATA[ AND A.PREFER_MINI = ${prefer_mini} ]]>
+	  	</if>
+	  	<if test=" prefer_max != null ">
+	  		<![CDATA[ AND A.PREFER_MAX = ${prefer_max} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addPrefer"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO OPT_PREFER
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" prefer_id  != null and  prefer_id  != ''  and  prefer_id  != 'null' ">
+				<![CDATA[ PREFER_ID , ]]>
+	  		</if>
+	  		<if test=" lower_limit  != null ">
+				<![CDATA[ LOWER_LIMIT , ]]>
+	  		</if>
+	  		<if test=" upper_limit  != null ">
+				<![CDATA[ UPPER_LIMIT , ]]>
+	  		</if>
+	  		<if test=" prefer_mini  != null ">
+				<![CDATA[ PREFER_MINI , ]]>
+	  		</if>
+	  		<if test=" prefer_max  != null ">
+				<![CDATA[ PREFER_MAX , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" prefer_id  != null and  prefer_id  != ''  and  prefer_id  != 'null' ">
+	  			<![CDATA[ #{prefer_id} , ]]>
+	  		</if>
+	  		<if test=" lower_limit  != null">
+	    		<![CDATA[ ${lower_limit} , ]]>
+	  		</if>
+	  		<if test=" upper_limit  != null">
+	    		<![CDATA[ ${upper_limit} , ]]>
+	  		</if>
+	  		<if test=" prefer_mini  != null">
+	    		<![CDATA[ ${prefer_mini} , ]]>
+	  		</if>
+	  		<if test=" prefer_max  != null">
+	    		<![CDATA[ ${prefer_max} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updatePrefer" parameterType="java.util.Map">
+		<![CDATA[ UPDATE OPT_PREFER A ]]>
+		<set>
+		<if test=" lower_limit  != null ">
+  			<![CDATA[ A.LOWER_LIMIT = ${lower_limit} , ]]>
+		</if>
+		<if test=" upper_limit  != null ">
+  			<![CDATA[ A.UPPER_LIMIT = ${upper_limit} , ]]>
+		</if>
+		<if test=" prefer_mini  != null ">
+  			<![CDATA[ A.PREFER_MINI = ${prefer_mini} , ]]>
+		</if>
+		<if test=" prefer_max  != null ">
+  			<![CDATA[ A.PREFER_MAX = ${prefer_max} , ]]>
+		</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.PREFER_ID = #{prefer_id}]]>
+  	</update>
+  
+  	<delete id="deletePrefer" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM OPT_PREFER A where A.PREFER_ID = #{prefer_id} ]]>
+	</delete>
+  
+	<select id="findOnePrefer" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM OPT_PREFER A  ]]>
+		<include refid="preferWhereCondition" />
+  	</select>
+    
+  	<select id="findAllPrefer" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM OPT_PREFER A ]]>
+		<include refid="preferWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapPrefer" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM OPT_PREFER A ]]>
+		<include refid="preferWhereCondition" />
+	</select>
+  
+  	<select id="findPreferTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM OPT_PREFER A ]]>
+		<include refid="preferWhereCondition" />
+  	</select>
+  
+  	<select id="queryPreferForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT A.* FROM OPT_PREFER A 
+		   where 1=1 
+          AND A.DELFLAG = '0' 
+  	</select>
+  	<select id="comfrimPreferForPage" parameterType="java.util.Map" resultType="java.util.Map">
+	<![CDATA[	 SELECT A.* FROM OPT_PREFER A 
+		   where 1=1 
+		   and #{lowerLimit} < A.LOWER_LIMIT 
+           and #{upperLimit} < A.UPPER_LIMIT  or #{lowerLimit} < A.UPPER_LIMIT ]]>
+           AND A.DELFLAG = '0' 
+  	</select>
+</mapper>

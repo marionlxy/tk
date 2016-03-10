@@ -1,0 +1,156 @@
+package com.taikang.iu.opt.order.action.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.taikang.iu.opt.order.action.IOrderAction;
+import com.taikang.iu.opt.order.model.OrderAppBO;
+import com.taikang.iu.opt.order.model.OrderBO;
+import com.taikang.iu.opt.order.model.OrderSevBO;
+import com.taikang.iu.opt.order.service.IOrderAppService;
+import com.taikang.iu.opt.order.service.IOrderService;
+import com.taikang.iu.opt.order.service.IOrderSevService;
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.udp.framework.common.datastructre.impl.BaseDto;
+import com.taikang.udp.framework.common.util.TKDateTimeUtils;
+import com.taikang.udp.framework.core.action.impl.BaseActionImpl;
+import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+import com.taikang.udp.sys.util.UserUtils;
+import com.taikang.udp.sys.util.vo.LoginUser;
+
+
+
+/**
+  * OrderAction
+  */
+  @Service(IOrderAction.ACTION_ID)
+public class OrderActionImpl extends BaseActionImpl 
+  implements IOrderAction {
+
+    /**
+      * 注入service
+      */
+    @Resource(name=IOrderService.SERVICE_ID)
+	private IOrderService<OrderBO> orderService;	
+    
+    
+    @Resource(name=IOrderAppService.SERVICE_ID)
+    private IOrderAppService<OrderAppBO> orderAppService;
+    
+    @Resource(name = IOrderSevService.SERVICE_ID)
+    private IOrderSevService<OrderSevBO> orderSevService;
+    
+	/**
+	  * 增加数据
+	  */
+	public void insertObject(Dto param) {
+		logger.debug("<======OrderAction--addOrder======>");
+		
+		OrderBO orderBO = BaseDto.toModel(OrderBO.class , param);
+		orderService.insertObject(orderBO);
+	}
+	
+	/**
+      * 修改数据
+      */
+	public void updateObject(Dto param){
+		logger.debug("<======OrderAction--updateOrder======>");
+		
+		OrderBO orderBO = BaseDto.toModel(OrderBO.class , param);
+		orderService.updateObject(orderBO);
+	}
+
+	 /**
+      * 删除数据
+      */
+	public void deleteObject(Dto param) {
+		logger.debug("<======OrderAction--deleteOrder======>");
+		
+		OrderBO orderBO = BaseDto.toModel(OrderBO.class , param);
+		orderService.deleteObject(orderBO);
+	}
+	
+	/**
+      * 查询单条数据
+      */
+	public Dto findOne(Dto param) {
+		logger.debug("<======OrderAction--findOneOrder======>");
+		
+		OrderBO orderBO = BaseDto.toModel(OrderBO.class , param);
+		return orderService.findOne(orderBO).toDto();//返回的BO对象自动转换成Dto返回
+	}  
+	
+	/**
+      * 查询所有数据
+      */
+	public List<Dto> findAll(Dto param) {
+		logger.debug("<======OrderAction--findAllOrder======>");
+				
+		return orderService.findAllMap(param);
+	} 
+	
+		
+	 /**
+      * 分页查询数据
+      */
+	public CurrentPage queryForPage(CurrentPage currentPage){
+		logger.debug("<======OrderAction--queryOrderForPage======>");
+		
+		return orderService.queryForPage(currentPage);
+	}
+
+    /**
+     * 根据id查找子订单信息
+     */
+	public OrderBO findOrderByIdInfo(OrderBO order) {
+		logger.debug("<======OrderAction--findOrderByIdInfo======>");
+		return orderService.findOrderByIdInfo(order);
+	}
+    /**
+     * 查看服务类型订单
+     */
+	public CurrentPage queryAllSevOrderPage(CurrentPage currentPage) {
+		logger.debug("<======OrderAction--queryAllSevOrderPage======>");
+		return orderService.queryAllSevOrderPage(currentPage);
+	}
+
+	public CurrentPage queryReferenceOrderPage(CurrentPage currentPage) {
+		logger.debug("<======OrderAction--queryAllSevOrderPage======>");
+		return orderService.queryReferenceOrderPage(currentPage);
+	}
+
+	public List<Dto> findOrderIsTypeSD(Dto param) {
+		return orderService.findOrderIsTypeSD(param);
+	}
+
+	@SuppressWarnings("unchecked")
+	public void updateFixedTimeApp(Dto param) {
+		Dto orderDto = new BaseDto();
+		LoginUser user = UserUtils.getUser();
+		String loginId = String.valueOf(user.getUserId());
+		orderDto.put("orderId", param.get("ORDER_ID"));
+		orderDto.put("orderState", "16");
+		orderDto.put("modifiedBy",loginId);
+		orderDto.put("version", Integer.parseInt(param.get("VERSION").toString())+1);
+		orderDto.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+		Dto appOrder = new  BaseDto();
+		appOrder.put("orderId",param.get("ORDER_ID"));
+		List<Dto> appOrderList = orderAppService.findAllAppOrderList(appOrder);
+		for(Dto app :appOrderList){
+			Dto updateApp = new  BaseDto();
+			updateApp.put("orderAppId", app.get("ORDER_APP_ID"));
+			updateApp.put("appState", "06");
+			updateApp.put("modifiedBy",loginId);
+			updateApp.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+			updateApp.put("version", Integer.parseInt(param.get("VERSION").toString())+1);
+			OrderAppBO orderAppBO = BaseDto.toModel(OrderAppBO.class ,updateApp);
+			orderAppService.updateObject(orderAppBO);
+		}
+		OrderBO orderBO = BaseDto.toModel(OrderBO.class , orderDto);
+		orderService.updateObject(orderBO);
+	}
+	
+}

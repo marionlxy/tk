@@ -1,0 +1,187 @@
+package com.taikang.iu.opt.employee.action.impl;
+
+import com.taikang.udp.framework.common.datastructre.impl.BaseDto;
+
+import javax.annotation.Resource;
+
+import java.util.List;
+
+import com.taikang.udp.framework.core.action.impl.BaseActionImpl;
+import com.taikang.udp.framework.core.exception.TKCheckedException;
+import com.taikang.iu.opt.employee.service.IEmployeeService;
+import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.udp.framework.common.util.TKDateTimeUtils;
+import com.taikang.udp.sys.model.UserBO;
+import com.taikang.udp.sys.service.IUserService;
+import com.taikang.udp.sys.util.UserUtils;
+import com.taikang.udp.sys.util.sequence.BusinessSeqGenerator;
+import com.taikang.udp.sys.util.sequence.SequenceGenerator;
+import com.taikang.iu.opt.employee.action.IEmployeeAction;
+import com.taikang.iu.opt.employee.model.EmployeeBO;
+
+import org.springframework.stereotype.Service;
+
+/**
+ * EmployeeAction
+ */
+@Service(IEmployeeAction.ACTION_ID)
+public class EmployeeActionImpl extends BaseActionImpl implements
+		IEmployeeAction {
+
+	/**
+	 * 注入service
+	 */
+	@Resource(name = IEmployeeService.SERVICE_ID)
+	private IEmployeeService<EmployeeBO> employeeService;
+	
+	
+	/**
+	 * 注入service
+	 */
+	@Resource(name = IUserService.SERVICE_ID)
+	private IUserService<UserBO> userService;
+
+	/**
+	 * 增加数据
+	 */
+	public void insertObject(Dto param) {
+		logger.debug("<======EmployeeAction--addEmployee======>");
+
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class, param);
+		employeeService.insertObject(employeeBO);
+	}
+
+	/**
+	 * 修改数据
+	 */
+	public void updateObject(Dto param) {
+		logger.debug("<======EmployeeAction--updateEmployee======>");
+
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class, param);
+		employeeService.updateObject(employeeBO);
+	}
+
+	/**
+	 * 删除数据
+	 */
+	public void deleteObject(Dto param) {
+		logger.debug("<======EmployeeAction--deleteEmployee======>");
+
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class, param);
+		employeeService.deleteObject(employeeBO);
+	}
+
+	/**
+	 * 查询单条数据
+	 */
+	public Dto findOne(Dto param) {
+		logger.debug("<======EmployeeAction--findOneEmployee======>");
+
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class, param);
+		return employeeService.findOne(employeeBO).toDto();// 返回的BO对象自动转换成Dto返回
+	}
+
+	/**
+	 * 查询所有数据
+	 */
+	public List<Dto> findAll(Dto param) {
+		logger.debug("<======EmployeeAction--findAllEmployee======>");
+
+		return employeeService.findAllMap(param);
+	}
+
+	/**
+	 * 分页查询数据
+	 */
+	public CurrentPage queryForPage(CurrentPage currentPage) {
+		logger.debug("<======EmployeeAction--queryEmployeeForPage======>");
+
+		return employeeService.queryForPage(currentPage);
+	}
+
+	public List<EmployeeBO> finAllEmp(Dto param) {
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class, param);
+		return employeeService.finAllEmp(employeeBO);
+	}
+
+	public List<EmployeeBO> finAllEmpTS(Dto param) {
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class , param);
+		return employeeService.finAllEmpTS(employeeBO);
+	}
+	/**
+	 * 查询天使
+	 */
+	public List<EmployeeBO> finAllEmpT(Dto param) {
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class, param);
+		return employeeService.finAllEmpT(employeeBO);
+	}
+
+	@Override
+	public CurrentPage queryAnglesForPage(CurrentPage page) {
+		return employeeService.queryAnglesForPage(page);
+	}
+
+	@Override
+	public CurrentPage queryEmployeesForPage(CurrentPage page) {
+		return employeeService.queryEmployeesForPage(page);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void saveEmployeeManage(Dto param) {
+		logger.debug("<======EmployeeAction--saveEmployeeManage======>");
+		param.put("employeeCode", "YG"
+				+ TKDateTimeUtils.getCurrentDate().toString().replace("-", "")
+				+ BusinessSeqGenerator.getInstance("EMPLOYEE_CODE").nextId());
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class, param);
+		UserBO user = new UserBO();
+		// 获取用户编号
+		SequenceGenerator generator = SequenceGenerator.getInstance("User_Id",
+				1);
+		long nextid = generator.nextId();
+
+		user.setUserId(Integer.valueOf(String.valueOf(nextid)));
+		user.setUserCode(param.getAsString("loginName"));
+		user.setUserName(employeeBO.getEmployeeName());
+		try {
+			user.setUserPwd(UserUtils.entryptPassword(param
+					.getAsString("loginInitPwd")));
+		} catch (TKCheckedException e) {
+			logger.error("<======SellerServiceImpl--insertSelle--UserUtils.entryptPasswordr======>");
+			e.printStackTrace();
+		}
+		user.setUserType("1");
+		user.setUserStatus("1");
+		user.setCreateTime(employeeBO.getCreatedTime());
+		user.setCreator(Integer.parseInt(employeeBO.getCreatedBy()));
+		user.setWorkStatus("1");
+		// 设置employee的UserId
+		employeeBO.setUserId(Integer.valueOf(String.valueOf(nextid)));
+
+		employeeService.saveEmployeeManage(employeeBO);
+		employeeService.saveUserManage(user);
+
+	}
+
+	@Override
+	public void updateEmployeeManage(Dto param) {
+		logger.debug("<======EmployeeAction--updateEmployeeManage======>");
+
+		EmployeeBO employeeBO = BaseDto.toModel(EmployeeBO.class, param);
+		employeeService.updateObject(employeeBO);
+		UserBO userBO=new UserBO();
+		userBO.setUserId(employeeBO.getUserId());
+		userService.findOne(userBO);
+		userBO.setUserName(employeeBO.getEmployeeName());
+		userBO.setLastModtime(employeeBO.getModifiedTime());
+		userBO.setLastModby(Integer.valueOf(String.valueOf(employeeBO.getModifiedBy())));
+		userService.updateObject(userBO);
+	}
+
+	@Override
+	public List<Dto> queryAllEmployeeByCondition(Dto param) {
+		logger.debug("<======EmployeeAction--queryAllEmployeeByCondition======>");
+		return employeeService.queryAllEmployeeByCondition(param);
+	}
+}

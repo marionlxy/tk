@@ -1,0 +1,88 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<%@ include file="/include.jsp"%>
+    <title></title>
+</head>
+<body>
+<div>
+	<form id="dataForm">
+		<input type="hidden" name="version">
+		<input type="hidden" name="clueId">
+	<div class="fitem">
+		    	<label>线索编号:</label>
+		        <input name="clueCode" class="easyui-textbox" data-options="required:true"  validType="length[0,50]" required="required" disabled="disabled">
+			</div>
+			<div class="fitem">
+		    	<label>客户姓名:</label>
+		        <input name="customName" class="easyui-textbox" data-options="required:true" validType="length[0,50]" required="required" disabled="disabled">
+			</div>
+			<div class="fitem" style="width: 700px">
+		    	<label>站点:</label>
+		        <input name="site" class="easyui-combobox" data-options="required:true" style="width:100px" panelHeight="auto"
+		        url="${rootPath}/getDictCombox?dictType=SITE" valueField="dictId" textField="dictName" disabled>
+			</div>
+			<div class="fitem">
+		    	<label>客户性别:</label>
+		    	<input class="easyui-combobox" name="customSex" style="width:80px" panelHeight="auto"
+		 	url="${rootPath}/getDictCombox?dictType=SEX_TYPE" valueField="dictId" textField="dictName" data-options="required:true" validType="length[0,50]" required="required" disabled="disabled">
+<%-- 		        <input name="customSex" url="${rootPath}/getDictCombox?dictType=SEX_TYPE" valueField="dictId" textField="dictName" class="easyui-textbox" data-options="required:true" validType="length[0,50]" required="required" disabled="disabled"> --%>
+			</div>
+			<div class="fitem">
+		    	<label>客户电话:</label>
+		        <input name="customTel" class="easyui-textbox" data-options="required:true" validType="length[0,50]" required="required" disabled="disabled">
+			</div>
+			<div class="fitem">
+		    	<label>客户地址:</label>
+		        <input name="customAddress" class="easyui-textbox" data-options="required:true" validType="length[0,50]" required="required" disabled="disabled">
+			</div>
+			<div class="fitem">
+		    	<label>客户需求:</label>
+		     	<textarea   name="customRequire" class="easyui-validatebox validatebox-text validatebox-invalid" required="required" validtype="length[0,4000]" cols="31" rows="4"  disabled="disabled" style=" border:1px solid #99bbe8;" title=""></textarea>
+<!-- 		        <input name="customRequire" class="easyui-textbox" data-options="required:true" validType="length[0,50]" required="required" disabled="disabled"> -->
+			</div>
+			<div class="fitem">
+		    	<label>上门时间:</label>
+		        <input name="doorTime" class="easyui-datetimebox" required style="width:205px" disabled="disabled">
+			</div>
+			<div class="fitem">
+		    	<label>代理人电话:</label>
+		        <input name="proxyTel" class="easyui-textbox" data-options="required:true" validType="length[0,50]" required="required" disabled="disabled">
+			</div>
+			<div class="fitem">
+		    	<label>备注:</label>
+		    	<textarea   name="remark"  disabled="disabled" class="easyui-validatebox validatebox-text validatebox-invalid" required="required" validtype="length[0,200]" cols="31" rows="4" style=" border:1px solid #99bbe8;"  title=""></textarea>
+<!-- 		        <input name="remark" class="easyui-textbox" data-options="required:true" validType="length[0,50]" required="required" disabled="disabled"> -->
+			</div>
+	</form>
+    <div id="dlg-buttons" align="center">
+       <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="goBack(1)" style="width:90px">取消</a>
+   </div>
+</div>
+    
+<script type="text/javascript">
+
+var sellerId;
+jQuery(function(){ 
+	// 注意：不要读取缓存
+	jQuery.ajaxSetup({
+		cache : false
+	});
+	
+	clueId ='${clueId}';
+	
+	if (clueId != null && clueId != "" && clueId!=0){
+		var url='${rootPath}/clue/getOne?clueId=' + clueId;
+		$('#dataForm').form('load', url);
+	}
+});
+
+</script>
+
+</body>
+</html>

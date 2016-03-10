@@ -1,0 +1,48 @@
+package com.taikang.iu.opt.order.service;
+
+import java.util.List;
+
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.udp.framework.core.service.IBaseService;
+
+/**
+  * IOrderSubService
+  */
+ 
+ public interface IOrderSubService<T> extends IBaseService<T>{
+ 
+ 	final String SERVICE_ID = "orderSubService"; 
+ 	/**
+ 	 * 获得子订单服务类型的且状态为实施中
+ 	 * @author t-zhaohan
+ 	 * @Credited 2015年4月21日 上午10:09:29
+ 	 * @see       [相关类/方法]
+ 	 * @return
+ 	 */
+ 	public List<Dto> findSubOrderIsTypeFT(Dto param);
+	/**
+ 	 * 获得子订单用品类型的且状态为发货
+ 	 * @author t-zhaohan
+ 	 * @Credited 2015年4月21日 上午10:09:29
+ 	 * @see       [相关类/方法]
+ 	 * @return
+ 	 */
+ 	public List<Dto> findSubOrderIsTypeST(Dto param);
+ 	/**
+	 * 查找单品
+	 * @author t-zhaohan
+	 * @Credited 2015年3月31日 下午8:11:50
+	 * @return
+	 */
+	public List<Dto> findSubOrderList(Dto param);
+	/**
+	 * 获得所有的子订单根据orderID
+	 * @author t-zhaohan
+	 * @Credited 2015年5月15日 上午9:36:54
+	 * @return
+	 */
+	public List<Dto> findSubOrderIsByOrderId(Dto param);
+ }
+ 
+ 
+ 

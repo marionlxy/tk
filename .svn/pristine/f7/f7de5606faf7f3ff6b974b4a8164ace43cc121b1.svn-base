@@ -1,0 +1,139 @@
+package com.taikang.iu.opt.employee.service.impl;
+ 
+import java.util.List;
+
+import com.taikang.iu.opt.employee.service.IEmployeeService;
+import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.iu.opt.employee.model.EmployeeBO;
+
+import org.springframework.stereotype.Service;
+
+import com.taikang.udp.framework.core.service.impl.BaseServiceImpl;
+import com.taikang.udp.sys.model.UserBO;
+ 
+  
+/**
+  * EmployeeServiceImpl
+  */
+ @Service(IEmployeeService.SERVICE_ID)
+ public class EmployeeServiceImpl extends BaseServiceImpl 
+ implements IEmployeeService<EmployeeBO>  
+  {
+  	 	 	
+ 	/**
+	  * 增加数据
+	  */
+	public void insertObject(EmployeeBO employee) {
+		logger.debug("<======EmployeeServiceImpl--insertEmployee======>");		
+		appDao.insert("Employee.addEmployee",employee);
+	} 	
+ 	
+ 	/**
+      * 修改数据
+      */
+	public void updateObject(EmployeeBO employee) {
+		logger.debug("<======EmployeeServiceImpl--updateEmployee======>");
+		appDao.update("Employee.updateEmployee",employee);
+	}
+
+	 /**
+      * 删除数据
+      */
+	public void deleteObject(EmployeeBO employee) {
+		logger.debug("<======EmployeeServiceImpl--deleteEmployee======>");
+		appDao.delete("Employee.deleteEmployee",employee);
+	}
+	
+	/**
+      * 查询数据
+      */
+	public EmployeeBO findOne(EmployeeBO employee) {
+		logger.debug("<======EmployeeServiceImpl--findEmployee======>");
+		
+		EmployeeBO employeeBackBO=appDao.queryOneObject("Employee.findOneEmployee", employee);
+		return employeeBackBO;		
+	}
+	
+	/**
+      * 查询所有数据
+      */
+	public List<EmployeeBO> findAll(EmployeeBO  employee) {
+		logger.debug("<======EmployeeServiceImpl--findAllEmployee======>");
+		return appDao.queryForEntityList("Employee.findAllEmployee", employee);
+	}
+	
+	
+	 /**
+      * 分页查询数据
+      */
+	public CurrentPage queryForPage(CurrentPage currentPage) {
+		logger.debug("<======EmployeeServiceImpl--queryEmployeeForPage======>");
+		return appDao.queryForPage("Employee.queryEmployeeForPage", currentPage);
+	}
+		
+	/**
+      * 查询所有数据 ，重新组装为map
+      */
+	public List<Dto> findAllMap(Dto param){
+		logger.debug("<======EmployeeServiceImpl--findAllMapEmployee======>");		
+		return appDao.queryForMapList("Employee.findAllMapEmployee", param);
+	}
+
+	public List<EmployeeBO> finAllEmp(EmployeeBO employeeBO) {
+		
+		return appDao.queryForEntityList("Employee.finAllEmp", employeeBO);
+	}
+
+	/**
+	 * 查询当前登录人同一站点的天使
+	 */
+	
+	public List<EmployeeBO> finAllEmpTS(EmployeeBO employeeBO){
+		return appDao.queryForEntityList("Employee.finAllEmpTS", employeeBO);
+	}
+	/**
+     * 查询天使
+     */
+	public List<EmployeeBO> finAllEmpT(EmployeeBO employeeBO) {
+		return appDao.queryForEntityList("Employee.finAllEmpT", employeeBO);
+	}
+
+	public CurrentPage queryAnglesForPage(CurrentPage page) {
+		logger.debug("<======EmployeeServiceImpl--queryAnglesForPage======>");
+		return appDao.queryForPage("Employee.queryAnglesForPage", page);
+	}
+
+	@Override
+	public CurrentPage queryEmployeesForPage(CurrentPage page) {
+		logger.debug("<======EmployeeServiceImpl--queryEmployeesForPage======>");
+		return appDao.queryForPage("Employee.queryEmployeesForPage", page);
+	}
+
+	@Override
+	public void saveEmployeeManage(EmployeeBO employeeBO) {
+		appDao.insert("Employee.addEmployeeManage",employeeBO);//mployeeManage
+			
+	}
+
+	@Override
+	public void saveUserManage(UserBO user) {
+		appDao.insert("User.addUser",user);
+	}
+
+	@Override
+	public List<Dto> queryAllEmployeeByCondition(Dto param) {
+		logger.debug("<======EmployeeServiceImpl--queryAllEmployeeByCondition======>");		
+		return appDao.queryForMapList("Employee.queryAllEmployeeByCondition", param);
+	}
+
+	@Override
+	public void updateEmployeeManage(EmployeeBO employeeBO) {
+		logger.debug("<======EmployeeServiceImpl--updateEmployeeManage======>");
+		appDao.update("Employee.updateEmployeeManage",employeeBO);
+		
+	}
+
+
+ }
+  

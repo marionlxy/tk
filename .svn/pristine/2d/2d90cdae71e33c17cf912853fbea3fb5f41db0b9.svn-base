@@ -1,0 +1,184 @@
+package com.taikang.iu.opt.complain.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.taikang.iu.opt.complain.action.IComplainAction;
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.udp.framework.common.datastructre.impl.BaseDto;
+import com.taikang.udp.framework.common.util.TKDateTimeUtils;
+import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+import com.taikang.udp.framework.core.web.BaseController;
+import com.taikang.udp.sys.util.UserUtils;
+import com.taikang.udp.sys.util.sequence.BusinessSeqGenerator;
+import com.taikang.udp.sys.util.vo.LoginUser;
+
+
+/**
+  * ComplainController
+  */
+@Controller("complainController")
+@RequestMapping(value="/complain")
+public class ComplainController  extends BaseController  {
+		
+	@Resource(name=IComplainAction.ACTION_ID)
+	private IComplainAction complainAction;
+		
+	/**
+	 * 打开主查询页面
+	 * @return 页面地址
+	 */
+	@RequestMapping("")
+	public String showComplainIndexPage() {
+		return "complain/complainIndex"; 
+	}
+	
+	/**
+	 * 查询信息列表
+	 * @return 分页列表数据
+	 */
+	@RequestMapping("/list")
+	@ResponseBody
+	public Map<String,Object> getComplainList(HttpServletRequest request,CurrentPage page){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		page.setParamObject(getParamAsDto(request));
+		CurrentPage currentPage = complainAction.queryForPage(page);
+		
+		map.put("rows", currentPage.getPageItems());
+		map.put("total", currentPage.getTotalRows());
+		
+		return map;
+	}
+
+	/**
+	 * 打开新增或修改页面
+	 * @return
+	 */
+	
+	@RequestMapping("/add")
+	public String Add() {
+		return "complain/complainAdd"; 
+	}
+	
+	
+	@RequestMapping("/edit")
+	public String showComplainEditPage(String complainId,Model model) {
+		
+		if(complainId!=null && !complainId.equals(""))
+		{
+			model.addAttribute("complainId",complainId );
+		}
+		
+		return "complain/complainEdit";
+	}
+	
+	/**
+	 * 打开详细页面
+	 * @return
+	 * String
+	 */
+	@RequestMapping("/view")
+	public String showComplainViewPage(String complainId,Model model) {
+		
+		if(complainId!=null && !complainId.equals(""))
+		{
+			model.addAttribute("complainId",complainId );
+		}
+		
+		return "complain/complainView"; 
+	}
+	
+	
+	/**
+	 * 获取一条记录详细信息，用来填充修改界面
+	 * @return
+	 */
+	@RequestMapping("/getOne")
+	@ResponseBody
+	public Dto getComplainById(@RequestParam("complainId")String complainId)
+	{
+		Dto param = new BaseDto();
+		param.put("complainId", complainId);
+		Dto dto = complainAction.findOne(param);
+		
+		return dto;
+	}
+	
+	/**
+	 * 保存新增或修改的记录，将其持久化到数据库中
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/save")
+	@ResponseBody
+	private Map<String,String> saveComplainInfo(HttpServletRequest request)
+	{
+		Map<String,String> map=new HashMap<String,String>();
+		LoginUser user = UserUtils.getUser();
+		String loginId = String.valueOf(user.getUserId());
+		Dto param = getParamAsDto(request);
+		if(param.get("complainId") ==null ||"".equals(param.get("complainId")))
+		{
+			param.put("complainId", UUID.randomUUID().toString().replace("-", ""));
+			param.put("complainType", param.get("complainType")); // “1”代表“使用中”
+			param.put("complainState", "1"); // “1”代表“使用中”
+//			param.put("complainMsg", "1"); // “1”代表“使用中”
+//			param.put("complainState", "1");
+//			param.put("complainTel", "1"); // “1”代表“使用中”
+			param.put("disposeName", param.get("disposeName"));
+			param.put("disposeTime", param.get("disposeTime"));
+			param.put("complainNum", "TS"+TKDateTimeUtils.getCurrentDate().toString().replace("-", "")+BusinessSeqGenerator.getInstance("COMPLAIN_CODE").nextId()); 
+			param.put("createdBy", loginId);
+			param.put("createdTime", TKDateTimeUtils.getTodayTimeStamp());
+			param.put("delflag", "0"); // “0”代表“未删除”
+			param.put("version", 1);
+			complainAction.insertObject(param);
+			map.put(MESSAGE_INFO, "添加成功！");
+		}
+		else
+		{
+			param.put("modifiedBy", loginId);
+			param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+			complainAction.updateObject(param);
+			map.put(MESSAGE_INFO, "修改成功！");
+		}
+		map.put(RTN_RESULT, "true");
+		
+		return map;
+	}
+	
+	/**
+	*删除一条或多条记录
+	*/
+	@RequestMapping(value="/del")
+	@ResponseBody
+	public Map<String, String> deleteComplain(@RequestParam("complainId") String complainId) {
+		Map<String, String> map = new HashMap<String, String>();
+		Dto param = new BaseDto();
+		param.put("complainId", complainId);
+		//complainAction.deleteObject(param);
+		LoginUser user = UserUtils.getUser();
+		String loginId = String.valueOf(user.getUserId());
+		param.put("modifiedBy", loginId);
+		param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+		param.put("delflag", "1"); // “1”代表“已删除”
+		complainAction.updateObject(param);
+		
+		map.put(RTN_RESULT, "true");
+		map.put(MESSAGE_INFO, "操作成功！");
+		
+		return map;
+	}
+}
+

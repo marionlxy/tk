@@ -1,0 +1,319 @@
+package com.taikang.iu.opt.characterset.service.impl;
+ 
+import com.taikang.iu.opt.characterset.model.CharactersetBO;
+
+import java.util.List;
+
+import com.taikang.iu.opt.characterset.service.ICharactersetService;
+
+import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+
+import java.util.Arrays;
+
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.udp.framework.common.datastructre.impl.BaseBO;
+
+import org.springframework.stereotype.Service;
+
+import com.taikang.udp.framework.core.service.impl.BaseServiceImpl;
+ 
+  
+/**
+  * CharactersetServiceImpl
+  */
+ @Service(ICharactersetService.SERVICE_ID)
+ public class CharactersetServiceImpl extends BaseServiceImpl 
+ implements ICharactersetService<CharactersetBO>  
+  {
+  	 	 	
+ 	/**
+	  * 增加数据
+	  */
+	public void insertObject(CharactersetBO characterset) {
+		logger.debug("<======CharactersetServiceImpl--insertCharacterset======>");		
+		appDao.insert("Characterset.addCharacterset",characterset);
+	} 	
+ 	
+ 	/**
+      * 修改数据
+      */
+	public void updateObject(CharactersetBO characterset) {
+		logger.debug("<======CharactersetServiceImpl--updateCharacterset======>");
+		appDao.update("Characterset.updatechacter",characterset);
+	}
+
+	 /**
+      * 删除数据
+      */
+	public void deleteObject(CharactersetBO characterset) {
+		logger.debug("<======CharactersetServiceImpl--deleteCharacterset======>");
+		appDao.delete("Characterset.deleteCharacterset",characterset);
+	}
+	
+	/**
+      * 查询数据
+      */
+	public CharactersetBO findOne(CharactersetBO characterset) {
+		logger.debug("<======CharactersetServiceImpl--findCharacterset======>");
+		
+		CharactersetBO charactersetBackBO=appDao.queryOneObject("Characterset.findOneCharacterset", characterset);
+		return charactersetBackBO;		
+	}
+	
+	/**
+      * 查询所有数据
+      */
+	public List<CharactersetBO> findAll(CharactersetBO  characterset) {
+		logger.debug("<======CharactersetServiceImpl--findAllCharacterset======>");
+		return appDao.queryForEntityList("Characterset.findAllCharacterset", characterset);
+	}
+	
+	
+	 /**
+      * 分页查询数据
+      */
+	public CurrentPage queryForPage(CurrentPage currentPage) {
+		logger.debug("<======CharactersetServiceImpl--querychacterByConForPage======>");
+//		return appDao.queryForPage("Characterset.queryCharactersetForPage", currentPage);
+		// 注意：这里需要修改成自己写的查询语句
+//		return appDao.queryForPage("Seller.querySellerForPage", currentPage);
+		return appDao.queryForPage("Characterset.querychacterByConForPage", currentPage);
+		                                         
+	}
+		
+	/**
+      * 查询所有数据 ，重新组装为map
+      */
+	public List<Dto> findAllMap(Dto param){
+		logger.debug("<======CharactersetServiceImpl--findAllMapCharacterset======>");		
+		return appDao.queryForMapList("Characterset.findAllMapCharacterset", param);
+	}
+	
+	public CurrentPage queryForLinkPage(CurrentPage page) {
+		logger.debug("<======CharactersetServiceImpl--queryForLinkPage======>");
+		return appDao.queryForPage("Characterset.queryForLinkPage", page);
+	}
+
+	public void deleteLink(CharactersetBO CharactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--deleteLink======>");
+		appDao.delete("Characterset.deleteLink",CharactersetBO);
+		
+	}
+//选择服务
+	public List<CharactersetBO> findAllServerService(CharactersetBO CharactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--findAllServerService======>");
+		return appDao.queryForEntityList("Characterset.findAllServerService", CharactersetBO);
+	}
+	//修改环节查询
+	public BaseBO findOneLink(CharactersetBO CharactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--findOneLink======>");
+		
+		CharactersetBO charactersetBO=	appDao.queryOneObject("Characterset.findOneLink", CharactersetBO);
+		     return charactersetBO;	
+	}
+
+	public void insertLink(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--insertLink======>");		
+		appDao.insert("Characterset.addLink",charactersetBO);
+	}
+//修改环节
+	public void updateLink(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--updateLink======>");
+		appDao.update("Characterset.updateLink",charactersetBO);
+	}
+
+	public CurrentPage queryForShowAppliancePage(CurrentPage page) {
+		logger.debug("<======CharactersetServiceImpl--queryForShowAppliancePage======>");
+		return appDao.queryForPage("Characterset.queryForShowAppliancePage",page);
+	}
+	public CurrentPage queryForAppliancePage(CurrentPage page) {
+		logger.debug("<======CharactersetServiceImpl--queryForAppliancePage======>");
+		return appDao.queryForPage("Characterset.queryForAppliancePage",page);
+	}
+	public List<CharactersetBO> findAllAppliance(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--findAllAppliance======>");
+		return appDao.queryForEntityList("Characterset.findAllAppliance", charactersetBO);
+	}
+//删除用品
+	public void delAppliance(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--delAppliance======>");
+		appDao.delete("Characterset.delAppliance",charactersetBO);
+		
+	}
+//环节添加用品
+	public void insertLinkServer(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--insertLinkServer======>");		
+		appDao.insert("Characterset.insertLinkServer",charactersetBO);
+		
+	}
+//环节添加服务
+	public void insertServer(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--insertServer======>");		
+		appDao.insert("Characterset.insertServer",charactersetBO);
+	}
+//查询环节下服务
+	public List<CharactersetBO> findCharactersetService(CharactersetBO CharactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--findCharactersetService======>");
+		return appDao.queryForEntityList("Characterset.findCharactersetService", CharactersetBO);
+	}
+
+	public void delCharactersetService(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--deleteCharacterset======>");
+		appDao.delete("Characterset.delCharactersetService",charactersetBO);
+	}
+
+	public void updateServer(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--updateServer======>");
+		appDao.update("Characterset.updateServer",charactersetBO);
+	}
+//查询环节下服务
+	public List<CharactersetBO> findOneServerService(CharactersetBO characterset) {
+		logger.debug("<======CharactersetServiceImpl--findOneServerService======>");
+		return appDao.queryForEntityList("Characterset.findOneServerService", characterset);
+	}
+
+	public CurrentPage queryForServicePage(CurrentPage page) {
+		logger.debug("<======CharactersetServiceImpl--queryForServicePage======>");
+		return appDao.queryForPage("Characterset.queryForServicePage",page);
+	}
+//查询环节下服务
+	public CurrentPage findOneService(CurrentPage page) {
+		logger.debug("<======CharactersetServiceImpl--findOneService======>");
+		return appDao.queryForPage("Characterset.findOneService",page);
+	}
+
+	public List<CharactersetBO> findLink(CharactersetBO Characterset) {
+		logger.debug("<======CharactersetServiceImpl--findLink======>");
+		return appDao.queryForEntityList("Characterset.findLink", Characterset);
+	}
+
+	public CurrentPage findEditLinkPage(CurrentPage page) {
+		logger.debug("<======CharactersetServiceImpl--findEditLinkPage======>");
+		return appDao.queryForPage("Characterset.findEditLinkPage", page);
+	}
+
+	public List<CharactersetBO> findEditMealList(CharactersetBO Characterset) {
+		logger.debug("<======CharactersetServiceImpl--findEditMealList======>");
+		return appDao.queryForEntityList("Characterset.findEditMealList", Characterset);
+	}
+
+	public BaseBO findOneMeal(CharactersetBO CharactersetBO) {
+          logger.debug("<======CharactersetServiceImpl--findOneMeal======>");
+          CharactersetBO charactersetBO=appDao.queryOneObject("Characterset.findOneMeal", CharactersetBO);
+		return charactersetBO;
+	}
+
+	public List<CharactersetBO> findEditMealCheckList(
+		CharactersetBO Characterset) {
+		logger.debug("<======CharactersetServiceImpl--findEditMealCheckList======>");
+		return appDao.queryForEntityList("Characterset.findEditMealList", Characterset);
+	}
+
+	public List<CharactersetBO> findApplianceList(CharactersetBO CharactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--findApplianceList======>");
+		return appDao.queryForEntityList("Characterset.findApplianceList", CharactersetBO);
+	}
+
+	public List<CharactersetBO> findDelLink(CharactersetBO CharactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--findDelLink======>");
+		return appDao.queryForEntityList("Characterset.findDelLink", CharactersetBO);
+	}
+
+	public List<CharactersetBO> findDelLinks(CharactersetBO CharactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--findDelLinks======>");
+		return appDao.queryForEntityList("Characterset.findDelLinks", CharactersetBO);
+	}
+
+	public List<CharactersetBO> findRelation(CharactersetBO Characterset) {
+		logger.debug("<======CharactersetServiceImpl--findRelation======>");
+		return appDao.queryForEntityList("Characterset.findRelation", Characterset);
+	}
+
+	public void updateAppliance(CharactersetBO CharactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--updateAppliance======>");
+		appDao.update("Characterset.updateAppliance",CharactersetBO);
+		
+	}
+
+	public List<CharactersetBO> findApplianceLists(CharactersetBO CharactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--findApplianceLists======>");
+		return appDao.queryForEntityList("Characterset.findApplianceLists", CharactersetBO);
+	}
+
+	public CurrentPage findOneServices(CurrentPage page) {
+		logger.debug("<======CharactersetServiceImpl--findOneServices======>");
+		return appDao.queryForPage("Characterset.findOneServices", page);
+	}
+
+	public void delApplianceLink(CharactersetBO CharactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--delApplianceLink======>");
+		appDao.delete("Characterset.delApplianceLink",CharactersetBO);
+	}
+	
+	
+	/**
+	 * 查询个性化用品服务ID为空的数据
+	 */
+	public List<Dto> FindapplianceByServerIdIsNull(Dto param){
+		logger.debug("<======CharactersetServiceImpl--findApplianceLists1======>");		
+		return appDao.queryForMapList("Characterset.findApplianceLists1", param);
+	}
+
+	public List<CharactersetBO> findChacterAppliacnce(CharactersetBO chacter) {
+		logger.debug("<======CharactersetServiceImpl--findChacterAppliacnce======>");		
+		return appDao.queryForEntityList("Characterset.findChacterAppliacnce", chacter);
+	}
+
+	public void delService(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--delService======>");
+		appDao.delete("Characterset.delCharactersetService",charactersetBO);		
+	}
+
+	public List<CharactersetBO> searchAppliance(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--searchAppliance======>");		
+		return appDao.queryForEntityList("Characterset.searchAppliance", charactersetBO);
+	}
+
+	public List<CharactersetBO> searchOneService(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--searchOneService======>");		
+		return appDao.queryForEntityList("Characterset.searchOneService", charactersetBO);
+	}
+
+	public List<CharactersetBO> findApplianceRelation(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--findApplianceRelation======>");		
+		return appDao.queryForEntityList("Characterset.findApplianceRelation", charactersetBO);
+	}
+
+	public List<CharactersetBO> findApplianList(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--findApplianList======>");		
+		return appDao.queryForEntityList("Characterset.findApplianList", charactersetBO);
+	}
+
+	public List<CharactersetBO> searchOneAppliance(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--searchOneAppliance======>");		
+		return appDao.queryForEntityList("Characterset.searchOneAppliance", charactersetBO);
+	}
+
+	public List<CharactersetBO> searchOnesService(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--searchOnesService======>");		
+		return appDao.queryForEntityList("Characterset.searchOnesService", charactersetBO);
+	}
+
+	public List<CharactersetBO> findOneLinkService(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--findOneLinkService======>");		
+		return appDao.queryForEntityList("Characterset.findOneLinkService", charactersetBO);
+	}
+
+	public List<CharactersetBO> findDelApplianceList(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--findDelApplianceList======>");
+		return appDao.queryForEntityList("Characterset.findDelApplianceList", charactersetBO);
+	}
+
+	public List<CharactersetBO> findUpdateRelation(CharactersetBO charactersetBO) {
+		logger.debug("<======CharactersetServiceImpl--findUpdateRelation======>");
+		return appDao.queryForEntityList("Characterset.findUpdateRelation", charactersetBO);
+	}
+
+
+ }
+  

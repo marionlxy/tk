@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Worksheet">
+	<resultMap id="worksheetResultMap" type="com.taikang.iu.opt.worksheet.model.WorksheetBO">
+		<result property="worksheetId" column="WORKSHEET_ID"/>
+		<result property="orderId" column="ORDER_ID"/>
+		<result property="orderCode" column="ORDER_CODE"/>
+		<result property="worksheetCode" column="WORKSHEET_CODE"/>
+		<result property="worksheetState" column="WORKSHEET_STATE"/>
+		<result property="clueId" column="CLUE_ID"/>
+		<result property="clueCode" column="CLUE_CODE"/>
+		<result property="customId" column="CUSTOM_ID"/>
+		<result property="customName" column="CUSTOM_NAME"/>
+		<result property="customSex" column="CUSTOM_SEX"/>
+		<result property="customTel" column="CUSTOM_TEL"/>
+		<result property="customAddress" column="CUSTOM_ADDRESS"/>
+		<result property="customRequire" column="CUSTOM_REQUIRE"/>
+		<result property="doorTime" column="DOOR_TIME"/>
+		<result property="invalidReason" column="INVALID_REASON"/>
+		<result property="proxyTel" column="PROXY_TEL"/>
+		<result property="remark" column="REMARK"/>
+		<result property="angelCode" column="ANGEL_CODE"/>
+		<result property="angelName" column="ANGEL_NAME"/>
+		<result property="angelTel" column="ANGEL_TEL"/>
+		<result property="angelOpenId" column="ANGEL_OPEN_ID"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+		</resultMap>
+  
+  <sql id="worksheetWhereCondition">
+		<where>
+	  	<if test=" worksheet_id != null and worksheet_id != '' and worksheet_id != 'null' ">
+			<![CDATA[ AND A.WORKSHEET_ID = #{worksheet_id} ]]>
+	  	</if>
+	  	<if test=" order_id != null and order_id != '' and order_id != 'null' ">
+			<![CDATA[ AND A.ORDER_ID = #{order_id} ]]>
+	  	</if>
+	  	<if test=" order_code != null and order_code != '' and order_code != 'null' ">
+			<![CDATA[ AND A.ORDER_CODE = #{order_code} ]]>
+	  	</if>
+	  	<if test=" worksheet_code != null and worksheet_code != '' and worksheet_code != 'null' ">
+			<![CDATA[ AND A.WORKSHEET_CODE = #{worksheet_code} ]]>
+	  	</if>
+	  	<if test=" worksheet_state != null and worksheet_state != '' and worksheet_state != 'null' ">
+			<![CDATA[ AND A.WORKSHEET_STATE = #{worksheet_state} ]]>
+	  	</if>
+	  	<if test=" clue_id != null and clue_id != '' and clue_id != 'null' ">
+			<![CDATA[ AND A.CLUE_ID = #{clue_id} ]]>
+	  	</if>
+	  	<if test=" clue_code != null and clue_code != '' and clue_code != 'null' ">
+			<![CDATA[ AND A.CLUE_CODE = #{clue_code} ]]>
+	  	</if>
+	  	<if test=" custom_id != null and custom_id != '' and custom_id != 'null' ">
+			<![CDATA[ AND A.CUSTOM_ID = #{custom_id} ]]>
+	  	</if>
+	  	<if test=" custom_name != null and custom_name != '' and custom_name != 'null' ">
+			<![CDATA[ AND A.CUSTOM_NAME = #{custom_name} ]]>
+	  	</if>
+	  	<if test=" custom_sex != null and custom_sex != '' and custom_sex != 'null' ">
+			<![CDATA[ AND A.CUSTOM_SEX = #{custom_sex} ]]>
+	  	</if>
+	  	<if test=" custom_tel != null and custom_tel != '' and custom_tel != 'null' ">
+			<![CDATA[ AND A.CUSTOM_TEL = #{custom_tel} ]]>
+	  	</if>
+	  	<if test=" custom_address != null and custom_address != '' and custom_address != 'null' ">
+			<![CDATA[ AND A.CUSTOM_ADDRESS = #{custom_address} ]]>
+	  	</if>
+	  	<if test=" custom_require != null and custom_require != '' and custom_require != 'null' ">
+			<![CDATA[ AND A.CUSTOM_REQUIRE = #{custom_require} ]]>
+	  	</if>
+	  	<if test=" door_time != null and door_time != '' and door_time  != 'null' ">
+	    	<![CDATA[ AND A.DOOR_TIME = DATE_FORMAT(#{door_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" invalid_reason != null and invalid_reason != '' and invalid_reason != 'null' ">
+			<![CDATA[ AND A.INVALID_REASON = #{invalid_reason} ]]>
+	  	</if>
+	  	<if test=" proxy_tel != null and proxy_tel != '' and proxy_tel != 'null' ">
+			<![CDATA[ AND A.PROXY_TEL = #{proxy_tel} ]]>
+	  	</if>
+	  	<if test=" remark != null and remark != '' and remark != 'null' ">
+			<![CDATA[ AND A.REMARK = #{remark} ]]>
+	  	</if>
+	  	<if test=" angel_code != null and angel_code != '' and angel_code != 'null' ">
+			<![CDATA[ AND A.ANGEL_CODE = #{angel_code} ]]>
+	  	</if>
+	  	<if test=" angel_name != null and angel_name != '' and angel_name != 'null' ">
+			<![CDATA[ AND A.ANGEL_NAME = #{angel_name} ]]>
+	  	</if>
+	  	<if test=" angel_tel != null and angel_tel != '' and angel_tel != 'null' ">
+			<![CDATA[ AND A.ANGEL_TEL = #{angel_tel} ]]>
+	  	</if>
+	  	<if test=" angel_open_id != null and angel_open_id != '' and angel_open_id != 'null' ">
+			<![CDATA[ AND A.ANGEL_OPEN_ID = #{angel_open_id} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addWorksheet"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO OPT_WORKSHEET
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" worksheet_id  != null and  worksheet_id  != ''  and  worksheet_id  != 'null' ">
+				<![CDATA[ WORKSHEET_ID , ]]>
+	  		</if>
+	  		<if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+				<![CDATA[ ORDER_ID , ]]>
+	  		</if>
+	  		<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+				<![CDATA[ ORDER_CODE , ]]>
+	  		</if>
+	  		<if test=" worksheet_code  != null and  worksheet_code  != ''  and  worksheet_code  != 'null' ">
+				<![CDATA[ WORKSHEET_CODE , ]]>
+	  		</if>
+	  		<if test=" worksheet_state  != null and  worksheet_state  != ''  and  worksheet_state  != 'null' ">
+				<![CDATA[ WORKSHEET_STATE , ]]>
+	  		</if>
+	  		<if test=" clue_id  != null and  clue_id  != ''  and  clue_id  != 'null' ">
+				<![CDATA[ CLUE_ID , ]]>
+	  		</if>
+	  		<if test=" clue_code  != null and  clue_code  != ''  and  clue_code  != 'null' ">
+				<![CDATA[ CLUE_CODE , ]]>
+	  		</if>
+	  		<if test=" custom_id  != null and  custom_id  != ''  and  custom_id  != 'null' ">
+				<![CDATA[ CUSTOM_ID , ]]>
+	  		</if>
+	  		<if test=" custom_name  != null and  custom_name  != ''  and  custom_name  != 'null' ">
+				<![CDATA[ CUSTOM_NAME , ]]>
+	  		</if>
+	  		<if test=" custom_sex  != null and  custom_sex  != ''  and  custom_sex  != 'null' ">
+				<![CDATA[ CUSTOM_SEX , ]]>
+	  		</if>
+	  		<if test=" custom_tel  != null and  custom_tel  != ''  and  custom_tel  != 'null' ">
+				<![CDATA[ CUSTOM_TEL , ]]>
+	  		</if>
+	  		<if test=" custom_address  != null and  custom_address  != ''  and  custom_address  != 'null' ">
+				<![CDATA[ CUSTOM_ADDRESS , ]]>
+	  		</if>
+	  		<if test=" custom_require  != null and  custom_require  != ''  and  custom_require  != 'null' ">
+				<![CDATA[ CUSTOM_REQUIRE , ]]>
+	  		</if>
+	  		<if test=" door_time  != null and  door_time  != ''  and  door_time  != 'null' ">
+				<![CDATA[ DOOR_TIME , ]]>
+	  		</if>
+	  		<if test=" invalid_reason  != null and  invalid_reason  != ''  and  invalid_reason  != 'null' ">
+				<![CDATA[ INVALID_REASON , ]]>
+	  		</if>
+	  		<if test=" proxy_tel  != null and  proxy_tel  != ''  and  proxy_tel  != 'null' ">
+				<![CDATA[ PROXY_TEL , ]]>
+	  		</if>
+	  		<if test=" remark  != null and  remark  != ''  and  remark  != 'null' ">
+				<![CDATA[ REMARK , ]]>
+	  		</if>
+	  		<if test=" angel_code  != null and  angel_code  != ''  and  angel_code  != 'null' ">
+				<![CDATA[ ANGEL_CODE , ]]>
+	  		</if>
+	  		<if test=" angel_name  != null and  angel_name  != ''  and  angel_name  != 'null' ">
+				<![CDATA[ ANGEL_NAME , ]]>
+	  		</if>
+	  		<if test=" angel_tel  != null and  angel_tel  != ''  and  angel_tel  != 'null' ">
+				<![CDATA[ ANGEL_TEL , ]]>
+	  		</if>
+	  		<if test=" angel_open_id  != null and  angel_open_id  != ''  and  angel_open_id  != 'null' ">
+				<![CDATA[ ANGEL_OPEN_ID , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" worksheet_id  != null and  worksheet_id  != ''  and  worksheet_id  != 'null' ">
+	  			<![CDATA[ #{worksheet_id} , ]]>
+	  		</if>
+	  		<if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+	  			<![CDATA[ #{order_id} , ]]>
+	  		</if>
+	  		<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+	  			<![CDATA[ #{order_code} , ]]>
+	  		</if>
+	  		<if test=" worksheet_code  != null and  worksheet_code  != ''  and  worksheet_code  != 'null' ">
+	  			<![CDATA[ #{worksheet_code} , ]]>
+	  		</if>
+	  		<if test=" worksheet_state  != null and  worksheet_state  != ''  and  worksheet_state  != 'null' ">
+	  			<![CDATA[ #{worksheet_state} , ]]>
+	  		</if>
+	  		<if test=" clue_id  != null and  clue_id  != ''  and  clue_id  != 'null' ">
+	  			<![CDATA[ #{clue_id} , ]]>
+	  		</if>
+	  		<if test=" clue_code  != null and  clue_code  != ''  and  clue_code  != 'null' ">
+	  			<![CDATA[ #{clue_code} , ]]>
+	  		</if>
+	  		<if test=" custom_id  != null and  custom_id  != ''  and  custom_id  != 'null' ">
+	  			<![CDATA[ #{custom_id} , ]]>
+	  		</if>
+	  		<if test=" custom_name  != null and  custom_name  != ''  and  custom_name  != 'null' ">
+	  			<![CDATA[ #{custom_name} , ]]>
+	  		</if>
+	  		<if test=" custom_sex  != null and  custom_sex  != ''  and  custom_sex  != 'null' ">
+	  			<![CDATA[ #{custom_sex} , ]]>
+	  		</if>
+	  		<if test=" custom_tel  != null and  custom_tel  != ''  and  custom_tel  != 'null' ">
+	  			<![CDATA[ #{custom_tel} , ]]>
+	  		</if>
+	  		<if test=" custom_address  != null and  custom_address  != ''  and  custom_address  != 'null' ">
+	  			<![CDATA[ #{custom_address} , ]]>
+	  		</if>
+	  		<if test=" custom_require  != null and  custom_require  != ''  and  custom_require  != 'null' ">
+	  			<![CDATA[ #{custom_require} , ]]>
+	  		</if>
+	  		<if test=" door_time != null and door_time != '' and door_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{door_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" invalid_reason  != null and  invalid_reason  != ''  and  invalid_reason  != 'null' ">
+	  			<![CDATA[ #{invalid_reason} , ]]>
+	  		</if>
+	  		<if test=" proxy_tel  != null and  proxy_tel  != ''  and  proxy_tel  != 'null' ">
+	  			<![CDATA[ #{proxy_tel} , ]]>
+	  		</if>
+	  		<if test=" remark  != null and  remark  != ''  and  remark  != 'null' ">
+	  			<![CDATA[ #{remark} , ]]>
+	  		</if>
+	  		<if test=" angel_code  != null and  angel_code  != ''  and  angel_code  != 'null' ">
+	  			<![CDATA[ #{angel_code} , ]]>
+	  		</if>
+	  		<if test=" angel_name  != null and  angel_name  != ''  and  angel_name  != 'null' ">
+	  			<![CDATA[ #{angel_name} , ]]>
+	  		</if>
+	  		<if test=" angel_tel  != null and  angel_tel  != ''  and  angel_tel  != 'null' ">
+	  			<![CDATA[ #{angel_tel} , ]]>
+	  		</if>
+	  		<if test=" angel_open_id  != null and  angel_open_id  != ''  and  angel_open_id  != 'null' ">
+	  			<![CDATA[ #{angel_open_id} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateWorksheet" parameterType="java.util.Map">
+		<![CDATA[ UPDATE OPT_WORKSHEET A ]]>
+		<set>
+	  	<if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+	  		<![CDATA[ A.ORDER_ID = #{order_id}, ]]>
+	  	</if>
+	  	<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+	  		<![CDATA[ A.ORDER_CODE = #{order_code}, ]]>
+	  	</if>
+	  	<if test=" worksheet_code  != null and  worksheet_code  != ''  and  worksheet_code  != 'null' ">
+	  		<![CDATA[ A.WORKSHEET_CODE = #{worksheet_code}, ]]>
+	  	</if>
+	  	<if test=" worksheet_state  != null and  worksheet_state  != ''  and  worksheet_state  != 'null' ">
+	  		<![CDATA[ A.WORKSHEET_STATE = #{worksheet_state}, ]]>
+	  	</if>
+	  	<if test=" clue_id  != null and  clue_id  != ''  and  clue_id  != 'null' ">
+	  		<![CDATA[ A.CLUE_ID = #{clue_id}, ]]>
+	  	</if>
+	  	<if test=" clue_code  != null and  clue_code  != ''  and  clue_code  != 'null' ">
+	  		<![CDATA[ A.CLUE_CODE = #{clue_code}, ]]>
+	  	</if>
+	  	<if test=" custom_id  != null and  custom_id  != ''  and  custom_id  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_ID = #{custom_id}, ]]>
+	  	</if>
+	  	<if test=" custom_name  != null and  custom_name  != ''  and  custom_name  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_NAME = #{custom_name}, ]]>
+	  	</if>
+	  	<if test=" custom_sex  != null and  custom_sex  != ''  and  custom_sex  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_SEX = #{custom_sex}, ]]>
+	  	</if>
+	  	<if test=" custom_tel  != null and  custom_tel  != ''  and  custom_tel  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_TEL = #{custom_tel}, ]]>
+	  	</if>
+	  	<if test=" custom_address  != null and  custom_address  != ''  and  custom_address  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_ADDRESS = #{custom_address}, ]]>
+	  	</if>
+	  	<if test=" custom_require  != null and  custom_require  != ''  and  custom_require  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_REQUIRE = #{custom_require}, ]]>
+	  	</if>
+	  	<if test=" door_time != null and door_time != '' and door_time  != 'null' ">
+	    	<![CDATA[ A.DOOR_TIME = DATE_FORMAT(#{door_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" invalid_reason  != null and  invalid_reason  != ''  and  invalid_reason  != 'null' ">
+	  		<![CDATA[ A.INVALID_REASON = #{invalid_reason}, ]]>
+	  	</if>
+	  	<if test=" proxy_tel  != null and  proxy_tel  != ''  and  proxy_tel  != 'null' ">
+	  		<![CDATA[ A.PROXY_TEL = #{proxy_tel}, ]]>
+	  	</if>
+	  	<if test=" remark  != null and  remark  != ''  and  remark  != 'null' ">
+	  		<![CDATA[ A.REMARK = #{remark}, ]]>
+	  	</if>
+	  	<if test=" angel_code  != null and  angel_code  != ''  and  angel_code  != 'null' ">
+	  		<![CDATA[ A.ANGEL_CODE = #{angel_code}, ]]>
+	  	</if>
+	  	<if test=" angel_name  != null and  angel_name  != ''  and  angel_name  != 'null' ">
+	  		<![CDATA[ A.ANGEL_NAME = #{angel_name}, ]]>
+	  	</if>
+	  	<if test=" angel_tel  != null and  angel_tel  != ''  and  angel_tel  != 'null' ">
+	  		<![CDATA[ A.ANGEL_TEL = #{angel_tel}, ]]>
+	  	</if>
+	  	<if test=" angel_open_id  != null and  angel_open_id  != ''  and  angel_open_id  != 'null' ">
+	  		<![CDATA[ A.ANGEL_OPEN_ID = #{angel_open_id}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.WORKSHEET_ID = #{worksheet_id}]]>
+  	</update>
+  
+  	<delete id="deleteWorksheet" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM OPT_WORKSHEET  where A.WORKSHEET_ID = #{worksheet_id} ]]>
+	</delete>
+  
+	<select id="findOneWorksheet" parameterType="java.util.Map" resultType="java.util.Map">
+<!-- 		<![CDATA[SELECT A.* FROM OPT_WORKSHEET A inner join OPT_CLUE B on A.CLUE_ID =B.CLUE_ID]]> -->
+		<![CDATA[SELECT A.*,B.CUSTOM_NAME ,B.CUSTOM_SEX ,B.CUSTOM_TEL ,B.CUSTOM_ADDRESS ,B.CUSTOM_REQUIRE ,B.DOOR_TIME ,B.PROXY_TEL, B.REMARK FROM OPT_WORKSHEET A left join OPT_CLUE B on A.CLUE_ID =B.CLUE_ID ]]>
+		<include refid="worksheetWhereCondition" />
+  	</select>
+    
+  	<select id="findAllWorksheet" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM OPT_WORKSHEET A ]]>
+		<include refid="worksheetWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapWorksheet" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM OPT_WORKSHEET A ]]>
+		<include refid="worksheetWhereCondition" />
+	</select>
+  
+  	<select id="findWorksheetTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM OPT_WORKSHEET A ]]>
+		<include refid="worksheetWhereCondition" />
+  	</select>
+  
+  	<select id="queryWorksheetForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+<!-- 		SELECT A.* ,B.* FROM OPT_WORKSHEET A inner join OPT_CLUE B on A.CLUE_ID =B.CLUE_ID where A.DELFLAG = '0'  -->
+		SELECT A.*  FROM OPT_WORKSHEET A where A.DELFLAG = '0'   
+		 <if test=" worksheetCode != null and worksheetCode != '' and worksheetCode != 'null' ">
+            <![CDATA[ AND A.WORKSHEET_CODE like concat('%', #{worksheetCode}, '%') ]]>
+        </if>
+         <if test=" worksheetState != null and worksheetState != '' and worksheetState != 'null' ">
+            <![CDATA[ AND A.WORKSHEET_STATE like concat('%', #{worksheetState}, '%') ]]>
+        </if>
+		 <if test=" createdTime != null and createdTime != '' and createdTime != 'null' ">
+            <![CDATA[ AND  A.CREATED_TIME >= #{createdTime} ]]>
+
+        </if>
+          <if test=" createdTime1 != null and createdTime1 != '' and createdTime1 != 'null' ">
+            <![CDATA[  AND A.CREATED_TIME<= #{createdTime1}]]>
+        </if>
+        <if test=" angelName != null and angelName != '' and angelName != 'null' ">
+            <![CDATA[ AND A.ANGEL_NAME like concat('%', #{angelName}, '%') ]]>
+        </if>
+        <if test=" customName != null and customName != '' and customName != 'null' ">
+            <![CDATA[ AND A.CUSTOM_NAME like concat('%', #{customName}, '%') ]]>
+        </if>
+        <if test=" customTel != null and customTel != '' and customTel != 'null' ">
+            <![CDATA[ AND A.CUSTOM_TEL like concat('%', #{customTel}, '%') ]]>
+        </if>
+		ORDER BY A.CREATED_TIME DESC
+  	</select>
+  	<select id="findCustomTel" parameterType="java.util.Map" resultType="java.util.Map" >
+	SELECT C.* FROM  OPT_EMPLOYEE C 
+       WHERE  C.USER_ID IN (SELECT A.USER_ID FROM BSC_USER_T A INNER JOIN BSC_USER_ROLE_T B ON A.USER_ID = B.USER_ID WHERE 1=1  AND B.ROLE_ID ='1479')
+  	</select>
+</mapper>

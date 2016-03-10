@@ -1,0 +1,20 @@
+package com.taikang.iu.opt.worksheet.service;
+
+import java.util.List;
+
+import com.taikang.iu.opt.employee.model.EmployeeBO;
+import com.taikang.udp.framework.core.service.IBaseService;
+
+/**
+  * IWorksheetService
+  */
+ 
+ public interface IWorksheetService<T> extends IBaseService<T>{
+ 
+ 	final String SERVICE_ID = "worksheetService";
+
+	List<EmployeeBO> findCustomTel(EmployeeBO param);  	
+ }
+ 
+ 
+ 

@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderSev">
+	<resultMap id="orderSevResultMap" type="com.taikang.iu.opt.order.model.OrderSevBO">
+		<result property="orderSevId" column="ORDER_SEV_ID"/>
+		<result property="linkId" column="LINK_ID"/>
+		<result property="subId" column="SUB_ID"/>
+		<result property="subCode" column="SUB_CODE"/>
+		<result property="orderId" column="ORDER_ID"/>
+		<result property="orderCode" column="ORDER_CODE"/>
+		<result property="sevState" column="SEV_STATE"/>
+		<result property="serviceId" column="SERVICE_ID"/>
+		<result property="serviceNum" column="SERVICE_NUM"/>
+		<result property="serviceName" column="SERVICE_NAME"/>
+		<result property="serviceType" column="SERVICE_TYPE"/>
+		<result property="serviceMsg" column="SERVICE_MSG"/>
+		<result property="purchasePrice" column="PURCHASE_PRICE"/>
+		<result property="sellPrice" column="SELL_PRICE"/>
+		<result property="moral" column="MORAL"/>
+		<result property="pictureUrl" column="PICTURE_URL"/>
+		<result property="sellerCode" column="SELLER_CODE"/>
+		<result property="sellerName" column="SELLER_NAME"/>
+		<result property="serviceSite" column="SERVICE_SITE"/>
+		<result property="appraiseState" column="APPRAISE_STATE"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="orderSevWhereCondition">
+		<where>
+	  	<if test=" order_sev_id != null and order_sev_id != '' and order_sev_id != 'null' ">
+			<![CDATA[ AND A.ORDER_SEV_ID = #{order_sev_id} ]]>
+	  	</if>
+	  	<if test=" link_id != null and link_id != '' and link_id != 'null' ">
+			<![CDATA[ AND A.LINK_ID = #{link_id} ]]>
+	  	</if>
+	  	<if test=" sub_id != null and sub_id != '' and sub_id != 'null' ">
+			<![CDATA[ AND A.SUB_ID = #{sub_id} ]]>
+	  	</if>
+	  	<if test=" sub_code != null and sub_code != '' and sub_code != 'null' ">
+			<![CDATA[ AND A.SUB_CODE = #{sub_code} ]]>
+	  	</if>
+	  	<if test=" order_id != null and order_id != '' and order_id != 'null' ">
+			<![CDATA[ AND A.ORDER_ID = #{order_id} ]]>
+	  	</if>
+	  	<if test=" order_code != null and order_code != '' and order_code != 'null' ">
+			<![CDATA[ AND A.ORDER_CODE = #{order_code} ]]>
+	  	</if>
+	  	<if test=" sev_state != null and sev_state != '' and sev_state != 'null' ">
+			<![CDATA[ AND A.SEV_STATE = #{sev_state} ]]>
+	  	</if>
+	  	<if test=" service_id != null and service_id != '' and service_id != 'null' ">
+			<![CDATA[ AND A.SERVICE_ID = #{service_id} ]]>
+	  	</if>
+	  	<if test=" service_num != null and service_num != '' and service_num != 'null' ">
+			<![CDATA[ AND A.SERVICE_NUM = #{service_num} ]]>
+	  	</if>
+	  	<if test=" service_name != null and service_name != '' and service_name != 'null' ">
+			<![CDATA[ AND A.SERVICE_NAME = #{service_name} ]]>
+	  	</if>
+	  	<if test=" service_type != null and service_type != '' and service_type != 'null' ">
+			<![CDATA[ AND A.SERVICE_TYPE = #{service_type} ]]>
+	  	</if>
+	  	<if test=" service_msg != null and service_msg != '' and service_msg != 'null' ">
+			<![CDATA[ AND A.SERVICE_MSG = #{service_msg} ]]>
+	  	</if>
+	  	<if test=" purchase_price != null ">
+	  		<![CDATA[ AND A.PURCHASE_PRICE = ${purchase_price} ]]>
+	  	</if>
+	  	<if test=" sell_price != null ">
+	  		<![CDATA[ AND A.SELL_PRICE = ${sell_price} ]]>
+	  	</if>
+	  	<if test=" moral != null and moral != '' and moral != 'null' ">
+			<![CDATA[ AND A.MORAL = #{moral} ]]>
+	  	</if>
+	  	<if test=" picture_url != null and picture_url != '' and picture_url != 'null' ">
+			<![CDATA[ AND A.PICTURE_URL = #{picture_url} ]]>
+	  	</if>
+	  	<if test=" seller_code != null and seller_code != '' and seller_code != 'null' ">
+			<![CDATA[ AND A.SELLER_CODE = #{seller_code} ]]>
+	  	</if>
+	  	<if test=" seller_name != null and seller_name != '' and seller_name != 'null' ">
+			<![CDATA[ AND A.SELLER_NAME = #{seller_name} ]]>
+	  	</if>
+	  	<if test=" service_site != null and service_site != '' and service_site != 'null' ">
+			<![CDATA[ AND A.SERVICE_SITE = #{service_site} ]]>
+	  	</if>
+	  	<if test=" appraise_state != null and appraise_state != '' and appraise_state != 'null' ">
+			<![CDATA[ AND A.APPRAISE_STATE = #{appraise_state} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addOrderSev"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO OPT_ORDER_SEV
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" order_sev_id  != null and  order_sev_id  != ''  and  order_sev_id  != 'null' ">
+				<![CDATA[ ORDER_SEV_ID , ]]>
+	  		</if>
+	  		<if test=" link_id  != null and  link_id  != ''  and  link_id  != 'null' ">
+				<![CDATA[ LINK_ID , ]]>
+	  		</if>
+	  		<if test=" sub_id  != null and  sub_id  != ''  and  sub_id  != 'null' ">
+				<![CDATA[ SUB_ID , ]]>
+	  		</if>
+	  		<if test=" sub_code  != null and  sub_code  != ''  and  sub_code  != 'null' ">
+				<![CDATA[ SUB_CODE , ]]>
+	  		</if>
+	  		<if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+				<![CDATA[ ORDER_ID , ]]>
+	  		</if>
+	  		<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+				<![CDATA[ ORDER_CODE , ]]>
+	  		</if>
+	  		<if test=" sev_state  != null and  sev_state  != ''  and  sev_state  != 'null' ">
+				<![CDATA[ SEV_STATE , ]]>
+	  		</if>
+	  		<if test=" service_id  != null and  service_id  != ''  and  service_id  != 'null' ">
+				<![CDATA[ SERVICE_ID , ]]>
+	  		</if>
+	  		<if test=" service_num  != null and  service_num  != ''  and  service_num  != 'null' ">
+				<![CDATA[ SERVICE_NUM , ]]>
+	  		</if>
+	  		<if test=" service_name  != null and  service_name  != ''  and  service_name  != 'null' ">
+				<![CDATA[ SERVICE_NAME , ]]>
+	  		</if>
+	  		<if test=" service_type  != null and  service_type  != ''  and  service_type  != 'null' ">
+				<![CDATA[ SERVICE_TYPE , ]]>
+	  		</if>
+	  		<if test=" service_msg  != null and  service_msg  != ''  and  service_msg  != 'null' ">
+				<![CDATA[ SERVICE_MSG , ]]>
+	  		</if>
+	  		<if test=" purchase_price  != null ">
+				<![CDATA[ PURCHASE_PRICE , ]]>
+	  		</if>
+	  		<if test=" sell_price  != null ">
+				<![CDATA[ SELL_PRICE , ]]>
+	  		</if>
+	  		<if test=" moral  != null and  moral  != ''  and  moral  != 'null' ">
+				<![CDATA[ MORAL , ]]>
+	  		</if>
+	  		<if test=" picture_url  != null and  picture_url  != ''  and  picture_url  != 'null' ">
+				<![CDATA[ PICTURE_URL , ]]>
+	  		</if>
+	  		<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+				<![CDATA[ SELLER_CODE , ]]>
+	  		</if>
+	  		<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+				<![CDATA[ SELLER_NAME , ]]>
+	  		</if>
+	  		<if test=" service_site  != null and  service_site  != ''  and  service_site  != 'null' ">
+				<![CDATA[ SERVICE_SITE , ]]>
+	  		</if>
+	  		<if test=" appraise_state  != null and  appraise_state  != ''  and  appraise_state  != 'null' ">
+				<![CDATA[ APPRAISE_STATE , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" order_sev_id  != null and  order_sev_id  != ''  and  order_sev_id  != 'null' ">
+	  			<![CDATA[ #{order_sev_id} , ]]>
+	  		</if>
+	  		<if test=" link_id  != null and  link_id  != ''  and  link_id  != 'null' ">
+	  			<![CDATA[ #{link_id} , ]]>
+	  		</if>
+	  		<if test=" sub_id  != null and  sub_id  != ''  and  sub_id  != 'null' ">
+	  			<![CDATA[ #{sub_id} , ]]>
+	  		</if>
+	  		<if test=" sub_code  != null and  sub_code  != ''  and  sub_code  != 'null' ">
+	  			<![CDATA[ #{sub_code} , ]]>
+	  		</if>
+	  		<if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+	  			<![CDATA[ #{order_id} , ]]>
+	  		</if>
+	  		<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+	  			<![CDATA[ #{order_code} , ]]>
+	  		</if>
+	  		<if test=" sev_state  != null and  sev_state  != ''  and  sev_state  != 'null' ">
+	  			<![CDATA[ #{sev_state} , ]]>
+	  		</if>
+	  		<if test=" service_id  != null and  service_id  != ''  and  service_id  != 'null' ">
+	  			<![CDATA[ #{service_id} , ]]>
+	  		</if>
+	  		<if test=" service_num  != null and  service_num  != ''  and  service_num  != 'null' ">
+	  			<![CDATA[ #{service_num} , ]]>
+	  		</if>
+	  		<if test=" service_name  != null and  service_name  != ''  and  service_name  != 'null' ">
+	  			<![CDATA[ #{service_name} , ]]>
+	  		</if>
+	  		<if test=" service_type  != null and  service_type  != ''  and  service_type  != 'null' ">
+	  			<![CDATA[ #{service_type} , ]]>
+	  		</if>
+	  		<if test=" service_msg  != null and  service_msg  != ''  and  service_msg  != 'null' ">
+	  			<![CDATA[ #{service_msg} , ]]>
+	  		</if>
+	  		<if test=" purchase_price  != null">
+	    		<![CDATA[ ${purchase_price} , ]]>
+	  		</if>
+	  		<if test=" sell_price  != null">
+	    		<![CDATA[ ${sell_price} , ]]>
+	  		</if>
+	  		<if test=" moral  != null and  moral  != ''  and  moral  != 'null' ">
+	  			<![CDATA[ #{moral} , ]]>
+	  		</if>
+	  		<if test=" picture_url  != null and  picture_url  != ''  and  picture_url  != 'null' ">
+	  			<![CDATA[ #{picture_url} , ]]>
+	  		</if>
+	  		<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+	  			<![CDATA[ #{seller_code} , ]]>
+	  		</if>
+	  		<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+	  			<![CDATA[ #{seller_name} , ]]>
+	  		</if>
+	  		<if test=" service_site  != null and  service_site  != ''  and  service_site  != 'null' ">
+	  			<![CDATA[ #{service_site} , ]]>
+	  		</if>
+	  		<if test=" appraise_state  != null and  appraise_state  != ''  and  appraise_state  != 'null' ">
+	  			<![CDATA[ #{appraise_state} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateOrderSev" parameterType="java.util.Map">
+		<![CDATA[ UPDATE OPT_ORDER_SEV A ]]>
+		<set>
+	  	<if test=" link_id  != null and  link_id  != ''  and  link_id  != 'null' ">
+	  		<![CDATA[ A.LINK_ID = #{link_id}, ]]>
+	  	</if>
+	  	<if test=" sub_id  != null and  sub_id  != ''  and  sub_id  != 'null' ">
+	  		<![CDATA[ A.SUB_ID = #{sub_id}, ]]>
+	  	</if>
+	  	<if test=" sub_code  != null and  sub_code  != ''  and  sub_code  != 'null' ">
+	  		<![CDATA[ A.SUB_CODE = #{sub_code}, ]]>
+	  	</if>
+	  	<if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+	  		<![CDATA[ A.ORDER_ID = #{order_id}, ]]>
+	  	</if>
+	  	<if test=" order_code  != null and  order_code  != ''  and  order_code  != 'null' ">
+	  		<![CDATA[ A.ORDER_CODE = #{order_code}, ]]>
+	  	</if>
+	  	<if test=" sev_state  != null and  sev_state  != ''  and  sev_state  != 'null' ">
+	  		<![CDATA[ A.SEV_STATE = #{sev_state}, ]]>
+	  	</if>
+	  	<if test=" service_id  != null and  service_id  != ''  and  service_id  != 'null' ">
+	  		<![CDATA[ A.SERVICE_ID = #{service_id}, ]]>
+	  	</if>
+	  	<if test=" service_num  != null and  service_num  != ''  and  service_num  != 'null' ">
+	  		<![CDATA[ A.SERVICE_NUM = #{service_num}, ]]>
+	  	</if>
+	  	<if test=" service_name  != null and  service_name  != ''  and  service_name  != 'null' ">
+	  		<![CDATA[ A.SERVICE_NAME = #{service_name}, ]]>
+	  	</if>
+	  	<if test=" service_type  != null and  service_type  != ''  and  service_type  != 'null' ">
+	  		<![CDATA[ A.SERVICE_TYPE = #{service_type}, ]]>
+	  	</if>
+	  	<if test=" service_msg  != null and  service_msg  != ''  and  service_msg  != 'null' ">
+	  		<![CDATA[ A.SERVICE_MSG = #{service_msg}, ]]>
+	  	</if>
+		<if test=" purchase_price  != null ">
+  			<![CDATA[ A.PURCHASE_PRICE = ${purchase_price} , ]]>
+		</if>
+		<if test=" sell_price  != null ">
+  			<![CDATA[ A.SELL_PRICE = ${sell_price} , ]]>
+		</if>
+	  	<if test=" moral  != null and  moral  != ''  and  moral  != 'null' ">
+	  		<![CDATA[ A.MORAL = #{moral}, ]]>
+	  	</if>
+	  	<if test=" picture_url  != null and  picture_url  != ''  and  picture_url  != 'null' ">
+	  		<![CDATA[ A.PICTURE_URL = #{picture_url}, ]]>
+	  	</if>
+	  	<if test=" seller_code  != null and  seller_code  != ''  and  seller_code  != 'null' ">
+	  		<![CDATA[ A.SELLER_CODE = #{seller_code}, ]]>
+	  	</if>
+	  	<if test=" seller_name  != null and  seller_name  != ''  and  seller_name  != 'null' ">
+	  		<![CDATA[ A.SELLER_NAME = #{seller_name}, ]]>
+	  	</if>
+	  	<if test=" service_site  != null and  service_site  != ''  and  service_site  != 'null' ">
+	  		<![CDATA[ A.SERVICE_SITE = #{service_site}, ]]>
+	  	</if>
+	  	<if test=" appraise_state  != null and  appraise_state  != ''  and  appraise_state  != 'null' ">
+	  		<![CDATA[ A.APPRAISE_STATE = #{appraise_state}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.ORDER_SEV_ID = #{order_sev_id}]]>
+  	</update>
+  
+  	<delete id="deleteOrderSev" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM OPT_ORDER_SEV A where A.ORDER_SEV_ID = #{order_sev_id} ]]>
+	</delete>
+  
+	<select id="findOneOrderSev" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM OPT_ORDER_SEV A  ]]>
+		<include refid="orderSevWhereCondition" />
+  	</select>
+    
+  	<select id="findAllOrderSev" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM OPT_ORDER_SEV A ]]>
+		<include refid="orderSevWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapOrderSev" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM OPT_ORDER_SEV A ]]>
+		<include refid="orderSevWhereCondition" />
+	</select>
+  
+  	<select id="findOrderSevTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM OPT_ORDER_SEV A ]]>
+		<include refid="orderSevWhereCondition" />
+  	</select>
+  
+  	<select id="queryOrderSevForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM OPT_ORDER_SEV A ]]>
+		<include refid="orderSevWhereCondition" />
+  	</select>
+  	
+  	<select id="queryOrderSevIdForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		SELECT A.* FROM OPT_ORDER_SEV A
+		WHERE 1=1 
+		<if test=" orderId  != null and  orderId  != ''  and  orderId  != 'null' ">
+	  		<![CDATA[ AND  A.ORDER_ID = #{orderId} ]]>
+	  	</if>
+	  	<if test=" subCode  != null and  subCode  != ''  and  subCode  != 'null' ">
+	  		<![CDATA[ AND  A.SUB_CODE = #{subCode} ]]>
+	  	</if>
+	  	
+  	</select>
+  	  
+  	<select id="findAllOrderSevB" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		 SELECT A.* FROM OPT_ORDER_SEV A 
+		 WHERE 1=1
+		 <if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+	  		<![CDATA[ AND  A.ORDER_ID = #{order_id} ]]>
+	  	</if>
+  	</select>
+  	
+  	
+  	
+  		<!-- 查询服务商的订单 -->
+  	<select id="queryfindSevOrderPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT A.* FROM OPT_ORDER_SEV A 
+          where 1=1 
+          AND A.DELFLAG = '0' 
+        <if test=" startTime != null and startTime != '' and startTime != 'null' ">
+            <![CDATA[ AND A.Create_Time >= DATE_FORMAT(#{startTime}, '%Y-%m-%d %H:%i:%s') ]]>
+        </if>
+		<if test=" endTime != null and endTime != '' and endTime != 'null' ">
+            <![CDATA[ AND A.Create_Time <= DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:%i:%s') ]]>
+        </if>
+        <if test=" sellerCode != null and sellerCode != '' and sellerCode != 'null' ">
+            <![CDATA[ AND A.ORDER_CODE like concat('%', #{orderCode}, '%') ]]>
+        </if> 
+          ORDER BY CREATED_TIME DESC
+  	</select>
+  	<!-- 第三方坐席回访 -->
+  	<select id="queryVitisOrderList" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT A.* FROM OPT_ORDER_SEV A 
+          where 1=1 
+          AND A.DELFLAG = '0' 
+          AND A.ORDER_ID = #{orderId}
+          ORDER BY CREATED_TIME DESC
+  	</select>
+  	<select id="queryVitisSevList" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT A.* FROM OPT_ORDER_SEV A 
+          where 1=1 
+          AND A.DELFLAG = '0' 
+          AND A.ORDER_ID = #{orderId}
+          ORDER BY CREATED_TIME DESC
+  	</select>
+</mapper>

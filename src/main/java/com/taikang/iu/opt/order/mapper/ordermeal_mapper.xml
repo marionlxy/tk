@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderMeal">
+	<resultMap id="orderMealResultMap" type="com.taikang.iu.opt.order.model.OrderMealBO">
+		<result property="mealId" column="MEAL_ID"/>
+		<result property="orderId" column="ORDER_ID"/>
+		<result property="mealCode" column="MEAL_CODE"/>
+		<result property="mealName" column="MEAL_NAME"/>
+		<result property="site" column="SITE"/>
+		<result property="mealPrice" column="MEAL_PRICE"/>
+		<result property="mealType" column="MEAL_TYPE"/>
+		<result property="mealConte" column="MEAL_CONTE"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="orderMealWhereCondition">
+		<where>
+	  	<if test=" meal_id != null and meal_id != '' and meal_id != 'null' ">
+			<![CDATA[ AND A.MEAL_ID = #{meal_id} ]]>
+	  	</if>
+	  	<if test=" order_id != null and order_id != '' and order_id != 'null' ">
+			<![CDATA[ AND A.ORDER_ID = #{order_id} ]]>
+	  	</if>
+	  	<if test=" meal_code != null and meal_code != '' and meal_code != 'null' ">
+			<![CDATA[ AND A.MEAL_CODE = #{meal_code} ]]>
+	  	</if>
+	  	<if test=" meal_name != null and meal_name != '' and meal_name != 'null' ">
+			<![CDATA[ AND A.MEAL_NAME = #{meal_name} ]]>
+	  	</if>
+	  	<if test=" site != null and site != '' and site != 'null' ">
+			<![CDATA[ AND A.SITE = #{site} ]]>
+	  	</if>
+	  	<if test=" meal_price != null ">
+	  		<![CDATA[ AND A.MEAL_PRICE = ${meal_price} ]]>
+	  	</if>
+	  	<if test=" meal_type != null and meal_type != '' and meal_type != 'null' ">
+			<![CDATA[ AND A.MEAL_TYPE = #{meal_type} ]]>
+	  	</if>
+	  	<if test=" meal_conte != null and meal_conte != '' and meal_conte != 'null' ">
+			<![CDATA[ AND A.MEAL_CONTE = #{meal_conte} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addOrderMeal"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO OPT_ORDER_MEAL
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" meal_id  != null and  meal_id  != ''  and  meal_id  != 'null' ">
+				<![CDATA[ MEAL_ID , ]]>
+	  		</if>
+	  		<if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+				<![CDATA[ ORDER_ID , ]]>
+	  		</if>
+	  		<if test=" meal_code  != null and  meal_code  != ''  and  meal_code  != 'null' ">
+				<![CDATA[ MEAL_CODE , ]]>
+	  		</if>
+	  		<if test=" meal_name  != null and  meal_name  != ''  and  meal_name  != 'null' ">
+				<![CDATA[ MEAL_NAME , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+				<![CDATA[ SITE , ]]>
+	  		</if>
+	  		<if test=" meal_price  != null ">
+				<![CDATA[ MEAL_PRICE , ]]>
+	  		</if>
+	  		<if test=" meal_type  != null and  meal_type  != ''  and  meal_type  != 'null' ">
+				<![CDATA[ MEAL_TYPE , ]]>
+	  		</if>
+	  		<if test=" meal_conte  != null and  meal_conte  != ''  and  meal_conte  != 'null' ">
+				<![CDATA[ MEAL_CONTE , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" meal_id  != null and  meal_id  != ''  and  meal_id  != 'null' ">
+	  			<![CDATA[ #{meal_id} , ]]>
+	  		</if>
+	  		<if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+	  			<![CDATA[ #{order_id} , ]]>
+	  		</if>
+	  		<if test=" meal_code  != null and  meal_code  != ''  and  meal_code  != 'null' ">
+	  			<![CDATA[ #{meal_code} , ]]>
+	  		</if>
+	  		<if test=" meal_name  != null and  meal_name  != ''  and  meal_name  != 'null' ">
+	  			<![CDATA[ #{meal_name} , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  			<![CDATA[ #{site} , ]]>
+	  		</if>
+	  		<if test=" meal_price  != null">
+	    		<![CDATA[ ${meal_price} , ]]>
+	  		</if>
+	  		<if test=" meal_type  != null and  meal_type  != ''  and  meal_type  != 'null' ">
+	  			<![CDATA[ #{meal_type} , ]]>
+	  		</if>
+	  		<if test=" meal_conte  != null and  meal_conte  != ''  and  meal_conte  != 'null' ">
+	  			<![CDATA[ #{meal_conte} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateOrderMeal" parameterType="java.util.Map">
+		<![CDATA[ UPDATE OPT_ORDER_MEAL A ]]>
+		<set>
+	  	<if test=" order_id  != null and  order_id  != ''  and  order_id  != 'null' ">
+	  		<![CDATA[ A.ORDER_ID = #{order_id}, ]]>
+	  	</if>
+	  	<if test=" meal_code  != null and  meal_code  != ''  and  meal_code  != 'null' ">
+	  		<![CDATA[ A.MEAL_CODE = #{meal_code}, ]]>
+	  	</if>
+	  	<if test=" meal_name  != null and  meal_name  != ''  and  meal_name  != 'null' ">
+	  		<![CDATA[ A.MEAL_NAME = #{meal_name}, ]]>
+	  	</if>
+	  	<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  		<![CDATA[ A.SITE = #{site}, ]]>
+	  	</if>
+		<if test=" meal_price  != null ">
+  			<![CDATA[ A.MEAL_PRICE = ${meal_price} , ]]>
+		</if>
+	  	<if test=" meal_type  != null and  meal_type  != ''  and  meal_type  != 'null' ">
+	  		<![CDATA[ A.MEAL_TYPE = #{meal_type}, ]]>
+	  	</if>
+	  	<if test=" meal_conte  != null and  meal_conte  != ''  and  meal_conte  != 'null' ">
+	  		<![CDATA[ A.MEAL_CONTE = #{meal_conte}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.MEAL_ID = #{meal_id}]]>
+  	</update>
+  
+  	<delete id="deleteOrderMeal" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM OPT_ORDER_MEAL A where A.MEAL_ID = #{meal_id} ]]>
+	</delete>
+  
+	<select id="findOneOrderMeal" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM OPT_ORDER_MEAL A  ]]>
+		<include refid="orderMealWhereCondition" />
+  	</select>
+    
+  	<select id="findAllOrderMeal" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM OPT_ORDER_MEAL A ]]>
+		<include refid="orderMealWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapOrderMeal" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM OPT_ORDER_MEAL A ]]>
+		<include refid="orderMealWhereCondition" />
+	</select>
+  
+  	<select id="findOrderMealTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM OPT_ORDER_MEAL A ]]>
+		<include refid="orderMealWhereCondition" />
+  	</select>
+  
+  	<select id="queryOrderMealForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM OPT_ORDER_MEAL A ]]>
+		<include refid="orderMealWhereCondition" />
+  	</select>
+</mapper>

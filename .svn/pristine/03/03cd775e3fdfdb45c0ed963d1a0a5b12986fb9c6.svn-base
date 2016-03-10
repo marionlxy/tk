@@ -1,0 +1,22 @@
+package com.taikang.iu.opt.appraise.action;
+
+import java.util.List;
+
+import com.taikang.iu.opt.appraise.model.AppraiseBO;
+import com.taikang.udp.framework.core.action.IBaseAction;
+
+
+/**
+  * IAppraiseAction
+  */
+
+public interface IAppraiseAction extends IBaseAction { 
+
+	final String ACTION_ID = "appraiseAction";
+	/**
+	 * 根据子订单的id查找对应的评价
+	 * @param appraise
+	 * @return
+	 */
+	public List<AppraiseBO> findUniquedAppraise(AppraiseBO appraise);
+}

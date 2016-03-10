@@ -1,0 +1,94 @@
+package com.taikang.iu.opt.appraise.service.impl;
+ 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.taikang.iu.opt.appraise.model.AppraiseBO;
+import com.taikang.iu.opt.appraise.service.IAppraiseService;
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.udp.framework.common.datastructre.impl.BaseDto;
+import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+import com.taikang.udp.framework.core.service.impl.BaseServiceImpl;
+ 
+  
+/**
+  * AppraiseServiceImpl
+  */
+ @Service(IAppraiseService.SERVICE_ID)
+ public class AppraiseServiceImpl extends BaseServiceImpl 
+ implements IAppraiseService<AppraiseBO>  
+  {
+  	 	 	
+ 	/**
+	  * 增加数据
+	  */
+	public void insertObject(AppraiseBO appraise) {
+		logger.debug("<======AppraiseServiceImpl--insertAppraise======>");		
+		appDao.insert("Appraise.addAppraise",appraise);
+	} 	
+ 	
+ 	/**
+      * 修改数据
+      */
+	public void updateObject(AppraiseBO appraise) {
+		logger.debug("<======AppraiseServiceImpl--updateAppraise======>");
+		appDao.update("Appraise.updateAppraise",appraise);
+	}
+
+	 /**
+      * 删除数据
+      */
+	public void deleteObject(AppraiseBO appraise) {
+		logger.debug("<======AppraiseServiceImpl--deleteAppraise======>");
+		appDao.delete("Appraise.deleteAppraise",appraise);
+	}
+	
+	/**
+      * 查询数据
+      */
+	public AppraiseBO findOne(AppraiseBO appraise) {
+		logger.debug("<======AppraiseServiceImpl--findAppraise======>");
+		
+		AppraiseBO appraiseBackBO=appDao.queryOneObject("Appraise.findOneAppraise", appraise);
+		return appraiseBackBO;		
+	}
+	
+	/**
+      * 查询所有数据
+      */
+	public List<AppraiseBO> findAll(AppraiseBO  appraise) {
+		logger.debug("<======AppraiseServiceImpl--findAllAppraise======>");
+		return appDao.queryForEntityList("Appraise.findAllAppraise", appraise);
+	}
+	
+	
+	 /**
+      * 分页查询数据
+      */
+	public CurrentPage queryForPage(CurrentPage currentPage) {
+		logger.debug("<======AppraiseServiceImpl--queryAppraiseForPage======>");
+		return appDao.queryForPage("Appraise.queryAppraiseForPage", currentPage);
+	}
+		
+	/**
+      * 查询所有数据 ，重新组装为map
+      */
+	public List<Dto> findAllMap(Dto param){
+		logger.debug("<======AppraiseServiceImpl--findAllMapAppraise======>");		
+		return appDao.queryForMapList("Appraise.findAllMapAppraise", param);
+	}
+    /**
+     * 根据子订单查找评价详情
+     */
+	public List<AppraiseBO> findUniquedAppraise(AppraiseBO appraise) {
+		return appDao.queryForEntityList("Appraise.findAllMapAppraise", appraise);
+	}
+
+	public Dto findOneApp(Dto param) {
+		AppraiseBO appraiseBO = BaseDto.toModel(AppraiseBO.class , param);
+     	List<AppraiseBO> appraiseBackBO=appDao.queryForEntityList("Appraise.findOneApp", appraiseBO);
+		return appraiseBackBO.get(0).toDto();
+	}
+ }
+  

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Goodscategory">
+	<resultMap id="goodscategoryResultMap" type="com.taikang.iu.biz.goodscategory.model.GoodscategoryBO">
+		<result property="categoryId" column="CATEGORY_ID"/>
+		<result property="categoryCode" column="CATEGORY_CODE"/>
+		<result property="categoryName" column="CATEGORY_NAME"/>
+		<result property="categoryGrade" column="CATEGORY_GRADE"/>
+		<result property="sort" column="SORT"/>
+		<result property="treePath" column="TREE_PATH"/>
+		<result property="treePathName" column="TREE_PATH_NAME"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="goodscategoryWhereCondition">
+		<where>
+	  	<if test=" category_id != null and category_id != '' and category_id != 'null' ">
+			<![CDATA[ AND A.CATEGORY_ID = #{category_id} ]]>
+	  	</if>
+	  	<if test=" category_code != null and category_code != '' and category_code != 'null' ">
+			<![CDATA[ AND A.CATEGORY_CODE = #{category_code} ]]>
+	  	</if>
+	  	<if test=" category_name != null and category_name != '' and category_name != 'null' ">
+			<![CDATA[ AND A.CATEGORY_NAME = #{category_name} ]]>
+	  	</if>
+	  	<if test=" category_grade != null ">
+	  		<![CDATA[ AND A.CATEGORY_GRADE = ${category_grade} ]]>
+	  	</if>
+	  	<if test=" sort != null ">
+	  		<![CDATA[ AND A.SORT = ${sort} ]]>
+	  	</if>
+	  	<if test=" tree_path != null and tree_path != '' and tree_path != 'null' ">
+			<![CDATA[ AND A.TREE_PATH = #{tree_path} ]]>
+	  	</if>
+	  	<if test=" tree_path_name != null and tree_path_name != '' and tree_path_name != 'null' ">
+			<![CDATA[ AND A.TREE_PATH_NAME = #{tree_path_name} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addGoodscategory"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BIZ_GOODS_CATEGORY
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" category_id  != null and  category_id  != ''  and  category_id  != 'null' ">
+				<![CDATA[ CATEGORY_ID , ]]>
+	  		</if>
+	  		<if test=" category_code  != null and  category_code  != ''  and  category_code  != 'null' ">
+				<![CDATA[ CATEGORY_CODE , ]]>
+	  		</if>
+	  		<if test=" category_name  != null and  category_name  != ''  and  category_name  != 'null' ">
+				<![CDATA[ CATEGORY_NAME , ]]>
+	  		</if>
+	  		<if test=" category_grade  != null ">
+				<![CDATA[ CATEGORY_GRADE , ]]>
+	  		</if>
+	  		<if test=" sort  != null ">
+				<![CDATA[ SORT , ]]>
+	  		</if>
+	  		<if test=" tree_path  != null and  tree_path  != ''  and  tree_path  != 'null' ">
+				<![CDATA[ TREE_PATH , ]]>
+	  		</if>
+	  		<if test=" tree_path_name  != null and  tree_path_name  != ''  and  tree_path_name  != 'null' ">
+				<![CDATA[ TREE_PATH_NAME , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" category_id  != null and  category_id  != ''  and  category_id  != 'null' ">
+	  			<![CDATA[ #{category_id} , ]]>
+	  		</if>
+	  		<if test=" category_code  != null and  category_code  != ''  and  category_code  != 'null' ">
+	  			<![CDATA[ #{category_code} , ]]>
+	  		</if>
+	  		<if test=" category_name  != null and  category_name  != ''  and  category_name  != 'null' ">
+	  			<![CDATA[ #{category_name} , ]]>
+	  		</if>
+	  		<if test=" category_grade  != null">
+	    		<![CDATA[ ${category_grade} , ]]>
+	  		</if>
+	  		<if test=" sort  != null">
+	    		<![CDATA[ ${sort} , ]]>
+	  		</if>
+	  		<if test=" tree_path  != null and  tree_path  != ''  and  tree_path  != 'null' ">
+	  			<![CDATA[ #{tree_path} , ]]>
+	  		</if>
+	  		<if test=" tree_path_name  != null and  tree_path_name  != ''  and  tree_path_name  != 'null' ">
+	  			<![CDATA[ #{tree_path_name} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateGoodscategory" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BIZ_GOODS_CATEGORY A ]]>
+		<set>
+	  	<if test=" category_code  != null and  category_code  != ''  and  category_code  != 'null' ">
+	  		<![CDATA[ A.CATEGORY_CODE = #{category_code}, ]]>
+	  	</if>
+	  	<if test=" category_name  != null and  category_name  != ''  and  category_name  != 'null' ">
+	  		<![CDATA[ A.CATEGORY_NAME = #{category_name}, ]]>
+	  	</if>
+		<if test=" category_grade  != null ">
+  			<![CDATA[ A.CATEGORY_GRADE = ${category_grade} , ]]>
+		</if>
+		<if test=" sort  != null ">
+  			<![CDATA[ A.SORT = ${sort} , ]]>
+		</if>
+	  	<if test=" tree_path  != null and  tree_path  != ''  and  tree_path  != 'null' ">
+	  		<![CDATA[ A.TREE_PATH = #{tree_path}, ]]>
+	  	</if>
+	  	<if test=" tree_path_name  != null and  tree_path_name  != ''  and  tree_path_name  != 'null' ">
+	  		<![CDATA[ A.TREE_PATH_NAME = #{tree_path_name}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.CATEGORY_ID = #{category_id}]]>
+  	</update>
+  
+  	<delete id="deleteGoodscategory" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BIZ_GOODS_CATEGORY  where CATEGORY_ID = #{category_id} ]]>
+	</delete>
+  
+	<select id="findOneGoodscategory" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BIZ_GOODS_CATEGORY A  ]]>
+		<include refid="goodscategoryWhereCondition" />
+  	</select>
+    
+  	<select id="findAllGoodscategory" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BIZ_GOODS_CATEGORY A ]]>
+		<include refid="goodscategoryWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapGoodscategory" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BIZ_GOODS_CATEGORY A ]]>
+		<include refid="goodscategoryWhereCondition" />
+	</select>
+  
+  	<select id="findGoodscategoryTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BIZ_GOODS_CATEGORY A ]]>
+		<include refid="goodscategoryWhereCondition" />
+  	</select>
+  
+  	<select id="queryGoodscategoryForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BIZ_GOODS_CATEGORY A ]]>
+		<include refid="goodscategoryWhereCondition" />
+  	</select>
+  	
+  	<select id="getcategoryBycategoryId" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+    <![CDATA[
+        select * from BIZ_GOODS_CATEGORY A  where A.TREE_PATH  like concat(#{category_id})
+    ]]>
+    </select>
+  	
+  	<select id="findUserMenu" parameterType="java.util.Map" resultType="java.util.Map" >
+       SELECT A.* FROM BIZ_GOODS_CATEGORY A
+    </select>
+    
+</mapper>

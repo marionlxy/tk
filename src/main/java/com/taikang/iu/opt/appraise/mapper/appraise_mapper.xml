@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Appraise">
+	<resultMap id="appraiseResultMap" type="com.taikang.iu.opt.appraise.model.AppraiseBO">
+		<result property="appraiseId" column="APPRAISE_ID"/>
+		<result property="appraiseNum" column="APPRAISE_NUM"/>
+		<result property="customId" column="CUSTOM_ID"/>
+		<result property="appraiseBy" column="APPRAISE_BY"/>
+		<result property="appraiseMsg" column="APPRAISE_MSG"/>
+		<result property="appraiseType" column="APPRAISE_TYPE"/>
+		<result property="subOrder" column="SUB_ORDER"/>
+		<result property="appCode" column="APP_CODE"/>
+		<result property="skuCode" column="SKU_CODE"/>
+		<result property="orderSevId" column="ORDER_SEV_ID"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="appraiseWhereCondition">
+		<where>
+	  	<if test=" appraise_id != null and appraise_id != '' and appraise_id != 'null' ">
+			<![CDATA[ AND A.APPRAISE_ID = #{appraise_id} ]]>
+	  	</if>
+	  	<if test=" appraise_num != null and appraise_num != '' and appraise_num != 'null' ">
+			<![CDATA[ AND A.APPRAISE_NUM = #{appraise_num} ]]>
+	  	</if>
+	  	<if test=" custom_id != null and custom_id != '' and custom_id != 'null' ">
+			<![CDATA[ AND A.CUSTOM_ID = #{custom_id} ]]>
+	  	</if>
+	  	<if test=" appraise_by != null and appraise_by != '' and appraise_by != 'null' ">
+			<![CDATA[ AND A.APPRAISE_BY = #{appraise_by} ]]>
+	  	</if>
+	  	<if test=" appraise_msg != null and appraise_msg != '' and appraise_msg != 'null' ">
+			<![CDATA[ AND A.APPRAISE_MSG = #{appraise_msg} ]]>
+	  	</if>
+	  	<if test=" appraise_type != null and appraise_type != '' and appraise_type != 'null' ">
+			<![CDATA[ AND A.APPRAISE_TYPE = #{appraise_type} ]]>
+	  	</if>
+	  	<if test=" sub_order != null and sub_order != '' and sub_order != 'null' ">
+			<![CDATA[ AND A.SUB_ORDER = #{sub_order} ]]>
+	  	</if>
+	  	<if test=" app_code != null and app_code != '' and app_Code != 'null' ">
+			<![CDATA[ AND A.APP_CODE = #{app_code} ]]>
+	  	</if>
+	  	<if test=" sku_code != null and sku_code != '' and sku_code != 'null' ">
+			<![CDATA[ AND A.SKU_CODE = #{sku_code} ]]>
+	  	</if>
+	  	<if test=" order_sev_id != null and order_sev_id != '' and order_sev_id != 'null' ">
+			<![CDATA[ AND A.ORDER_SEV_ID = #{order_sev_id} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addAppraise"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO OPT_APPRAISE
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" appraise_id  != null and  appraise_id  != ''  and  appraise_id  != 'null' ">
+				<![CDATA[ APPRAISE_ID , ]]>
+	  		</if>
+	  		<if test=" appraise_num  != null and  appraise_num  != ''  and  appraise_num  != 'null' ">
+				<![CDATA[ APPRAISE_NUM , ]]>
+	  		</if>
+	  		<if test=" custom_id  != null and  custom_id  != ''  and  custom_id  != 'null' ">
+				<![CDATA[ CUSTOM_ID , ]]>
+	  		</if>
+	  		<if test=" appraise_by  != null and  appraise_by  != ''  and  appraise_by  != 'null' ">
+				<![CDATA[ APPRAISE_BY , ]]>
+	  		</if>
+	  		<if test=" appraise_msg  != null and  appraise_msg  != ''  and  appraise_msg  != 'null' ">
+				<![CDATA[ APPRAISE_MSG , ]]>
+	  		</if>
+	  		<if test=" appraise_type  != null and  appraise_type  != ''  and  appraise_type  != 'null' ">
+				<![CDATA[ APPRAISE_TYPE , ]]>
+	  		</if>
+	  		<if test=" sub_order  != null and  sub_order  != ''  and  sub_order  != 'null' ">
+				<![CDATA[ SUB_ORDER , ]]>
+	  		</if>
+	  		<if test=" app_code  != null and  app_code  != ''  and  app_code  != 'null' ">
+				<![CDATA[ APP_CODE , ]]>
+	  		</if><if test=" sku_code  != null and  sku_code  != ''  and  sku_code  != 'null' ">
+				<![CDATA[ SKU_CODE , ]]>
+	  		</if><if test=" order_sev_id  != null and  order_sev_id  != ''  and  order_sev_id  != 'null' ">
+				<![CDATA[ ORDER_SEV_ID , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" appraise_id  != null and  appraise_id  != ''  and  appraise_id  != 'null' ">
+	  			<![CDATA[ #{appraise_id} , ]]>
+	  		</if>
+	  		<if test=" appraise_num  != null and  appraise_num  != ''  and  appraise_num  != 'null' ">
+	  			<![CDATA[ #{appraise_num} , ]]>
+	  		</if>
+	  		<if test=" custom_id  != null and  custom_id  != ''  and  custom_id  != 'null' ">
+	  			<![CDATA[ #{custom_id} , ]]>
+	  		</if>
+	  		<if test=" appraise_by  != null and  appraise_by  != ''  and  appraise_by  != 'null' ">
+	  			<![CDATA[ #{appraise_by} , ]]>
+	  		</if>
+	  		<if test=" appraise_msg  != null and  appraise_msg  != ''  and  appraise_msg  != 'null' ">
+	  			<![CDATA[ #{appraise_msg} , ]]>
+	  		</if>
+	  		<if test=" appraise_type  != null and  appraise_type  != ''  and  appraise_type  != 'null' ">
+	  			<![CDATA[ #{appraise_type} , ]]>
+	  		</if>
+	  		<if test=" sub_order  != null and  sub_order  != ''  and  sub_order  != 'null' ">
+	  			<![CDATA[ #{sub_order} , ]]>
+	  		</if>
+	  		<if test=" app_code  != null and  app_code  != ''  and  app_code  != 'null' ">
+	  			<![CDATA[ #{app_code} , ]]>
+	  		</if>
+	  		<if test=" sku_code  != null and  sku_code  != ''  and  sku_code  != 'null' ">
+	  			<![CDATA[ #{sku_code} , ]]>
+	  		</if>
+	  		<if test=" order_sev_id  != null and  order_sev_id  != ''  and  order_sev_id  != 'null' ">
+	  			<![CDATA[ #{order_sev_id} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateAppraise" parameterType="java.util.Map">
+		<![CDATA[ UPDATE OPT_APPRAISE A ]]>
+		<set>
+	  	<if test=" appraise_num  != null and  appraise_num  != ''  and  appraise_num  != 'null' ">
+	  		<![CDATA[ A.APPRAISE_NUM = #{appraise_num}, ]]>
+	  	</if>
+	  	<if test=" custom_id  != null and  custom_id  != ''  and  custom_id  != 'null' ">
+	  		<![CDATA[ A.CUSTOM_ID = #{custom_id}, ]]>
+	  	</if>
+	  	<if test=" appraise_by  != null and  appraise_by  != ''  and  appraise_by  != 'null' ">
+	  		<![CDATA[ A.APPRAISE_BY = #{appraise_by}, ]]>
+	  	</if>
+	  	<if test=" appraise_msg  != null and  appraise_msg  != ''  and  appraise_msg  != 'null' ">
+	  		<![CDATA[ A.APPRAISE_MSG = #{appraise_msg}, ]]>
+	  	</if>
+	  	<if test=" appraise_type  != null and  appraise_type  != ''  and  appraise_type  != 'null' ">
+	  		<![CDATA[ A.APPRAISE_TYPE = #{appraise_type}, ]]>
+	  	</if>
+	  	<if test=" sub_order  != null and  sub_order  != ''  and  sub_order  != 'null' ">
+	  		<![CDATA[ A.SUB_ORDER = #{sub_order}, ]]>
+	  	</if>
+	  	<if test=" app_code  != null and  app_code  != ''  and  sub_oapp_coderder  != 'null' ">
+	  		<![CDATA[ A.APP_CODE = #{app_code}, ]]>
+	  	</if>
+	  	<if test=" sku_code  != null and  sku_code  != ''  and  sku_code  != 'null' ">
+	  		<![CDATA[ A.SKU_CODE = #{sku_code}, ]]>
+	  	</if>
+	  	<if test=" order_sev_id  != null and  order_sev_id  != ''  and  order_sev_id  != 'null' ">
+	  		<![CDATA[ A.ORDER_SEV_ID = #{order_sev_id}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.APPRAISE_ID = #{appraise_id}]]>
+  	</update>
+  
+  	<delete id="deleteAppraise" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM OPT_APPRAISE A where A.APPRAISE_ID = #{appraise_id} ]]>
+	</delete>
+  
+	<select id="findOneAppraise" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM OPT_APPRAISE A  ]]>
+		<include refid="appraiseWhereCondition" />
+  	</select>
+    
+  	<select id="findAllAppraise" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM OPT_APPRAISE A ]]>
+		<include refid="appraiseWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapAppraise" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM OPT_APPRAISE A ]]>
+		<include refid="appraiseWhereCondition" />
+	</select>
+  
+  	<select id="findAppraiseTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM OPT_APPRAISE A ]]>
+		<include refid="appraiseWhereCondition" />
+  	</select>
+  
+  	<select id="queryAppraiseForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM OPT_APPRAISE A ]]>
+		<include refid="appraiseWhereCondition" />
+  	</select>
+  	 <select id="findOneApp" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM OPT_APPRAISE A ]]>
+		<include refid="appraiseWhereCondition" />
+	</select>
+	
+</mapper>

@@ -1,0 +1,13 @@
+package com.taikang.iu.opt.finance.account.action;
+
+import com.taikang.udp.framework.core.action.IBaseAction;
+
+
+/**
+  * IFinanceAction
+  */
+
+public interface IFinanceAction extends IBaseAction { 
+
+	final String ACTION_ID = "financeAction"; 	
+}

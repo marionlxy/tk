@@ -1,0 +1,197 @@
+package com.taikang.iu.opt.appraise.model;
+
+import java.sql.Timestamp;
+import java.lang.Integer;
+import java.lang.String;
+import java.util.Arrays;
+import com.taikang.udp.framework.common.datastructre.impl.BaseBO;
+
+
+/**
+  * AppraiseBO 
+  */
+public class AppraiseBO  extends BaseBO {
+	
+	private static final long serialVersionUID = 1L;
+	
+	public AppraiseBO(){
+		init();
+	}
+	
+	protected void init(){
+		super.init();
+		this.addList(Arrays.asList("appraise_id","appraise_num","custom_id","appraise_by","appraise_msg","appraise_type","sub_order","app_code","sku_code","order_sev_id","created_time","created_by","modified_time","modified_by","version","delflag"));
+	}
+	
+  
+private String appCode;
+public String getAppCode() {
+	return (String)getData().get("app_code");
+}
+
+public void setAppCode(String appCode) {
+	getData().put("app_code",appCode);
+	this.appCode = appCode;
+}
+private String skuCode;
+public String getSkuCode() {
+	return (String)getData().get("sku_code");
+}
+
+public void setSkuCode(String skuCode) {
+	getData().put("sku_code",skuCode);
+	this.skuCode = skuCode;
+}
+private String orderSevId;
+public String getOrderSevId() {
+	return (String)getData().get("order_sev_id");
+}
+
+public void setOrderSevId(String orderSevId) {
+	getData().put("order_sev_id",orderSevId);
+	this.orderSevId = orderSevId;
+}
+
+	private String appraiseId;
+		public void setAppraiseId(String appraiseId){
+		getData().put("appraise_id",appraiseId);
+		this.appraiseId=appraiseId;
+	}
+	
+	public String getAppraiseId(){
+		return (String)getData().get("appraise_id");
+	}	
+		
+		
+	private String appraiseNum;
+		public void setAppraiseNum(String appraiseNum){
+		getData().put("appraise_num",appraiseNum);
+		this.appraiseNum=appraiseNum;
+	}
+	
+	public String getAppraiseNum(){
+		return (String)getData().get("appraise_num");
+	}	
+		
+		
+	private String customId;
+		public void setCustomId(String customId){
+		getData().put("custom_id",customId);
+		this.customId=customId;
+	}
+	
+	public String getCustomId(){
+		return (String)getData().get("custom_id");
+	}	
+		
+		
+	private String appraiseBy;
+		public void setAppraiseBy(String appraiseBy){
+		getData().put("appraise_by",appraiseBy);
+		this.appraiseBy=appraiseBy;
+	}
+	
+	public String getAppraiseBy(){
+		return (String)getData().get("appraise_by");
+	}	
+		
+		
+	private String appraiseMsg;
+		public void setAppraiseMsg(String appraiseMsg){
+		getData().put("appraise_msg",appraiseMsg);
+		this.appraiseMsg=appraiseMsg;
+	}
+	
+	public String getAppraiseMsg(){
+		return (String)getData().get("appraise_msg");
+	}	
+		
+		
+	private String appraiseType;
+		public void setAppraiseType(String appraiseType){
+		getData().put("appraise_type",appraiseType);
+		this.appraiseType=appraiseType;
+	}
+	
+	public String getAppraiseType(){
+		return (String)getData().get("appraise_type");
+	}	
+		
+		
+	private String subOrder;
+		public void setSubOrder(String subOrder){
+		getData().put("sub_order",subOrder);
+		this.subOrder=subOrder;
+	}
+	
+	public String getSubOrder(){
+		return (String)getData().get("sub_order");
+	}	
+		
+		
+	private Timestamp createdTime;
+		public void setCreatedTime(Timestamp createdTime){
+		getData().put("created_time",createdTime);
+		this.createdTime=createdTime;
+	}
+	
+	public Timestamp getCreatedTime(){
+		return (Timestamp)getData().get("created_time");
+	}	
+		
+		
+	private String createdBy;
+		public void setCreatedBy(String createdBy){
+		getData().put("created_by",createdBy);
+		this.createdBy=createdBy;
+	}
+	
+	public String getCreatedBy(){
+		return (String)getData().get("created_by");
+	}	
+		
+		
+	private Timestamp modifiedTime;
+		public void setModifiedTime(Timestamp modifiedTime){
+		getData().put("modified_time",modifiedTime);
+		this.modifiedTime=modifiedTime;
+	}
+	
+	public Timestamp getModifiedTime(){
+		return (Timestamp)getData().get("modified_time");
+	}	
+		
+		
+	private String modifiedBy;
+		public void setModifiedBy(String modifiedBy){
+		getData().put("modified_by",modifiedBy);
+		this.modifiedBy=modifiedBy;
+	}
+	
+	public String getModifiedBy(){
+		return (String)getData().get("modified_by");
+	}	
+		
+		
+	private Integer version;
+		public void setVersion(Integer version){
+		getData().put("version",version);
+		this.version=version;
+	}
+	
+	public Integer getVersion(){
+		return (Integer)getData().get("version");
+	}	
+		
+		
+	private String delflag;
+		public void setDelflag(String delflag){
+		getData().put("delflag",delflag);
+		this.delflag=delflag;
+	}
+	
+	public String getDelflag(){
+		return (String)getData().get("delflag");
+	}	
+	 }
+

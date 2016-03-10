@@ -1,0 +1,26 @@
+package com.taikang.iu.opt.employee.service;
+
+import java.util.List;
+
+import com.taikang.iu.opt.employee.model.EmployeeBO;
+import com.taikang.udp.framework.core.service.IBaseService;
+
+
+/**
+  * IEmployeeService
+  */
+ 
+ public interface IEmployeeService<T> extends IBaseService<T>{
+ 
+ 	final String SERVICE_ID = "employeeService";  
+
+	public List<EmployeeBO> finAllEmp(EmployeeBO employeeBO);  	
+	
+	/**
+     * 查询天使
+     */
+	public List<EmployeeBO> finAllEmpTS(EmployeeBO employeeBO);
+ }
+ 
+ 
+ 

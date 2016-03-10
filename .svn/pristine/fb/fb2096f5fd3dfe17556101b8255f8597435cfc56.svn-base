@@ -1,0 +1,466 @@
+package com.taikang.iu.opt.clue.controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.taikang.iu.opt.clue.action.IClueAction;
+import com.taikang.iu.opt.clue.model.ClueBO;
+import com.taikang.iu.opt.custom.action.ICustomAction;
+import com.taikang.iu.opt.employee.action.IEmployeeAction;
+import com.taikang.iu.opt.worksheet.action.IWorksheetAction;
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.udp.framework.common.datastructre.impl.BaseDto;
+import com.taikang.udp.framework.common.util.TKDateTimeUtils;
+import com.taikang.udp.framework.core.exception.TKCheckedException;
+import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+import com.taikang.udp.framework.core.web.BaseController;
+import com.taikang.udp.sys.action.IUserAction;
+import com.taikang.udp.sys.model.UserBO;
+import com.taikang.udp.sys.util.UserUtils;
+import com.taikang.udp.sys.util.vo.LoginUser;
+
+
+/**
+  * ClueController
+  */
+@Controller("clueController")
+@RequestMapping(value="/clue")
+public class ClueController  extends BaseController  {
+		
+	@Resource(name=IClueAction.ACTION_ID)
+	private IClueAction clueAction;
+	//用户表
+	@Resource(name=IUserAction.ACTION_ID)
+	private IUserAction userAction;
+	//客户表
+	@Resource(name=ICustomAction.ACTION_ID)
+	private ICustomAction customAction;
+	//工单表
+	@Resource(name=IWorksheetAction.ACTION_ID)
+	private IWorksheetAction worksheetAction;
+	//员工表
+	@Resource(name=IEmployeeAction.ACTION_ID)
+	private IEmployeeAction employeeAction;
+	/**
+	 * 打开主查询页面
+	 * @return 页面地址
+	 */
+	@RequestMapping("")
+	public String showClueIndexPage() {
+		return "clue/clueIndex"; 
+	}
+//	/**
+//	 * 派工单的页面
+//	 */
+//	@RequestMapping("/worksheet")
+//	public String showWorksheetIndexPage() {
+//		return "worksheet/wclueIndex"; 
+//	}
+	/**
+	 * 查询信息列表
+	 * @return 分页列表数据
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/list")
+	@ResponseBody
+	public Map<String,Object> getClueList(HttpServletRequest request,CurrentPage page){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		page.setParamObject(getParamAsDto(request));
+		CurrentPage currentPage = clueAction.queryForPage(page);
+		//创建人，通过查询user表，把userName 传给CREATED_BY
+		List<Dto> clueList =  new LinkedList<Dto>();
+		clueList = currentPage.getPageItems();
+		
+		for (int i = 0; i < clueList.size(); i++) {
+			Dto clueBO = new BaseDto();
+			 clueBO =   clueList.get(i);
+			 if(clueBO.get("CREATED_BY") != null){
+				 String clueOne =  clueBO.get("CREATED_BY").toString();
+				 if(clueOne.getBytes().length == clueOne.length()){
+					 
+					 Dto user = new BaseDto();
+					 user.put("userId", clueBO.get("CREATED_BY"));
+					 Dto userOne = userAction.findOne(user);
+					 clueBO.put("CREATED_BY", userOne.get("userName"));
+				 }
+			 }
+			 
+			 if(clueBO.get("CONFIRM_BY") != null){//页面显示确认人
+				 Dto employeeName = new BaseDto();
+				 employeeName.put("userId", clueBO.get("CONFIRM_BY"));
+				 Dto employeeOne = employeeAction.findOne(employeeName);
+				 clueBO.put("CONFIRM_BY", employeeOne.get("employeeName"));
+			 }
+
+		
+		}
+		map.put("rows", currentPage.getPageItems());
+		map.put("total", currentPage.getTotalRows());
+		
+		return map;
+	}
+	
+	/**
+	 * 打开新增页面
+	 * @return   
+	 * String
+	 */
+	@RequestMapping("/add")
+	public String oneRole() {
+		
+		return "clue/clueAdd"; 
+	}
+	/**
+	 * 打开详细页面
+	 * @return
+	 * String
+	 */
+	@RequestMapping("/view")
+	public String showSellerViewPage(String clueId,Model model) {
+		
+		if(clueId!=null && !clueId.equals(""))
+		{
+			model.addAttribute("clueId",clueId );
+		}
+		
+		return "clue/clueView"; 
+	}
+	/**
+	 * 打开修改页面
+	 * @return
+	 */
+	@RequestMapping("edit")
+	public String showClueEditPage(String clueId,Model model) {
+		
+		if(clueId!=null && !clueId.equals(""))
+		{
+			model.addAttribute("clueId",clueId );
+		}
+		
+		return "clue/clueEdit"; 
+	}
+	@RequestMapping("edit1")
+	public String showClueEditPage3(String clueId,Model model) {
+		
+		if(clueId!=null && !clueId.equals(""))
+		{
+			model.addAttribute("clueId",clueId );
+		}
+		
+		return "clue/clueEdit1"; 
+	}
+	/**
+	 * 打开修改页面
+	 * @return
+	 */
+	@RequestMapping("wedit")
+	public String showClueEditPage1(String clueId,Model model) {
+		
+		if(clueId!=null && !clueId.equals(""))
+		{
+			model.addAttribute("clueId",clueId );
+		}
+		
+		return "worksheet/wclueEdit"; 
+	}
+	
+	/**
+	 * 获取一条记录详细信息，用来填充修改界面
+	 * @return
+	 */
+	@RequestMapping("/getOne")
+	@ResponseBody
+	public Dto getClueById(@RequestParam("clueId")String clueId)
+	{
+		Dto param = new BaseDto();
+		param.put("clueId", clueId);
+		return clueAction.findOne(param);
+	}
+	
+	/**
+	 * 保存新增或修改的记录，将其持久化到数据库中
+	 * @return
+	 */
+	@RequestMapping("/ClueEdit")
+	@ResponseBody
+	private Map<String,String> saveClueInfo(HttpServletRequest request)
+	{
+		Map<String,String> map=new HashMap<String,String>();
+		LoginUser user = UserUtils.getUser();
+		String loginId = String.valueOf(user.getUserId());
+		Dto param = getParamAsDto(request);
+			
+			
+			param.put("modifiedBy", loginId);
+			param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+			param.put("version", Integer.parseInt(param.get("version").toString())+1);
+			
+			clueAction.updateObject(param);
+			map.put(MESSAGE_INFO, "更新成功！");
+		map.put(RTN_RESULT, "true");
+		
+		return map;
+	}
+	
+	/**
+	*
+	*确认无效
+	*/
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/del")
+	@ResponseBody
+	public Map<String, String> deleteClue(HttpServletRequest request) {
+		Map<String, String> map = new HashMap<String, String>();
+		Dto param = getParamAsDto(request);
+//		clueAction.deleteObject(param);
+		LoginUser user = UserUtils.getUser();
+		String loginId = String.valueOf(user.getUserId());
+		param.put("invalidReason",param.get("invalidReason"));//无效原因
+		param.put("modifiedBy", loginId);
+		param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+		param.put("confirmBy", loginId);
+		param.put("confirmTime", TKDateTimeUtils.getTodayTimeStamp());
+		param.put("clueState", "2"); //clueState "0"，代表未确认，"1"代表确认有效，"2"代表确认无效
+		param.put("version", Integer.parseInt(param.get("version").toString())+1);
+		clueAction.updateObject(param);
+		map.put(RTN_RESULT, "true");
+		map.put(MESSAGE_INFO, "操作成功！");
+		
+		return map;
+	}
+	/**
+	*
+	*确认有效
+	*/
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/del1")
+	@ResponseBody
+	public Map<String, String> deleteClue1(@RequestParam("clueId") String clueId, @RequestParam("version") String version) {
+//		Map<String, String> map = new HashMap<String, String>();
+//		Dto paramClue = new BaseDto();
+//		paramClue.put("clueId", clueId);
+//
+//		//根据clueId获得客户的电话
+//		Dto customTel =  clueAction.findOne(paramClue);
+//		Dto  customTelOneDto = new BaseDto();
+//		customTelOneDto.put("customTel", customTel.get("customTel"));
+//		//获取客户电话相同的所有线索
+//		List<Dto> clueList = clueAction.findAll(customTelOneDto);
+//		//除了最新的线索外，其他线索，修改成已删除状态
+//		for (int i = 0; i < clueList.size(); i++) {
+//			if(i == 0){
+//				Dto paramOne = new BaseDto();
+//				paramOne.put("clueId", clueList.get(0).get("CLUE_ID"));
+//				LoginUser user = UserUtils.getUser();
+//				String loginId = String.valueOf(user.getUserId());
+//				paramOne.put("modifiedBy", loginId);
+//				paramOne.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+//				paramOne.put("clueState", "1"); //clueState "0"，代表未确认，"1"代表确认有效，"2"代表确认无效
+//				paramOne.put("version", Integer.parseInt(version)+1);
+//				clueAction.updateObject(paramOne);
+//			}else{
+//				Dto dtoList = clueList.get(i);
+//				Dto param = new BaseDto();
+//
+//				param.put("clueId", dtoList.get("CLUE_ID"));
+//				LoginUser user = UserUtils.getUser();
+//				String loginId = String.valueOf(user.getUserId());
+//				param.put("modifiedBy", loginId);
+//				param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+//				param.put("delflag", "1"); // “1”代表“已删除”
+////				param.put("clueState", "1"); //clueState "0"，代表未确认，"1"代表确认有效，"2"代表确认无效
+//				param.put("version", Integer.parseInt(version)+1);
+//				clueAction.updateObject(param);
+//			}
+//		}
+//		map.put(MESSAGE_INFO, "操作成功！");
+//		map.put(RTN_RESULT, "true");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		//根据clueId获得客户的电话
+		Dto param = new BaseDto();
+		param.put("clueId", clueId);
+		Dto oldClue =  clueAction.findOne(param);
+		
+		oldClue.put("clueState", "1"); //clueState "0"，代表未确认，"1"代表确认有效，"2"代表确认无效
+		oldClue.put("modifiedBy",  UserUtils.getUser().getUserId());
+		oldClue.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+		oldClue.put("confirmBy", UserUtils.getUser().getUserId());
+		oldClue.put("confirmTime", TKDateTimeUtils.getTodayTimeStamp());
+		oldClue.put("version", Integer.parseInt(oldClue.get("version").toString())+1);
+		clueAction.updateObject(oldClue);
+		
+		map.put(MESSAGE_INFO, "操作成功！");
+		map.put(RTN_RESULT, "true");
+		
+		return map;
+	}
+	
+//	/**
+//	*
+//	*已派工单
+//	*/
+//	@SuppressWarnings("unchecked")
+//	@RequestMapping(value="/wedit1")
+//	@ResponseBody
+//	public Map<String, String> wedit1(@RequestParam("clueId") String clueId, @RequestParam("version") String version) {
+//		Map<String, String> map = new HashMap<String, String>();
+//		Dto param = new BaseDto();
+//		param.put("clueId", clueId);
+////		clueAction.deleteObject(param);
+//		LoginUser user = UserUtils.getUser();
+//		String loginId = String.valueOf(user.getUserName());
+//		param.put("modifiedBy", loginId);
+//		param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+////		param.put("delflag", "1"); // “1”代表“已删除”
+//		param.put("clueState", 3); //clueState "0"，代表未确认，"1"代表确认有效，"2"代表确认无效,"3"代表已派工单
+//		param.put("version", Integer.parseInt(version)+1);
+//		clueAction.updateObject(param);
+//		map.put(RTN_RESULT, "true");
+//		map.put(MESSAGE_INFO, "操作成功！");
+//		
+//		return map;
+//	}
+	/**
+	 * 新增数据
+	 * @return
+	 * @throws TKCheckedException 
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/save")
+	@ResponseBody
+	private Map<String,String> saveSellerInfo(HttpServletRequest request) throws TKCheckedException
+	{
+		Map<String,String> map=new HashMap<String,String>();
+//		LoginUser user = UserUtils.getUser();
+//		String loginId = String.valueOf(user.getUserName());
+		
+		Dto param = getParamAsDto(request);
+		if(param != null){
+			
+		Dto dto =	clueAction.addClueAnd(param);
+		
+			map.put(MESSAGE_INFO, dto.get("MESSAGE_INFO").toString());
+
+		}
+//		else{
+//			map.put(MESSAGE_INFO, "请填写信息！");
+//		}
+		//新增线索
+	/*	if(param.get("clueId") ==null ||"".equals(param.get("clueId")))
+		{
+			param.put("clueId", UUID.randomUUID().toString().replace("-", ""));
+			param.put("clueCode", "XS"+TKDateTimeUtils.getCurrentDate().toString().replace("-", "")+BusinessSeqGenerator.getInstance("CLUECODE").nextId());
+			param.put("customId", UUID.randomUUID().toString().replace("-", ""));
+			param.put("clueState", "0"); // clueState "0"，代表未确认，"1"代表确认有效，"2"代表确认无效
+			param.put("createdBy", loginId);
+			param.put("createdTime", TKDateTimeUtils.getTodayTimeStamp());
+			param.put("delflag", "0"); // “0”代表“未删除”
+			param.put("version", "1");
+			clueAction.insertObject(param);
+		
+			map.put(MESSAGE_INFO, "添加成功！");
+			
+			//客户表
+			Dto custom = new BaseDto();
+			custom.put("loginName",param.get("customTel"));
+			Dto customDto =customAction.findOne(custom);
+			
+			if(customDto.get("customId")== null || "".equals(customDto.get("customId")) ){
+				Dto dto = new BaseDto();
+				dto.put("userId", SequenceGenerator.getInstance("User_Id",1).nextId());
+				dto.put("customId",  UUID.randomUUID().toString().replace("-", ""));
+				dto.put("customAddress",param.get("customAddress"));
+				dto.put("customSex",param.get("customSex"));
+				dto.put("customName",param.get("customName"));
+				dto.put("customPwd",UserUtils.entryptPassword("123456"));//默认密码123456
+				dto.put("customRepwd",UserUtils.entryptPassword("123456"));
+				param.put("modifiedBy", loginId);
+				param.put("createdBy", loginId);
+				param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+				dto.put("createdTime", TKDateTimeUtils.getTodayTimeStamp());
+				dto.put("delflag", "0"); // “0”代表“未删除”
+				dto.put("version", "1");
+				customAction.insertCustom(dto);//插入客户表
+			
+				//用户表
+				Dto userDto = new BaseDto();
+
+				userDto.put("userId",dto.get("userId"));
+//				userDto.put("userCode",param.get("customTel"));userPwd
+				userDto.put("userType",1);
+				userDto.put("userPwd",UserUtils.entryptPassword("123456"));
+				param.put("modifiedBy", loginId);
+				param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+				param.put("createdBy", loginId);
+				userDto.put("createdTime", TKDateTimeUtils.getTodayTimeStamp());
+				userDto.put("delflag", "0"); // “0”代表“未删除”
+				userDto.put("version", 1);
+				userAction.insertUser(userDto);
+			}else{
+				map.put(MESSAGE_INFO, "用户名重复！");
+				map.put(RTN_RESULT, "true");
+			}
+			
+		}
+		else
+		{
+			param.put("modifiedBy", loginId);
+			param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+			param.put("version", Integer.parseInt(param.get("version").toString())+1);
+			clueAction.updateObject(param);
+			
+
+			map.put(MESSAGE_INFO, "修改成功！");
+		}*/
+		
+		map.put(RTN_RESULT, "true");
+		
+		return map;
+	}
+	/**
+	 * 查出代理电话
+	 * @param proxyTelCheck
+	 * @throws IOException 
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/proxyTelCheck")
+	public void  proxyTelCheck(String  proxyTel,HttpServletResponse response) throws IOException{
+		 response.setContentType("text/json; charset=UTF-8");
+		   response.setHeader("Cache-Control", "no-cache");
+		Map<String,String> map=new HashMap<String,String>();
+		Dto param = new BaseDto();
+		param.put("proxyTel", proxyTel);
+		List<Dto> proxyTelCheck =	clueAction.proxyTelCheck(param);
+		List<String> listZtree = new ArrayList<String>();
+		 int sizefor = proxyTelCheck.size();
+		 String treeNodes = "";
+		 treeNodes = "{id:'"+sizefor+"'}";
+		 listZtree.add(treeNodes);
+		 JSONArray json = JSONArray.fromObject(listZtree);
+		 response.getWriter().print(json); 
+		 response.getWriter().flush();
+		 response.getWriter().close();
+		
+	}
+	
+}
+

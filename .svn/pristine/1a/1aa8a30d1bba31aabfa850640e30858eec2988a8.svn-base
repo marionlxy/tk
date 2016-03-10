@@ -1,0 +1,52 @@
+package com.taikang.iu.opt.order.service;
+
+import java.util.List;
+
+import com.taikang.iu.opt.order.model.OrderBO;
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+import com.taikang.udp.framework.core.service.IBaseService;
+
+/**
+  * IOrderService
+  */
+ 
+ public interface IOrderService<T> extends IBaseService<T>{
+	 final String SERVICE_ID = "orderService";	
+ 	
+ 	/**
+	 * 根据订单查找详情
+	 * @param orderId
+	 * @return
+	 * zhaohan
+	 */
+	public OrderBO findOrderByIdInfo(OrderBO order);
+	/**
+	 * 查看服务类型订单
+	 * @author t-zhaohan
+	 * @Credited 2015年3月23日 下午2:06:41
+	 * @return
+	 */
+	public CurrentPage queryAllSevOrderPage(CurrentPage currentPage);
+	/**
+	 * 查看代理人及被推荐人的订单
+	 * @author t-zhaohan
+	 * @Credited 2015年3月23日 下午2:06:41
+	 * @return
+	 */
+	public CurrentPage queryReferenceOrderPage(CurrentPage currentPage);
+	
+	
+	public OrderBO findOneOrder(OrderBO order);
+	/**
+	 * 查出订单类型为SD同时是已发货的用品
+	 * @author t-zhaohan
+	 * @Credited 2015年4月21日 上午9:49:10
+	 * @see       [相关类/方法]
+	 * @return
+	 */
+	public  List<Dto> findOrderIsTypeSD(Dto param);
+ }
+ 
+ 
+ 

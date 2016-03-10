@@ -1,0 +1,909 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Characterset">
+	<resultMap id="charactersetResultMap" type="com.taikang.iu.opt.characterset.model.CharactersetBO">
+	    <result property="applianceId" column="APPLIANCE_ID"/>
+		<result property="categoryId" column="CATEGORY_ID"/>
+		<result property="qualityValueId" column="QUALITY_VALUE_ID"/>
+		<result property="skuid" column="SKUID"/>
+		<result property="categoryName" column="CATEGORY_NAME"/>
+		<result property="applianceCoding" column="APPLIANCE_CODING"/>
+		<result property="applianceName" column="APPLIANCE_NAME"/>
+		<result property="sellerName" column="SELLER_NAME"/>
+		<result property="applianceSettlePrice" column="APPLIANCE_SETTLE_PRICE"/>
+		<result property="applianceMarketprice" column="APPLIANCE_MARKETPRICE"/>
+		<result property="interflowPrice" column="INTERFLOW_PRICE"/>
+		<result property="isReturnBills" column="IS_RETURN_BILLS"/>
+		<result property="applianceUnit" column="APPLIANCE_UNIT"/>
+		<result property="applianceCategoryId" column="APPLIANCE_CATEGORY_ID"/>
+		<result property="ismarketable" column="ISMARKETABLE"/>
+		<result property="relationId" column="RELATION_ID"/>
+		<result property="srelationId" column="SRELATION_ID"/>
+		<result property="serviceId" column="SERVICE_ID"/>
+		<result property="serviceNum" column="SERVICE_NUM"/>
+		<result property="serviceName" column="SERVICE_NAME"/>
+		<result property="linkId" column="LINK_ID"/>
+		<result property="linkCode" column="LINK_CODE"/>
+		<result property="linkName" column="LINK_NAME"/>
+		<result property="linkNum" column="LINK_NUM"/>
+		<result property="stage" column="STAGE"/>
+		<result property="mealId" column="MEAL_ID"/>
+		<result property="mealCode" column="MEAL_CODE"/>
+		<result property="mealName" column="MEAL_NAME"/>
+		<result property="mealPicture" column="MEAL_PICTURE"/>
+		<result property="mealType" column="MEAL_TYPE"/>
+		<result property="mealPrice" column="MEAL_PRICE"/>
+		<result property="mealConte" column="MEAL_CONTE"/>
+		<result property="site" column="SITE"/>
+		<result property="mealPicture" column="MEAL_PICTURE"/>
+		<result property="state" column="STATE"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="charactersetWhereCondition">
+		<where>
+			<if test=" appliance_id != null and appliance_id != '' and appliance_id != 'null' ">
+			<![CDATA[ AND E.APPLIANCE_ID = #{appliance_id} ]]>
+	  	</if>
+	  	<if test=" category_id != null and category_id != '' and category_id != 'null' ">
+			<![CDATA[ AND E.CATEGORY_ID = #{category_id} ]]>
+	  	</if>
+	  	<if test=" quality_value_id != null and quality_value_id != '' and quality_value_id != 'null' ">
+			<![CDATA[ AND E.QUALITY_VALUE_ID = #{quality_value_id} ]]>
+	  	</if>
+	  	<if test=" skuid != null and skuid != '' and skuid != 'null' ">
+			<![CDATA[ AND E.SKUID = #{skuid} ]]>
+	  	</if>
+	  	<if test=" appliance_coding != null and appliance_coding != '' and appliance_coding != 'null' ">
+			<![CDATA[ AND E.APPLIANCE_CODING = #{appliance_coding} ]]>
+	  	</if>
+	  	<if test=" appliance_name != null and appliance_name != '' and appliance_name != 'null' ">
+			<![CDATA[ AND E.APPLIANCE_NAME = #{appliance_name} ]]>
+	  	</if>
+	  	<if test=" seller_name != null and seller_name != '' and seller_name != 'null' ">
+			<![CDATA[ AND E.SELLER_NAME = #{seller_name} ]]>
+	  	</if>
+	  	<if test=" appliance_settle_price != null ">
+	  		<![CDATA[ AND E.APPLIANCE_SETTLE_PRICE = ${appliance_settle_price} ]]>
+	  	</if>
+	  	<if test=" appliance_marketprice != null ">
+	  		<![CDATA[ AND E.APPLIANCE_MARKETPRICE = ${appliance_marketprice} ]]>
+	  	</if>
+	  	<if test=" interflow_price != null ">
+	  		<![CDATA[ AND E.INTERFLOW_PRICE = ${interflow_price} ]]>
+	  	</if>
+	  	<if test=" is_return_bills != null and is_return_bills != '' and is_return_bills != 'null' ">
+			<![CDATA[ AND E.IS_RETURN_BILLS = #{is_return_bills} ]]>
+	  	</if>
+	  	<if test=" appliance_unit != null and appliance_unit != '' and appliance_unit != 'null' ">
+			<![CDATA[ AND E.APPLIANCE_UNIT = #{appliance_unit} ]]>
+	  	</if>
+	  	<if test=" appliance_category_id != null and appliance_category_id != '' and appliance_category_id != 'null' ">
+			<![CDATA[ AND E.APPLIANCE_CATEGORY_ID = #{appliance_category_id} ]]>
+	  	</if>
+	  	<if test=" ismarketable != null and ismarketable != '' and ismarketable != 'null' ">
+			<![CDATA[ AND E.ISMARKETABLE = #{ismarketable} ]]>
+	  	</if>
+		<if test=" link_id != null and link_id != '' and link_id != 'null' ">
+			<![CDATA[ AND B.LINK_ID = #{link_id} ]]>
+	  	</if>
+		<if test=" relation_id != null and relation_id != '' and relation_id != 'null' ">
+			<![CDATA[ AND C.RELATION_ID = #{relation_id} ]]>
+	  	</if>
+		<if test=" service_id != null and service_id != '' and service_id != 'null' ">
+			<![CDATA[ AND C.SERVICE_ID = #{service_id} ]]>
+	  	</if>
+		<if test=" service_num != null and service_num != '' and service_num != 'null' ">
+			<![CDATA[ AND D.SERVICE_NUM = #{service_num} ]]>
+	  	</if>
+		<if test=" service_name != null and service_name != '' and service_name != 'null' ">
+			<![CDATA[ AND D.SERVICE_NAME = #{service_name} ]]>
+	  	</if>
+	  	<if test=" link_code != null and link_code != '' and link_code != 'null' ">
+			<![CDATA[ AND B.LINK_CODE = #{link_code} ]]>
+	  	</if>
+	  	<if test=" link_name != null and link_name != '' and link_name != 'null' ">
+			<![CDATA[ AND B.LINK_NAME = #{link_name} ]]>
+	  	</if>
+	  	<if test=" link_num != null ">
+	  		<![CDATA[ AND B.LINK_NUM = ${link_num} ]]>
+	  	</if>
+	  	<if test=" stage != null and stage != '' and stage != 'null' ">
+			<![CDATA[ AND B.STAGE = #{stage} ]]>
+	  	</if>
+	  	<if test=" meal_id != null and meal_id != '' and meal_id != 'null' ">
+			<![CDATA[ AND A.MEAL_ID = #{meal_id} ]]>
+	  	</if>
+	  	<if test=" meal_code != null and meal_code != '' and meal_code != 'null' ">
+			<![CDATA[ AND A.MEAL_CODE = #{meal_code} ]]>
+	  	</if>
+	  	<if test=" meal_name != null and meal_name != '' and meal_name != 'null' ">
+			<![CDATA[ AND A.MEAL_NAME = #{meal_name} ]]>
+	  	</if>
+	  	<if test=" meal_type != null and meal_type != '' and meal_type != 'null' ">
+			<![CDATA[ AND A.MEAL_TYPE = #{meal_type} ]]>
+	  	</if>
+	  	<if test=" meal_price != null ">
+	  		<![CDATA[ AND A.MEAL_PRICE = ${meal_price} ]]>
+	  	</if>
+	  	<if test=" meal_picture != null and meal_picture != '' and meal_picture != 'null' ">
+			<![CDATA[ AND E.MEAL_PICTURE = #{meal_picture} ]]>
+	  	</if>
+	  	<if test=" meal_conte != null and meal_conte != '' and meal_conte != 'null' ">
+			<![CDATA[ AND A.MEAL_CONTE = #{meal_conte} ]]>
+	  	</if>
+	  	<if test=" site != null and site != '' and site != 'null' ">
+			<![CDATA[ AND A.SITE = #{site} ]]>
+	  	</if>
+	  	<if test=" meal_picture != null and meal_picture != '' and meal_picture != 'null' ">
+			<![CDATA[ AND A.MEAL_PICTURE = #{meal_picture} ]]>
+	  	</if>
+	  	<if test=" state != null and state != '' and state != 'null' ">
+			<![CDATA[ AND A.STATE = #{state} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+		<!-- 环节添加服务 -->
+		<insert id="insertServer"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO OPT_CHACTER_SERVICES
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" srelation_id  != null and  srelation_id  != ''  and  srelation_id  != 'null' ">
+				<![CDATA[ SRELATION_ID , ]]>
+	  		</if>
+	  		<if test=" link_id  != null and  link_id  != ''  and  link_id  != 'null' ">
+				<![CDATA[ LINK_ID , ]]>
+	  		</if>
+	  		<if test=" service_id  != null and  service_id  != ''  and  service_id  != 'null' ">
+				<![CDATA[ SERVICE_ID , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" srelation_id  != null and  srelation_id  != ''  and  srelation_id  != 'null' ">
+	  			<![CDATA[ #{srelation_id} , ]]>
+	  		</if>
+	  		<if test=" link_id  != null and  link_id  != ''  and  link_id  != 'null' ">
+	  			<![CDATA[ #{link_id} , ]]>
+	  		</if>
+	  		<if test=" service_id  != null and  service_id  != ''  and  service_id  != 'null' ">
+	  			<![CDATA[ #{service_id} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+  	<!-- 更新环节下服务 -->
+  	<update id="updateServer" parameterType="java.util.Map">
+		<![CDATA[ UPDATE OPT_CHACTER_SERVICES A ]]>
+		<set>
+	  	<if test=" link_id  != null and  link_id  != ''  and  link_id  != 'null' ">
+	  		<![CDATA[ A.LINK_ID = #{link_id}, ]]>
+	  	</if>
+	  	<if test=" service_id  != null and  service_id  != ''  and  service_id  != 'null' ">
+	  		<![CDATA[ A.SERVICE_ID = #{service_id}, ]]>
+	  	</if>
+	  	<if test=" service_num  != null and  service_num  != ''  and  service_num  != 'null' ">
+	  		<![CDATA[ A.SERVICE_NUM = #{service_num}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.SRELATION_ID = #{srelation_id}]]>
+  	</update>
+	<!-- 环节添加用品 -->
+		<insert id="insertLinkServer"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO OPT_CHACTER_APPLIANCE
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" relation_id  != null and  relation_id  != ''  and  relation_id  != 'null' ">
+				<![CDATA[ RELATION_ID , ]]>
+	  		</if>
+	  		<if test=" srelation_id  != null and  srelation_id  != ''  and  srelation_id  != 'null' ">
+				<![CDATA[ SRELATION_ID , ]]>
+	  		</if>
+	  		<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+				<![CDATA[ APPLIANCE_ID , ]]>
+	  		</if>
+	  		<if test=" appliance_coding  != null and  appliance_coding  != ''  and  appliance_coding  != 'null' ">
+				<![CDATA[ APPLIANCE_CODING , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" relation_id  != null and  relation_id  != ''  and  relation_id  != 'null' ">
+	  			<![CDATA[ #{relation_id} , ]]>
+	  		</if>
+	  		<if test=" srelation_id  != null and  srelation_id  != ''  and  srelation_id  != 'null' ">
+				<![CDATA[ #{srelation_id} , ]]>
+	  		</if>
+	  		<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+	  			<![CDATA[ #{appliance_id} , ]]>
+	  		</if>
+	  		<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+	  			<![CDATA[ #{appliance_coding} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+  	
+	<insert id="addCharacterset"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO OPT_CHACTER_MEAL
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" meal_id  != null and  meal_id  != ''  and  meal_id  != 'null' ">
+				<![CDATA[ MEAL_ID , ]]>
+	  		</if>
+	  		<if test=" meal_code  != null and  meal_code  != ''  and  meal_code  != 'null' ">
+				<![CDATA[ MEAL_CODE , ]]>
+	  		</if>
+	  		<if test=" meal_name  != null and  meal_name  != ''  and  meal_name  != 'null' ">
+				<![CDATA[ MEAL_NAME , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+				<![CDATA[ SITE , ]]>
+	  		</if>
+	  		<if test=" meal_type  != null and  meal_type  != ''  and  meal_type  != 'null' ">
+				<![CDATA[ MEAL_TYPE , ]]>
+	  		</if>
+	  		
+	  		<if test=" meal_conte  != null and  meal_conte  != ''  and  meal_conte  != 'null' ">
+				<![CDATA[ MEAL_CONTE , ]]>
+	  		</if>
+	  		
+	  	    <if test=" meal_picture != null and meal_picture != '' and meal_picture != 'null' ">
+			    <![CDATA[ MEAL_PICTURE , ]]>
+	  	    </if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" meal_id  != null and  meal_id  != ''  and  meal_id  != 'null' ">
+	  			<![CDATA[ #{meal_id} , ]]>
+	  		</if>
+	  		<if test=" meal_code  != null and  meal_code  != ''  and  meal_code  != 'null' ">
+	  			<![CDATA[ #{meal_code} , ]]>
+	  		</if>
+	  		<if test=" meal_name  != null and  meal_name  != ''  and  meal_name  != 'null' ">
+	  			<![CDATA[ #{meal_name} , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  			<![CDATA[ #{site} , ]]>
+	  		</if>
+	  		<if test=" meal_type  != null and  meal_type  != ''  and  meal_type  != 'null' ">
+	  			<![CDATA[ #{meal_type} , ]]>
+	  		</if>
+	  		<if test=" meal_conte  != null and  meal_conte  != ''  and  meal_conte  != 'null' ">
+	  			<![CDATA[ #{meal_conte} , ]]>
+	  		</if>
+	  		<if test=" meal_picture != null and meal_picture != '' and meal_picture != 'null' ">
+			   <![CDATA[ #{meal_picture} , ]]>
+	  	    </if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+  
+  	<insert id="addLink"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO OPT_CHACTER_LINK
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" link_id  != null and  link_id  != ''  and  link_id  != 'null' ">
+				<![CDATA[ LINK_ID , ]]>
+	  		</if>
+	  		<if test=" meal_id  != null and  meal_id  != ''  and  meal_id  != 'null' ">
+				<![CDATA[ MEAL_ID , ]]>
+	  		</if>
+	  		<if test=" link_code  != null and  link_code  != ''  and  link_code  != 'null' ">
+				<![CDATA[ LINK_CODE , ]]>
+	  		</if>
+	  		<if test=" link_name  != null and  link_name  != ''  and  link_name  != 'null' ">
+				<![CDATA[ LINK_NAME , ]]>
+	  		</if>
+	  		<if test=" link_num  != null ">
+				<![CDATA[ LINK_NUM , ]]>
+	  		</if>
+	  		<if test=" stage  != null and  stage  != ''  and  stage  != 'null' ">
+				<![CDATA[ STAGE , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" link_id  != null and  link_id  != ''  and  link_id  != 'null' ">
+	  			<![CDATA[ #{link_id} , ]]>
+	  		</if>
+	  		<if test=" meal_id  != null and  meal_id  != ''  and  meal_id  != 'null' ">
+	  			<![CDATA[ #{meal_id} , ]]>
+	  		</if>
+	  		<if test=" link_code  != null and  link_code  != ''  and  link_code  != 'null' ">
+	  			<![CDATA[ #{link_code} , ]]>
+	  		</if>
+	  		<if test=" link_name  != null and  link_name  != ''  and  link_name  != 'null' ">
+	  			<![CDATA[ #{link_name} , ]]>
+	  		</if>
+	  		<if test=" link_num  != null">
+	    		<![CDATA[ ${link_num} , ]]>
+	  		</if>
+	  		<if test=" stage  != null and  stage  != ''  and  stage  != 'null' ">
+	  			<![CDATA[ #{stage} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updatechacter" parameterType="java.util.Map">
+		<![CDATA[ UPDATE OPT_CHACTER_MEAL A ]]>
+		<set>
+	  	<if test=" meal_code  != null and  meal_code  != ''  and  meal_code  != 'null' ">
+	  		<![CDATA[ A.MEAL_CODE = #{meal_code}, ]]>
+	  	</if>
+	  	<if test=" meal_name  != null and  meal_name  != ''  and  meal_name  != 'null' ">
+	  		<![CDATA[ A.MEAL_NAME = #{meal_name}, ]]>
+	  	</if>
+	  	<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  		<![CDATA[ A.SITE = #{site}, ]]>
+	  	</if>
+	  	<if test=" meal_type  != null and  meal_type  != ''  and  meal_type  != 'null' ">
+	  		<![CDATA[ A.MEAL_TYPE = #{meal_type}, ]]>
+	  	</if>
+	  	<if test=" meal_conte  != null and  meal_conte  != ''  and  meal_conte  != 'null' ">
+	  		<![CDATA[ A.MEAL_CONTE = #{meal_conte}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" meal_picture != null and meal_picture != '' and meal_picture != 'null' ">
+			<![CDATA[ A.MEAL_PICTURE = #{meal_picture}, ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.MEAL_ID = #{meal_id}]]>
+  	</update>
+  	              
+  	  <update id="updateAppliance" parameterType="java.util.Map">
+		<![CDATA[ UPDATE OPT_CHACTER_APPLIANCE S ]]>
+		<set>
+	  	<if test=" srelation_id  != null and  srelation_id  != ''  and  srelation_id  != 'null' ">
+	  		<![CDATA[S.SRELATION_ID = #{srelation_id}, ]]>
+	  	</if>
+	  	<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+	  		<![CDATA[ S.APPLIANCE_ID = #{appliance_id}, ]]>
+	  	</if>
+	  	<if test=" appliance_coding  != null and  appliance_coding  != ''  and  appliance_coding  != 'null' ">
+	  		<![CDATA[ S.APPLIANCE_CODING = #{appliance_coding}, ]]>
+	  	</if>
+	  	<if test=" code  != null and  code  != ''  and  code  != 'null' ">
+	  		<![CDATA[ S.CODE = #{code}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ S.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ S.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ S.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ S.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+	  	<if test=" version  != null and  version  != ''  and  version  != 'null' ">
+	  		<![CDATA[ S.VERSION = #{version}, ]]>
+	  	</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ S.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where S.RELATION_ID = #{relation_id}]]>
+  	</update>
+  
+  	<update id="updateLink" parameterType="java.util.Map">
+		<![CDATA[ UPDATE OPT_CHACTER_LINK A ]]>
+		<set>
+	  	<if test=" meal_id  != null and  meal_id  != ''  and  meal_id  != 'null' ">
+	  		<![CDATA[ A.MEAL_ID = #{meal_id}, ]]>
+	  	</if>
+	  	<if test=" link_code  != null and  link_code  != ''  and  link_code  != 'null' ">
+	  		<![CDATA[ A.LINK_CODE = #{link_code}, ]]>
+	  	</if>
+	  	<if test=" link_name  != null and  link_name  != ''  and  link_name  != 'null' ">
+	  		<![CDATA[ A.LINK_NAME = #{link_name}, ]]>
+	  	</if>
+		<if test=" link_num  != null ">
+  			<![CDATA[ A.LINK_NUM = ${link_num} , ]]>
+		</if>
+	  	<if test=" stage  != null and  stage  != ''  and  stage  != 'null' ">
+	  		<![CDATA[ A.STAGE = #{stage}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.LINK_ID = #{link_id}]]>
+  	</update>
+  
+  	<delete id="deletechacter" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM OPT_CHACTER_MEAL  where MEAL_ID = #{meal_id} ]]>
+	</delete>
+	
+  	<delete id="deleteLink" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM OPT_CHACTER_LINK  where LINK_ID = #{link_id} ]]>
+	</delete>
+	<!-- 删除环节下服务 -->
+	 <delete id="delCharactersetService" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM OPT_CHACTER_SERVICES  where SRELATION_ID = #{srelation_id} ]]>
+	</delete>
+  	<delete id="delAppliance" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM OPT_CHACTER_APPLIANCE where RELATION_ID = #{relation_id} ]]>
+	</delete>
+  
+  	<delete id="delApplianceLink" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM opt_chacter_link where LINK_ID = #{link_id}]]>
+	</delete>
+	<select id="findOnechacter" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM OPT_CHACTER_MEAL A  ]]>
+		<include refid="charactersetWhereCondition" />
+  	</select>
+  	<!-- 查询环节下服务 -->
+	<select id="findCharactersetService" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT G.* FROM OPT_CHACTER_SERVICES G,OPT_CHACTER_LINK B where  G.link_id = B.link_id ]]>
+		  <if test=" link_id != null and link_id != '' and link_id != 'null' ">
+            <![CDATA[ AND B.LINK_ID =#{link_id} ]]>
+          </if>
+  	</select>
+	<select id="findOneLinkService" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT B.* FROM OPT_CHACTER_SERVICES B where B.DELFLAG='0' ]]>
+		  <if test=" link_id != null and link_id != '' and link_id != 'null' ">
+            <![CDATA[ AND B.LINK_ID =#{link_id} ]]>
+          </if>
+		  <if test=" service_id != null and service_id != '' and service_id != 'null' ">
+            <![CDATA[ AND B.SERVICE_ID =#{service_id} ]]>
+          </if>
+		  <if test=" srelation_id != null and srelation_id != '' and srelation_id != 'null' ">
+            <![CDATA[ AND B.SRELATION_ID =#{srelation_id} ]]>
+          </if>
+  	</select>
+  	
+  	<!-- 通过serviceId查询个性套餐下是否有此服务 -->
+	<select id="findApplianceRelation" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT * from opt_chacter_services where delflag = '0' ]]>
+		  <if test=" service_id != null and service_id != '' and service_id != 'null' ">
+            <![CDATA[ AND service_id =#{service_id} ]]>
+          </if>
+  	</select>
+  	  <!-- 通过用品Id查询固定套餐下是否有此用品 -->
+  	  <select id="findApplianList" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 select S.* from opt_chacter_appliance S where  S.DELFLAG = '0' 
+  			<if test=" appliance_id != null and appliance_id != '' and appliance_id != 'null' ">
+            <![CDATA[ AND S.APPLIANCE_ID =#{appliance_id} ]]>
+          </if>
+          ORDER BY S.CREATED_TIME DESC
+  	</select>
+  	<!-- 根据用品Id查询用品 -->
+  	  <select id="searchOneAppliance" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 select S.* from biz_appliance S where  S.DELFLAG = '0' 
+  			<if test=" appliance_id != null and appliance_id != '' and appliance_id != 'null' ">
+            <![CDATA[ AND S.APPLIANCE_ID =#{appliance_id} ]]>
+            </if>
+          ORDER BY S.CREATED_TIME DESC
+  	</select>
+  	
+	<select id="findOneServerService" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[SELECT D.SERVICE_NAME,D.SERVICE_ID FROM biz_single_service D,opt_chacter_services G,opt_chacter_link B
+		 where D.service_id = G.SERVICE_ID AND G.LINK_ID = B.LINK_ID ]]>
+		  	<if test=" link_id != null and link_id != '' and link_id != 'null' ">
+            <![CDATA[ AND B.LINK_ID =#{link_id} ]]>
+          </if>
+  	</select>
+  	
+	<select id="findOneLink" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT B.* FROM opt_chacter_link B ]]>
+		<include refid="charactersetWhereCondition" />
+  	</select>
+    
+  	<select id="findAll" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM OPT_chacter_MEAL A ]]>
+		<include refid="charactersetWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllServerService" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT D.SERVICE_NAME,D.SERVICE_ID,D.service_num,d.site FROM biz_single_service D where D.delflag='0']]>
+			<if test=" site != null and site != '' and site != 'null' ">
+            <![CDATA[ AND D.site =#{site} ]]>
+          </if>
+  	</select>
+  	<!-- 根据站点查询用品列表 -->
+  	<select id="findAllAppliance" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT E.* FROM biz_appliance E  WHERE E.delflag='0' ]]>
+		 	<if test=" site != null and site != '' and site != 'null' ">
+            <![CDATA[ AND E.SERVICE_SITE =#{site} ]]>
+          </if>
+  	</select>
+  	
+  	<select id="findAllMap" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM OPT_CHACTER_MEAL A ]]>
+		<include refid="charactersetWhereCondition" />
+	</select>
+  
+  	<select id="findTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM OPT_CHACTER_MEAL A ]]>
+		<include refid="charactersetWhereCondition" />
+  	</select>
+  
+  	<select id="querychacterByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT A.* FROM opt_chacter_meal A
+          where 1=1 
+          AND A.DELFLAG = '0' 
+        <if test=" mealCode != null and mealCode != '' and mealCode != 'null' ">
+            <![CDATA[ AND A.Meal_Code like concat('%', #{mealCode}, '%') ]]>
+        </if> 
+        <if test=" mealName != null and mealName != '' and mealName != 'null' ">
+            <![CDATA[ AND A.Meal_Name like concat('%', #{mealName}, '%') ]]>
+        </if> 
+        <if test=" mealType != null and mealType != '' and mealType != 'null' ">
+            <![CDATA[ AND A.Meal_Type like concat('%', #{mealType}, '%') ]]>
+        </if>
+        <if test=" site != null and site != '' and site != 'null' ">
+            <![CDATA[ AND A.SITE like concat('%', #{site}, '%') ]]>
+        </if>
+          ORDER BY CREATED_TIME DESC
+  	</select>
+  	<select id="queryForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT A.* FROM opt_chacter_meal A
+          where 1=1 
+          AND A.DELFLAG = '0' 
+        <if test=" mealCode != null and mealCode != '' and mealCode != 'null' ">
+            <![CDATA[ AND A.Meal_Code like concat('%', #{mealCode}, '%') ]]>
+        </if> 
+        <if test=" mealName != null and mealName != '' and mealName != 'null' ">
+            <![CDATA[ AND A.Meal_Name like concat('%', #{mealName}, '%') ]]>
+        </if> 
+        <if test=" mealType != null and mealType != '' and mealType != 'null' ">
+            <![CDATA[ AND A.Meal_Type like concat('%', #{mealType}, '%') ]]>
+        </if>
+        <if test=" site != null and site != '' and site != 'null' ">
+            <![CDATA[ AND A.SITE like concat('%', #{site}, '%') ]]>
+        </if>
+          ORDER BY CREATED_TIME DESC
+  	</select>
+  	<select id="queryForLinkPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT B.* FROM opt_chacter_link B WHERE B.DELFLAG = '0'  and B.MEAL_ID IS NULL  ORDER BY B.LINK_NUM
+  	</select>
+  	<select id="queryForAppliancePage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT E.* FROM biz_appliance E WHERE E.DELFLAG = '0' 
+ 		 <if test=" site != null and site != '' and site != 'null' "> 
+             <![CDATA[ AND E.SERVICE_SITE =#{site} ]]> 
+         </if> 
+        ORDER BY E.CREATED_TIME DESC
+       
+  	</select>
+  	<!-- 初始化服务列表 -->
+  	<select id="queryForServicePage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT D.SERVICE_ID,D.SERVICE_NAME,D.SERVICE_NUM FROM biz_single_service D  where  D.DELFLAG = '0' 
+		 <if test=" site != null and site != '' and site != 'null' ">
+            <![CDATA[ AND D.SITE =#{site} ]]>
+        </if>
+        ORDER BY D.CREATED_TIME DESC
+  	</select>
+  	 <!-- 查询套餐下环节 -->
+  	<select id="findLink" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT B.* FROM opt_chacter_link B WHERE B.MEAL_ID IS null  
+		  <if test=" delflag != null and delflag != '' and delflag != 'null' ">
+            <![CDATA[ AND B.DELFLAG =#{delflag} ]]>
+          </if>
+		 ORDER BY B.LINK_NUM
+  	</select>
+   <select id="findDelLink" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 	SELECT B.* FROM opt_chacter_link B join opt_chacter_meal A on A.MEAL_ID = B.MEAL_ID 
+		<if test=" meal_id != null and meal_id != '' and meal_id != 'null' ">
+            <![CDATA[ AND A.MEAL_ID =#{meal_id} ]]>
+        </if>
+  	</select>
+  	  	<!-- 分页查询修改套餐环节列表 -->
+  	<select id="findEditLinkPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT B.* FROM opt_chacter_link B WHERE B.DELFLAG = '0' and B.MEAL_ID =#{mealId} ORDER BY B.CREATED_TIME DESC
+  	</select>
+  	<!-- 查询套餐列表 -->
+	<select id="findEditMealList" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM OPT_CHACTER_MEAL A where A.DELFLAG='0' ]]>
+			<if test=" mealId != null and mealId != '' and mealId != 'null' ">
+            <![CDATA[ AND A.MEAL_ID =#{mealId} ]]>
+          </if>
+  	</select>
+  	<select id="findApplianceList" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ select F.* FROM opt_chacter_appliance F JOIN opt_chacter_services B on F.SRELATION_ID = B.SRELATION_ID where F.delflag = '0' AND B.DELFLAG = '0']]>
+		<if test=" srelation_id != null and srelation_id != '' and srelation_id != 'null' ">
+            <![CDATA[ AND F.SRELATION_ID =#{srelation_id} ]]>
+         </if>
+	</select>
+  	<select id="findDelApplianceList" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ select F.* FROM opt_chacter_appliance F JOIN opt_chacter_services B on F.SRELATION_ID = B.SRELATION_ID where F.delflag is not null AND B.DELFLAG = '0']]>
+		<if test=" srelation_id != null and srelation_id != '' and srelation_id != 'null' ">
+            <![CDATA[ AND F.SRELATION_ID =#{srelation_id} ]]>
+         </if>
+	</select>
+  	<!-- 查询单个套餐 -->
+	<select id="findOneMeal" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM opt_chacter_meal A WHERE A.DELFLAG = '0']]>
+		<if test=" meal_id != null and meal_id != '' and meal_id != 'null' ">
+            <![CDATA[ AND A.MEAL_ID =#{meal_id} ]]>
+         </if>
+  	</select>
+  	  	<select id="queryForShowAppliancePage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 select E.* from biz_appliance E,opt_chacter_appliance F where E.APPLIANCE_ID=F.APPLIANCE_ID 
+ 		 and  E.DELFLAG = '0' AND F.DELFLAG ='0'
+  		<if test=" srelationId != null and srelationId != '' and srelationId != 'null' ">
+            <![CDATA[ AND F.SRELATION_ID =#{srelationId} ]]>
+          </if>
+          ORDER BY E.CREATED_TIME DESC
+  		</select>
+  		<!-- 查询环节下服务 -->
+  	  	<select id="findOneService" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 select D.*,G.SRELATION_ID as SRELATION_ID from biz_single_service D,opt_chacter_services G where  D.DELFLAG = '0' and 
+		 D.service_id = G.service_id AND G.DELFLAG = '0'
+  		<if test=" linkId != null and linkId != '' and linkId != 'null' ">
+            <![CDATA[ AND G.LINK_ID =#{linkId} ]]>
+         </if>
+          ORDER BY D.CREATED_TIME DESC
+  		</select>
+  		<select id="searchAppliance" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT F.* FROM opt_chacter_appliance F where  F.DELFLAG = '0' ]]>
+		  <if test=" srelation_id != null and srelation_id != '' and srelation_id != 'null' ">
+            <![CDATA[ AND F.SRELATION_ID =#{srelation_id} ]]>
+          </if>
+		  <if test=" appliance_id != null and appliance_id != '' and appliance_id != 'null' ">
+            <![CDATA[ AND F.APPLIANCE_ID =#{appliance_id} ]]>
+          </if>
+  	</select>
+  	<select id="searchOneService" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT G.* FROM opt_chacter_services G where  G.DELFLAG = '0' ]]>
+		  <if test=" link_id != null and link_id != '' and link_id != 'null' ">
+            <![CDATA[ AND G.link_id =#{link_id} ]]>
+          </if>
+		  <if test=" service_id != null and service_id != '' and service_id != 'null' ">
+            <![CDATA[ AND G.service_id =#{service_id} ]]>
+          </if>
+  	</select>
+  	
+  	<select id="searchOnesService" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT G.* FROM opt_chacter_services G where  G.DELFLAG = '0' ]]>
+		  <if test=" srelation_id != null and srelation_id != '' and srelation_id != 'null' ">
+            <![CDATA[ AND G.SRELATION_ID =#{srelation_id} ]]>
+          </if>
+  	</select>
+  		
+  		<select id="findApplianceLists" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ select F.* FROM opt_chacter_appliance F JOIN opt_chacter_link B on F.LINK_ID = B.LINK_ID ]]>
+			  <if test=" link_id != null and link_id != '' and link_id != 'null' ">
+            <![CDATA[  WHERE  B.LINK_ID =#{link_id} ]]>
+          </if>
+		</select>
+	
+  		<!-- 查询环节下服务 -->
+  	  	<select id="findOneServices" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 select D.* from biz_single_service D,opt_chacter_services G where  D.DELFLAG = '0' AND 
+		 D.service_id = G.service_id and G.LINK_ID IS NULL
+          ORDER BY D.CREATED_TIME DESC
+  		</select>
+  		
+  		<select id="findRelation" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT F.RELATION_ID FROM opt_chacter_appliance F WHERE F.DELFLAG is not nuLL ]]>
+		  <if test=" srelation_id != null and srelation_id != '' and srelation_id != 'null' ">
+            <![CDATA[ AND F.SRELATION_ID =#{srelation_id} ]]>
+          </if>
+		  <if test=" appliance_id != null and appliance_id != '' and appliance_id != 'null' ">
+            <![CDATA[ AND F.appliance_id =#{appliance_id} ]]>
+          </if>
+  	</select>
+  	
+</mapper>

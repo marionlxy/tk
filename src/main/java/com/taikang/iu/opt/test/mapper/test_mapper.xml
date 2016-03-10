@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Test">
+	<resultMap id="testResultMap" type="com.taikang.iu.opt.test.model.TestBO">
+		<result property="serialId" column="SERIAL_ID"/>
+		<result property="num" column="NUM"/>
+		<result property="title" column="TITLE"/>
+		<result property="text" column="TEXT"/>
+  	</resultMap>
+  
+  	<sql id="testWhereCondition">
+		<where>
+	  	<if test=" serial_id != null ">
+	  		<![CDATA[ AND A.SERIAL_ID = ${serial_id} ]]>
+	  	</if>
+	  	<if test=" num != null ">
+	  		<![CDATA[ AND A.NUM = ${num} ]]>
+	  	</if>
+	  	<if test=" title != null and title != '' and title != 'null' ">
+			<![CDATA[ AND A.TITLE = #{title} ]]>
+	  	</if>
+	  	<if test=" text != null and text != '' and text != 'null' ">
+			<![CDATA[ AND A.TEXT = #{text} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addTest"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BIZ_TEST
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" serial_id  != null ">
+				<![CDATA[ SERIAL_ID , ]]>
+	  		</if>
+	  		<if test=" num  != null ">
+				<![CDATA[ NUM , ]]>
+	  		</if>
+	  		<if test=" title  != null and  title  != ''  and  title  != 'null' ">
+				<![CDATA[ TITLE , ]]>
+	  		</if>
+	  		<if test=" text  != null and  text  != ''  and  text  != 'null' ">
+				<![CDATA[ TEXT , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" serial_id  != null">
+	    		<![CDATA[ ${serial_id} , ]]>
+	  		</if>
+	  		<if test=" num  != null">
+	    		<![CDATA[ ${num} , ]]>
+	  		</if>
+	  		<if test=" title  != null and  title  != ''  and  title  != 'null' ">
+	  			<![CDATA[ #{title} , ]]>
+	  		</if>
+	  		<if test=" text  != null and  text  != ''  and  text  != 'null' ">
+	  			<![CDATA[ #{text} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateTest" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BIZ_TEST A ]]>
+		<set>
+		<if test=" num  != null ">
+  			<![CDATA[ A.NUM = ${num} , ]]>
+		</if>
+	  	<if test=" title  != null and  title  != ''  and  title  != 'null' ">
+	  		<![CDATA[ A.TITLE = #{title}, ]]>
+	  	</if>
+	  	<if test=" text  != null and  text  != ''  and  text  != 'null' ">
+	  		<![CDATA[ A.TEXT = #{text}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.SERIAL_ID = #{serial_id}]]>
+  	</update>
+  
+  	<delete id="deleteTest" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BIZ_TEST  where SERIAL_ID = #{serial_id} ]]>
+	</delete>
+  
+	<select id="findOneTest" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BIZ_TEST A  ]]>
+		<include refid="testWhereCondition" />
+  	</select>
+    
+  	<select id="findAllTest" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BIZ_TEST A ]]>
+		<include refid="testWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapTest" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BIZ_TEST A ]]>
+		<include refid="testWhereCondition" />
+	</select>
+  
+  	<select id="findTestTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BIZ_TEST A ]]>
+		<include refid="testWhereCondition" />
+  	</select>
+  
+  	<select id="queryTestForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BIZ_TEST A ]]>
+		<include refid="testWhereCondition" />
+  	</select>
+  	
+  	<!-- 注意：查询语句要重新写 -->
+  	<select id="queryTestByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT A.*,B.NAME FROM BIZ_TEST A LEFT OUTER JOIN BIZ_TEST_DETAIL B
+          ON 1=1 AND a.NUM=b.NUM
+        <if test=" serialId != null and serialId != '' and serialId != 'null' ">
+            <![CDATA[ AND A.serial_id like concat('%', #{serialId}, '%') ]]>
+        </if> 
+        <if test=" num != null and num != '' and num != 'null' ">
+            <![CDATA[ AND A.num like concat('%', #{num}, '%') ]]>
+        </if> 
+        <if test=" title != null and title != '' and title != 'null' ">
+            <![CDATA[ AND A.title = #{title} ]]>
+        </if>
+         <if test=" text != null and text != '' and text != 'null' ">
+            <![CDATA[ AND A.text = #{text} ]]>
+        </if>
+         <if test=" name != null and name != '' and name != 'null' ">
+            <![CDATA[ AND b.name = #{name} ]]>
+        </if>
+          ORDER BY serial_id DESC
+  	</select>
+  	
+  	<!-- 注意：查询语句要重新写 -->
+  	<select id="findAllTestByCon" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT A.* FROM BIZ_TEST A
+          where 1=1 
+        <if test=" serial_id != null and serial_id != '' and serial_id != 'null' ">
+            <![CDATA[ AND A.serial_id like concat('%', #{serial_id}, '%') ]]>
+        </if> 
+        <if test=" num != null and num != '' and num != 'null' ">
+            <![CDATA[ AND A.num like concat('%', #{num}, '%') ]]>
+        </if> 
+        <if test=" title != null and title != '' and title != 'null' ">
+            <![CDATA[ AND A.title = #{title} ]]>
+        </if>
+         <if test=" text != null and text != '' and text != 'null' ">
+            <![CDATA[ AND A.text = #{text} ]]>
+        </if>
+        
+          ORDER BY A.serial_id DESC
+  	</select>
+  	
+</mapper>

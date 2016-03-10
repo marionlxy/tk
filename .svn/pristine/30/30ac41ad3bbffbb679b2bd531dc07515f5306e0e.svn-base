@@ -1,0 +1,391 @@
+package com.taikang.iu.opt.finance.refund.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.taikang.iu.opt.finance.refund.action.IrefundAction;
+import com.taikang.udp.framework.common.datastructre.Dto;
+import com.taikang.udp.framework.common.datastructre.impl.BaseDto;
+import com.taikang.udp.framework.common.util.TKDateTimeUtils;
+import com.taikang.udp.framework.core.persistence.pagination.CurrentPage;
+import com.taikang.udp.framework.core.web.BaseController;
+import com.taikang.udp.sys.util.UserUtils;
+import com.taikang.udp.sys.util.vo.LoginUser;
+
+
+/**
+  * refundController
+  */
+@Controller("refundController")
+@RequestMapping(value="/refund")
+public class refundController  extends BaseController  {
+		
+	@Resource(name=IrefundAction.ACTION_ID)
+	private IrefundAction refundAction;
+		
+	/**
+	 * 打开主查询页面
+	 * @return 页面地址
+	 */
+	@RequestMapping("")
+	public String showrefundIndexPage(Model model) {
+//		Dto param=new BaseDto();
+//		List<Dto> list=refundAction.findAll(param);
+//		if(list.get(0)==null||"".equals(list.get(0)))
+//		{			
+//			model.addAttribute("countPrice","0");
+//		}
+//		else
+//		{
+//			model.addAttribute("countPrice",list.get(0).get("countPrice"));
+//		}
+		return "finance/refundIndex"; 
+	}
+	
+	/**
+	 * 结算管理动态查询合计金额
+	 */
+	@RequestMapping("/sumRefundAccount")
+	@ResponseBody
+	 public Dto sumRefundAccount(String applyTime){
+		Dto param=new BaseDto();
+		param.put("applyTime", applyTime);
+		List<Dto> list=refundAction.findAll(param);
+		if(list.get(0) == null){
+			Dto cPrice = new BaseDto();
+			cPrice.put("countPrice", "0.00");
+			return cPrice;
+		}else{
+			return list.get(0);
+		}
+			
+	}
+	/**
+	 * 查询信息列表
+	 * @return 分页列表数据
+	 */
+	@RequestMapping("/list")
+	@ResponseBody
+	public Map<String,Object> getrefundList(HttpServletRequest request,CurrentPage page,Model model){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		page.setParamObject(getParamAsDto(request));
+		CurrentPage currentPage = refundAction.queryForPage(page);
+	
+		map.put("rows", currentPage.getPageItems());
+		map.put("total", currentPage.getTotalRows());
+		
+		return map;
+	}
+
+	/**
+	 * 打开新增或修改页面
+	 * @return
+	 */
+	@RequestMapping("edit")
+	public String showrefundEditPage(String rowId,Model model) {
+		
+		if(rowId!=null && !rowId.equals(""))
+		{
+			model.addAttribute("rowId",rowId );
+		}
+		
+		return "refund/refundEdit"; 
+	}
+	
+	/**
+	 * 获取一条记录详细信息，用来填充修改界面
+	 * @return
+	 */
+	@RequestMapping("/getOne")
+	@ResponseBody
+	public Dto getrefundById(@RequestParam("rowId")String rowId)
+	{
+		Dto param = new BaseDto();
+		param.put("rowId", rowId);
+		return refundAction.findOne(param);
+	}
+	
+	/**
+	 * 保存新增或修改的记录，将其持久化到数据库中
+	 * @return
+	 */
+	@RequestMapping("/save")
+	@ResponseBody
+	private Map<String,String> saverefundInfo(HttpServletRequest request)
+	{
+		Map<String,String> map=new HashMap<String,String>();
+		
+		Dto param = getParamAsDto(request);
+		if(param.get("rowId") ==null ||"".equals(param.get("rowId")))
+		{
+			refundAction.insertObject(param);
+			map.put(MESSAGE_INFO, "新增成功！");
+		}
+		else
+		{
+			refundAction.updateObject(param);
+			map.put(MESSAGE_INFO, "更新成功！");
+		}
+		map.put(RTN_RESULT, "true");
+		
+		return map;
+	}
+	
+	/**
+	*删除一条或多条记录
+	*/
+	@RequestMapping(value="/del")
+	@ResponseBody
+	public Map<String, String> deleterefund(@RequestParam("rowId") String rowId) {
+		Map<String, String> map = new HashMap<String, String>();
+		Dto param = new BaseDto();
+		param.put("rowId", rowId);
+		refundAction.deleteObject(param);
+		
+		map.put(RTN_RESULT, "true");
+		map.put(MESSAGE_INFO, "操作成功！");
+		
+		return map;
+	}
+	
+	/**
+	 * 修改退货单的退款状态为已退款
+	 * @param returnId
+	 * @return
+	 */
+	@RequestMapping(value="ok")
+	@ResponseBody
+	public Map<String,String> ok(String returnId)
+	{
+		System.out.println(returnId);
+		Map<String, String> map = new HashMap<String, String>();
+		Dto param = new BaseDto();
+		param.put("returnId", returnId);
+		param.put("refundState", "1");
+		
+		LoginUser user = UserUtils.getUser();
+		String loginId = String.valueOf(user.getUserId());
+		param.put("modifiedBy", loginId);
+		param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+		Dto versionParam = new BaseDto();
+		versionParam.put("returnId", returnId);
+		Dto versionResult = refundAction.findOne(versionParam);
+		int version = 1;
+		
+		// 如果version为null时，将version置为2 (防止插入数据时没有为version赋值)
+		if(versionResult.get("version") == null || "".equals(versionResult.get("version"))){
+			version = 2;
+		}else {
+			version = Integer.parseInt(versionResult.get("version").toString())+1;
+		}
+		
+		param.put("version", version);
+		refundAction.updateObject(param);
+		map.put(RTN_RESULT, "true");
+		map.put(MESSAGE_INFO, "操作成功！");
+		return map;
+	}
+	
+	/**
+	 * 修改退货单的退款状态为未退款
+	 * @param returnId
+	 * @return
+	 */
+	@RequestMapping(value="ok1")
+	@ResponseBody
+	public Map<String,String> ok1(String returnId)
+	{
+		System.out.println(returnId);
+		Map<String, String> map = new HashMap<String, String>();
+		Dto param = new BaseDto();
+		param.put("returnId", returnId);
+		param.put("refundState", "0");
+		
+		LoginUser user = UserUtils.getUser();
+		String loginId = String.valueOf(user.getUserId());
+		param.put("modifiedBy", loginId);
+		param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+		Dto versionParam = new BaseDto();
+		versionParam.put("returnId", returnId);
+		Dto versionResult = refundAction.findOne(versionParam);
+		int version = 1;
+		
+		// 如果version为null时，将version置为2 (防止插入数据时没有为version赋值)
+		if(versionResult.get("version") == null || "".equals(versionResult.get("version"))){
+			version = 2;
+		}else {
+			version = Integer.parseInt(versionResult.get("version").toString())+1;
+		}
+		
+		param.put("version", version);
+		refundAction.updateObject(param);
+		map.put(RTN_RESULT, "true");
+		map.put(MESSAGE_INFO, "操作成功！");
+		return map;
+	}
+	
+	/**
+	 * 修改退货单的退款状态为作废
+	 * @param returnId
+	 * @return
+	 */
+	@RequestMapping(value="ok2")
+	@ResponseBody
+	public Map<String,String> ok2(String returnId)
+	{
+		System.out.println(returnId);
+		Map<String, String> map = new HashMap<String, String>();
+		Dto param = new BaseDto();
+		param.put("returnId", returnId);
+		param.put("refundState", "2");
+		
+		LoginUser user = UserUtils.getUser();
+		String loginId = String.valueOf(user.getUserId());
+		param.put("modifiedBy", loginId);
+		param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+		Dto versionParam = new BaseDto();
+		versionParam.put("returnId", returnId);
+		Dto versionResult = refundAction.findOne(versionParam);
+		int version = 1;
+		
+		// 如果version为null时，将version置为2 (防止插入数据时没有为version赋值)
+		if(versionResult.get("version") == null || "".equals(versionResult.get("version"))){
+			version = 2;
+		}else {
+			version = Integer.parseInt(versionResult.get("version").toString())+1;
+		}
+		
+		param.put("version", version);
+		refundAction.updateObject(param);
+		map.put(RTN_RESULT, "true");
+		map.put(MESSAGE_INFO, "操作成功！");
+		return map;
+	}
+	
+	/**
+	 *修改退货单的结算状态为已结算
+	 * @param returnId
+	 * @return
+	 */
+	@RequestMapping(value="ok3")
+	@ResponseBody
+	public Map<String,String> ok3(String returnId)
+	{
+		System.out.println(returnId);
+		Map<String, String> map = new HashMap<String, String>();
+		Dto param = new BaseDto();
+		param.put("returnId", returnId);
+		param.put("balanceState", "1");
+		
+		LoginUser user = UserUtils.getUser();
+		String loginId = String.valueOf(user.getUserId());
+		param.put("modifiedBy", loginId);
+		param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+		Dto versionParam = new BaseDto();
+		versionParam.put("returnId", returnId);
+		Dto versionResult = refundAction.findOne(versionParam);
+		int version = 1;
+		
+		// 如果version为null时，将version置为2 (防止插入数据时没有为version赋值)
+		if(versionResult.get("version") == null || "".equals(versionResult.get("version"))){
+			version = 2;
+		}else {
+			version = Integer.parseInt(versionResult.get("version").toString())+1;
+		}
+		
+		param.put("version", version);
+		refundAction.updateObject(param);
+		map.put(RTN_RESULT, "true");
+		map.put(MESSAGE_INFO, "操作成功！");
+		return map;
+	}
+	
+	/**
+	 *修改退货单的结算状态为未结算
+	 * @param returnId
+	 * @return
+	 */
+	@RequestMapping(value="ok4")
+	@ResponseBody
+	public Map<String,String> ok4(String returnId)
+	{
+		System.out.println(returnId);
+		Map<String, String> map = new HashMap<String, String>();
+		Dto param = new BaseDto();
+		param.put("returnId", returnId);
+		param.put("balanceState", "0");
+		
+		LoginUser user = UserUtils.getUser();
+		String loginId = String.valueOf(user.getUserId());
+		param.put("modifiedBy", loginId);
+		param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+		Dto versionParam = new BaseDto();
+		versionParam.put("returnId", returnId);
+		Dto versionResult = refundAction.findOne(versionParam);
+		int version = 1;
+		
+		// 如果version为null时，将version置为2 (防止插入数据时没有为version赋值)
+		if(versionResult.get("version") == null || "".equals(versionResult.get("version"))){
+			version = 2;
+		}else {
+			version = Integer.parseInt(versionResult.get("version").toString())+1;
+		}
+		
+		param.put("version", version);
+		refundAction.updateObject(param);
+		map.put(RTN_RESULT, "true");
+		map.put(MESSAGE_INFO, "操作成功！");
+		return map;
+	}
+	
+	/**
+	 *修改退货单的结算状态为作废
+	 * @param returnId
+	 * @return
+	 */
+	@RequestMapping(value="ok5")
+	@ResponseBody
+	public Map<String,String> ok5(String returnId)
+	{
+		System.out.println(returnId);
+		Map<String, String> map = new HashMap<String, String>();
+		Dto param = new BaseDto();
+		param.put("returnId", returnId);
+		param.put("balanceState", "2");
+		
+		LoginUser user = UserUtils.getUser();
+		String loginId = String.valueOf(user.getUserId());
+		param.put("modifiedBy", loginId);
+		param.put("modifiedTime", TKDateTimeUtils.getTodayTimeStamp());
+		Dto versionParam = new BaseDto();
+		versionParam.put("returnId", returnId);
+		Dto versionResult = refundAction.findOne(versionParam);
+		int version = 1;
+		
+		// 如果version为null时，将version置为2 (防止插入数据时没有为version赋值)
+		if(versionResult.get("version") == null || "".equals(versionResult.get("version"))){
+			version = 2;
+		}else {
+			version = Integer.parseInt(versionResult.get("version").toString())+1;
+		}
+		
+		param.put("version", version);
+		refundAction.updateObject(param);
+		map.put(RTN_RESULT, "true");
+		map.put(MESSAGE_INFO, "操作成功！");
+		return map;
+	}
+}
+

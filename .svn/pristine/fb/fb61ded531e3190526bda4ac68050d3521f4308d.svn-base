@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Picture">
+	<resultMap id="pictureResultMap" type="com.taikang.iu.biz.picture.model.PictureBO">
+		<result property="pictureId" column="PICTURE_ID"/>
+		<result property="applianceId" column="APPLIANCE_ID"/>
+		<result property="skuId" column="SKU_ID"/>
+		<result property="applianceCode" column="APPLIANCE_CODE"/>
+		<result property="pictureAddress" column="PICTURE_ADDRESS"/>
+		<result property="sort" column="SORT"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="pictureWhereCondition">
+		<where>
+	  	<if test=" picture_id != null and picture_id != '' and picture_id != 'null' ">
+			<![CDATA[ AND A.PICTURE_ID = #{picture_id} ]]>
+	  	</if>
+	  	<if test=" appliance_id != null and appliance_id != '' and appliance_id != 'null' ">
+			<![CDATA[ AND A.APPLIANCE_ID = #{appliance_id} ]]>
+	  	</if>
+	  	<if test=" sku_id != null and sku_id != '' and sku_id != 'null' ">
+			<![CDATA[ AND A.SKU_ID = #{sku_id} ]]>
+	  	</if>
+	  	<if test=" appliance_code != null and appliance_code != '' and appliance_code != 'null' ">
+			<![CDATA[ AND A.APPLIANCE_CODE = #{appliance_code} ]]>
+	  	</if>
+	  	<if test=" picture_address != null and picture_address != '' and picture_address != 'null' ">
+			<![CDATA[ AND A.PICTURE_ADDRESS = #{picture_address} ]]>
+	  	</if>
+	  	<if test=" sort != null ">
+	  		<![CDATA[ AND A.SORT = ${sort} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addPicture"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO BIZ_PICTURE
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" picture_id  != null and  picture_id  != ''  and  picture_id  != 'null' ">
+				<![CDATA[ PICTURE_ID , ]]>
+	  		</if>
+	  		<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+				<![CDATA[ APPLIANCE_ID , ]]>
+	  		</if>
+	  		<if test=" sku_id  != null and  sku_id  != ''  and  sku_id  != 'null' ">
+				<![CDATA[ SKU_ID , ]]>
+	  		</if>
+	  		<if test=" appliance_code  != null and  appliance_code  != ''  and  appliance_code  != 'null' ">
+				<![CDATA[ APPLIANCE_CODE , ]]>
+	  		</if>
+	  		<if test=" picture_address  != null and  picture_address  != ''  and  picture_address  != 'null' ">
+				<![CDATA[ PICTURE_ADDRESS , ]]>
+	  		</if>
+	  		<if test=" sort  != null ">
+				<![CDATA[ SORT , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" picture_id  != null and  picture_id  != ''  and  picture_id  != 'null' ">
+	  			<![CDATA[ #{picture_id} , ]]>
+	  		</if>
+	  		<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+	  			<![CDATA[ #{appliance_id} , ]]>
+	  		</if>
+	  		<if test=" sku_id  != null and  sku_id  != ''  and  sku_id  != 'null' ">
+	  			<![CDATA[ #{sku_id} , ]]>
+	  		</if>
+	  		<if test=" appliance_code  != null and  appliance_code  != ''  and  appliance_code  != 'null' ">
+	  			<![CDATA[ #{appliance_code} , ]]>
+	  		</if>
+	  		<if test=" picture_address  != null and  picture_address  != ''  and  picture_address  != 'null' ">
+	  			<![CDATA[ #{picture_address} , ]]>
+	  		</if>
+	  		<if test=" sort  != null">
+	    		<![CDATA[ ${sort} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updatePicture" parameterType="java.util.Map">
+		<![CDATA[ UPDATE BIZ_PICTURE A ]]>
+		<set>
+	  	<if test=" appliance_id  != null and  appliance_id  != ''  and  appliance_id  != 'null' ">
+	  		<![CDATA[ A.APPLIANCE_ID = #{appliance_id}, ]]>
+	  	</if>
+	  	<if test=" sku_id  != null and  sku_id  != ''  and  sku_id  != 'null' ">
+	  		<![CDATA[ A.SKU_ID = #{sku_id}, ]]>
+	  	</if>
+	  	<if test=" appliance_code  != null and  appliance_code  != ''  and  appliance_code  != 'null' ">
+	  		<![CDATA[ A.APPLIANCE_CODE = #{appliance_code}, ]]>
+	  	</if>
+	  	<if test=" picture_address  != null and  picture_address  != ''  and  picture_address  != 'null' ">
+	  		<![CDATA[ A.PICTURE_ADDRESS = #{picture_address}, ]]>
+	  	</if>
+		<if test=" sort  != null ">
+  			<![CDATA[ A.SORT = ${sort} , ]]>
+		</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.PICTURE_ID = #{picture_id}]]>
+  	</update>
+  
+  	<delete id="deletePicture" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM BIZ_PICTURE  where PICTURE_ID = #{picture_id} ]]>
+	</delete>
+  
+	<select id="findOnePicture" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM BIZ_PICTURE A  ]]>
+		<include refid="pictureWhereCondition" />
+  	</select>
+    
+  	<select id="findAllPicture" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM BIZ_PICTURE A ]]>
+		<include refid="pictureWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapPicture" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM BIZ_PICTURE A ]]>
+		<include refid="pictureWhereCondition" />
+	</select>
+  
+  	<select id="findPictureTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM BIZ_PICTURE A ]]>
+		<include refid="pictureWhereCondition" />
+  	</select>
+  
+  	<select id="queryPictureForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		<![CDATA[ SELECT A.* FROM BIZ_PICTURE A ]]>
+		<include refid="pictureWhereCondition" />
+  	</select>
+</mapper>

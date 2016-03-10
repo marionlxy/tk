@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Employee">
+	<resultMap id="employeeResultMap" type="com.taikang.iu.opt.employee.model.EmployeeBO">
+		<result property="employeeId" column="EMPLOYEE_ID"/>
+		<result property="userId" column="User_Id"/>
+		<result property="employeeCode" column="EMPLOYEE_CODE"/>
+		<result property="employeeTel" column="EMPLOYEE_TEL"/>
+		<result property="employeeName" column="EMPLOYEE_NAME"/>
+		<result property="employeeSex" column="EMPLOYEE_SEX"/>
+		<result property="employeeAddress" column="EMPLOYEE_ADDRESS"/>
+		<result property="openId" column="OPEN_ID"/>
+		<result property="site" column="SITE"/>
+		<result property="recommendCode" column="RECOMMEND_CODE"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="employeeWhereCondition">
+		<where>
+	  	<if test=" employee_id != null and employee_id != '' and employee_id != 'null' ">
+			<![CDATA[ AND A.EMPLOYEE_ID = #{employee_id} ]]>
+	  	</if>
+	  	<if test=" user_id != null ">
+	  		<![CDATA[ AND A.User_Id = ${user_id} ]]>
+	  	</if>
+	  	<if test=" employee_code != null and employee_code != '' and employee_code != 'null' ">
+			<![CDATA[ AND A.EMPLOYEE_CODE = #{employee_code} ]]>
+	  	</if>
+	  	<if test=" employee_tel != null and employee_tel != '' and employee_tel != 'null' ">
+			<![CDATA[ AND A.EMPLOYEE_TEL = #{employee_tel} ]]>
+	  	</if>
+	  	<if test=" employee_name != null and employee_name != '' and employee_name != 'null' ">
+			<![CDATA[ AND A.EMPLOYEE_NAME = #{employee_name} ]]>
+	  	</if>
+	  	<if test=" employee_sex != null and employee_sex != '' and employee_sex != 'null' ">
+			<![CDATA[ AND A.EMPLOYEE_SEX = #{employee_sex} ]]>
+	  	</if>
+	  	<if test=" employee_address != null and employee_address != '' and employee_address != 'null' ">
+			<![CDATA[ AND A.EMPLOYEE_ADDRESS = #{employee_address} ]]>
+	  	</if>
+	  	<if test=" open_id != null and open_id != '' and open_id != 'null' ">
+			<![CDATA[ AND A.OPEN_ID = #{open_id} ]]>
+	  	</if>
+	  	<if test=" site != null and site != '' and site != 'null' ">
+			<![CDATA[ AND A.SITE = #{site} ]]>
+	  	</if>
+	  	<if test=" recommend_code != null and recommend_code != '' and recommend_code != 'null' ">
+			<![CDATA[ AND A.RECOMMEND_CODE = #{recommend_code} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addEmployee"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO OPT_EMPLOYEE
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" employee_id  != null and  employee_id  != ''  and  employee_id  != 'null' ">
+				<![CDATA[ EMPLOYEE_ID , ]]>
+	  		</if>
+	  		<if test=" user_id  != null ">
+				<![CDATA[ User_Id , ]]>
+	  		</if>
+	  		<if test=" employee_code  != null and  employee_code  != ''  and  employee_code  != 'null' ">
+				<![CDATA[ EMPLOYEE_CODE , ]]>
+	  		</if>
+	  		<if test=" employee_tel  != null and  employee_tel  != ''  and  employee_tel  != 'null' ">
+				<![CDATA[ EMPLOYEE_TEL , ]]>
+	  		</if>
+	  		<if test=" employee_name  != null and  employee_name  != ''  and  employee_name  != 'null' ">
+				<![CDATA[ EMPLOYEE_NAME , ]]>
+	  		</if>
+	  		<if test=" employee_sex  != null and  employee_sex  != ''  and  employee_sex  != 'null' ">
+				<![CDATA[ EMPLOYEE_SEX , ]]>
+	  		</if>
+	  		<if test=" employee_address  != null and  employee_address  != ''  and  employee_address  != 'null' ">
+				<![CDATA[ EMPLOYEE_ADDRESS , ]]>
+	  		</if>
+	  		<if test=" open_id  != null and  open_id  != ''  and  open_id  != 'null' ">
+				<![CDATA[ OPEN_ID , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+				<![CDATA[ SITE , ]]>
+	  		</if>
+	  		<if test=" recommend_code != null and recommend_code != '' and recommend_code != 'null' ">
+				<![CDATA[ A.RECOMMEND_CODE ,]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" employee_id  != null and  employee_id  != ''  and  employee_id  != 'null' ">
+	  			<![CDATA[ #{employee_id} , ]]>
+	  		</if>
+	  		<if test=" user_id  != null">
+	    		<![CDATA[ ${user_id} , ]]>
+	  		</if>
+	  		<if test=" employee_code  != null and  employee_code  != ''  and  employee_code  != 'null' ">
+	  			<![CDATA[ #{employee_code} , ]]>
+	  		</if>
+	  		<if test=" employee_tel  != null and  employee_tel  != ''  and  employee_tel  != 'null' ">
+	  			<![CDATA[ #{employee_tel} , ]]>
+	  		</if>
+	  		<if test=" employee_name  != null and  employee_name  != ''  and  employee_name  != 'null' ">
+	  			<![CDATA[ #{employee_name} , ]]>
+	  		</if>
+	  		<if test=" employee_sex  != null and  employee_sex  != ''  and  employee_sex  != 'null' ">
+	  			<![CDATA[ #{employee_sex} , ]]>
+	  		</if>
+	  		<if test=" employee_address  != null and  employee_address  != ''  and  employee_address  != 'null' ">
+	  			<![CDATA[ #{employee_address} , ]]>
+	  		</if>
+	  		<if test=" open_id  != null and  open_id  != ''  and  open_id  != 'null' ">
+	  			<![CDATA[ #{open_id} , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  			<![CDATA[ #{site} , ]]>
+	  		</if>
+	  		<if test=" recommend_code != null and recommend_code != '' and recommend_code != 'null' ">
+				<![CDATA[ #{recommend_code}, ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateEmployee" parameterType="java.util.Map">
+		<![CDATA[ UPDATE OPT_EMPLOYEE A ]]>
+		<set>
+		<if test=" user_id  != null ">
+  			<![CDATA[ A.User_Id = ${user_id} , ]]>
+		</if>
+	  	<if test=" employee_code  != null and  employee_code  != ''  and  employee_code  != 'null' ">
+	  		<![CDATA[ A.EMPLOYEE_CODE = #{employee_code}, ]]>
+	  	</if>
+	  	<if test=" employee_tel  != null and  employee_tel  != ''  and  employee_tel  != 'null' ">
+	  		<![CDATA[ A.EMPLOYEE_TEL = #{employee_tel}, ]]>
+	  	</if>
+	  	<if test=" employee_name  != null and  employee_name  != ''  and  employee_name  != 'null' ">
+	  		<![CDATA[ A.EMPLOYEE_NAME = #{employee_name}, ]]>
+	  	</if>
+	  	<if test=" employee_sex  != null and  employee_sex  != ''  and  employee_sex  != 'null' ">
+	  		<![CDATA[ A.EMPLOYEE_SEX = #{employee_sex}, ]]>
+	  	</if>
+	  	<if test=" employee_address  != null and  employee_address  != ''  and  employee_address  != 'null' ">
+	  		<![CDATA[ A.EMPLOYEE_ADDRESS = #{employee_address}, ]]>
+	  	</if>
+	  	<if test=" open_id  != null and  open_id  != ''  and  open_id  != 'null' ">
+	  		<![CDATA[ A.OPEN_ID = #{open_id}, ]]>
+	  	</if>
+	  	<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  		<![CDATA[ A.SITE = #{site}, ]]>
+	  	</if>
+	  		<if test=" recommend_code != null and recommend_code != '' and recommend_code != 'null' ">
+			<![CDATA[ A.RECOMMEND_CODE = #{recommend_code},]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.EMPLOYEE_ID = #{employee_id}]]>
+  	</update>
+  
+  	<delete id="deleteEmployee" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM OPT_EMPLOYEE where EMPLOYEE_ID = #{employee_id}]]>
+		<if test=" user_id  != null ">
+  			<![CDATA[AND User_Id = ${user_id} ]]>
+		</if>
+	</delete>
+  
+	<select id="findOneEmployee" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM OPT_EMPLOYEE A  ]]>
+		<include refid="employeeWhereCondition" />
+  	</select>
+    
+  	<select id="findAllEmployee" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM OPT_EMPLOYEE A ]]>
+		<include refid="employeeWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapEmployee" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM OPT_EMPLOYEE A ]]>
+		<include refid="employeeWhereCondition" />
+	</select>
+  
+  	<select id="findEmployeeTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM OPT_EMPLOYEE A ]]>
+		<include refid="employeeWhereCondition" />
+  	</select>
+  
+  	<select id="queryEmployeeForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT A.* FROM OPT_EMPLOYEE A
+		WHERE 1=1 and user_id in (select B.user_id from bsc_user_role_t B where role_id = 1330)
+		  <if test=" employeeCode != null and employeeCode != '' and employeeCode != 'null' ">
+            <![CDATA[ AND A.EMPLOYEE_CODE like concat('%', #{employeeCode}, '%') ]]>
+        </if> 
+        <if test=" employeeName!= null and employeeName != '' and employeeName != 'null' ">
+            <![CDATA[ AND A.EMPLOYEE_NAME like concat('%', #{employeeName}, '%') ]]>
+        </if> 
+		 ORDER BY CREATED_TIME DESC 
+  	</select>
+  	 <select id="finAllEmp" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+			 SELECT  A.EMPLOYEE_CODE,A.EMPLOYEE_TEL,A.EMPLOYEE_NAME FROM OPT_EMPLOYEE A WHERE A.USER_ID IN(SELECT B.USER_ID  FROM BSC_USER_T B WHERE B.USER_TYPE='1')
+	
+  	</select>
+  	<select id="finAllEmpTS" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+  			SELECT A.EMPLOYEE_CODE,A.EMPLOYEE_TEL,A.EMPLOYEE_NAME FROM OPT_EMPLOYEE A , BSC_USER_ROLE_T R WHERE R.USER_ID = A.USER_ID AND R.ROLE_ID = 1479
+	
+  	</select>
+</mapper>

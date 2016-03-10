@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="operation">
+	<resultMap id="operationResultMap" type="com.taikang.iu.opt.operation.model.operationBO">
+		<result property="complainId" column="COMPLAIN_ID"/>
+		<result property="complainNum" column="COMPLAIN_NUM"/>
+		<result property="complainName" column="COMPLAIN_NAME"/>
+		<result property="complainTel" column="COMPLAIN_TEL"/>
+		<result property="complainMsg" column="COMPLAIN_MSG"/>
+		<result property="disposeMsg" column="DISPOSE_MSG"/>
+		<result property="subOrder" column="SUB_ORDER"/>
+		<result property="complainType" column="COMPLAIN_TYPE"/>
+		<result property="complainState" column="COMPLAIN_STATE"/>
+		<result property="disposeName" column="DISPOSE_NAME"/>
+		<result property="disposeTime" column="DISPOSE_TIME"/>
+		<result property="site" column="SITE"/>
+		<result property="createdTime" column="CREATED_TIME"/>
+		<result property="createdBy" column="CREATED_BY"/>
+		<result property="modifiedTime" column="MODIFIED_TIME"/>
+		<result property="modifiedBy" column="MODIFIED_BY"/>
+		<result property="version" column="VERSION"/>
+		<result property="delflag" column="DELFLAG"/>
+  	</resultMap>
+  
+  	<sql id="operationWhereCondition">
+		<where>
+	  	<if test=" complain_id != null and complain_id != '' and complain_id != 'null' ">
+			<![CDATA[ AND A.COMPLAIN_ID = #{complain_id} ]]>
+	  	</if>
+	  	<if test=" complain_num != null and complain_num != '' and complain_num != 'null' ">
+			<![CDATA[ AND A.COMPLAIN_NUM = #{complain_num} ]]>
+	  	</if>
+	  	<if test=" complain_name != null and complain_name != '' and complain_name != 'null' ">
+			<![CDATA[ AND A.COMPLAIN_NAME = #{complain_name} ]]>
+	  	</if>
+	  	<if test=" complain_tel != null and complain_tel != '' and complain_tel != 'null' ">
+			<![CDATA[ AND A.COMPLAIN_TEL = #{complain_tel} ]]>
+	  	</if>
+	  	<if test=" complain_msg != null and complain_msg != '' and complain_msg != 'null' ">
+			<![CDATA[ AND A.COMPLAIN_MSG = #{complain_msg} ]]>
+	  	</if>
+	  	<if test=" dispose_msg != null and dispose_msg != '' and dispose_msg != 'null' ">
+			<![CDATA[ AND A.DISPOSE_MSG = #{dispose_msg} ]]>
+	  	</if>
+	  	<if test=" sub_order != null and sub_order != '' and sub_order != 'null' ">
+			<![CDATA[ AND A.SUB_ORDER = #{sub_order} ]]>
+	  	</if>
+	  	<if test=" complain_type != null and complain_type != '' and complain_type != 'null' ">
+			<![CDATA[ AND A.COMPLAIN_TYPE = #{complain_type} ]]>
+	  	</if>
+	  	<if test=" complain_state != null and complain_state != '' and complain_state != 'null' ">
+			<![CDATA[ AND A.COMPLAIN_STATE = #{complain_state} ]]>
+	  	</if>
+	  	<if test=" dispose_name != null and dispose_name != '' and dispose_name != 'null' ">
+			<![CDATA[ AND A.DISPOSE_NAME = #{dispose_name} ]]>
+	  	</if>
+	  	<if test=" dispose_time != null and dispose_time != '' and dispose_time  != 'null' ">
+	    	<![CDATA[ AND A.DISPOSE_TIME = DATE_FORMAT(#{dispose_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" site != null and site != '' and site  != 'null' ">
+	    	<![CDATA[  AND A.SITE = #{site} ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ AND A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" created_by != null and created_by != '' and created_by != 'null' ">
+			<![CDATA[ AND A.CREATED_BY = #{created_by} ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ AND A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s') ]]>
+	  	</if>
+	  	<if test=" modified_by != null and modified_by != '' and modified_by != 'null' ">
+			<![CDATA[ AND A.MODIFIED_BY = #{modified_by} ]]>
+	  	</if>
+	  	<if test=" version != null ">
+	  		<![CDATA[ AND A.VERSION = ${version} ]]>
+	  	</if>
+	  	<if test=" delflag != null and delflag != '' and delflag != 'null' ">
+			<![CDATA[ AND A.DELFLAG = #{delflag} ]]>
+	  	</if>
+		</where>
+  	</sql>
+
+  	<insert id="addoperation"  parameterType="java.util.Map">
+		<![CDATA[
+	  	INSERT INTO OPT_COMPLAIN
+		]]>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" complain_id  != null and  complain_id  != ''  and  complain_id  != 'null' ">
+				<![CDATA[ COMPLAIN_ID , ]]>
+	  		</if>
+	  		<if test=" complain_num  != null and  complain_num  != ''  and  complain_num  != 'null' ">
+				<![CDATA[ COMPLAIN_NUM , ]]>
+	  		</if>
+	  		<if test=" complain_name  != null and  complain_name  != ''  and  complain_name  != 'null' ">
+				<![CDATA[ COMPLAIN_NAME , ]]>
+	  		</if>
+	  		<if test=" complain_tel  != null and  complain_tel  != ''  and  complain_tel  != 'null' ">
+				<![CDATA[ COMPLAIN_TEL , ]]>
+	  		</if>
+	  		<if test=" complain_msg  != null and  complain_msg  != ''  and  complain_msg  != 'null' ">
+				<![CDATA[ COMPLAIN_MSG , ]]>
+	  		</if>
+	  		<if test=" dispose_msg  != null and  dispose_msg  != ''  and  dispose_msg  != 'null' ">
+				<![CDATA[ DISPOSE_MSG , ]]>
+	  		</if>
+	  		<if test=" sub_order  != null and  sub_order  != ''  and  sub_order  != 'null' ">
+				<![CDATA[ SUB_ORDER , ]]>
+	  		</if>
+	  		<if test=" complain_type  != null and  complain_type  != ''  and  complain_type  != 'null' ">
+				<![CDATA[ COMPLAIN_TYPE , ]]>
+	  		</if>
+	  		<if test=" complain_state  != null and  complain_state  != ''  and  complain_state  != 'null' ">
+				<![CDATA[ COMPLAIN_STATE , ]]>
+	  		</if>
+	  		<if test=" dispose_name  != null and  dispose_name  != ''  and  dispose_name  != 'null' ">
+				<![CDATA[ DISPOSE_NAME , ]]>
+	  		</if>
+	  		<if test=" dispose_time  != null and  dispose_time  != ''  and  dispose_time  != 'null' ">
+				<![CDATA[ DISPOSE_TIME , ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+				<![CDATA[ SITE , ]]>
+	  		</if>
+	  		<if test=" created_time  != null and  created_time  != ''  and  created_time  != 'null' ">
+				<![CDATA[ CREATED_TIME , ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+				<![CDATA[ CREATED_BY , ]]>
+	  		</if>
+	  		<if test=" modified_time  != null and  modified_time  != ''  and  modified_time  != 'null' ">
+				<![CDATA[ MODIFIED_TIME , ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+				<![CDATA[ MODIFIED_BY , ]]>
+	  		</if>
+	  		<if test=" version  != null ">
+				<![CDATA[ VERSION , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+				<![CDATA[ DELFLAG , ]]>
+	  		</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+	  		<if test=" complain_id  != null and  complain_id  != ''  and  complain_id  != 'null' ">
+	  			<![CDATA[ #{complain_id} , ]]>
+	  		</if>
+	  		<if test=" complain_num  != null and  complain_num  != ''  and  complain_num  != 'null' ">
+	  			<![CDATA[ #{complain_num} , ]]>
+	  		</if>
+	  		<if test=" complain_name  != null and  complain_name  != ''  and  complain_name  != 'null' ">
+	  			<![CDATA[ #{complain_name} , ]]>
+	  		</if>
+	  		<if test=" complain_tel  != null and  complain_tel  != ''  and  complain_tel  != 'null' ">
+	  			<![CDATA[ #{complain_tel} , ]]>
+	  		</if>
+	  		<if test=" complain_msg  != null and  complain_msg  != ''  and  complain_msg  != 'null' ">
+	  			<![CDATA[ #{complain_msg} , ]]>
+	  		</if>
+	  		<if test=" dispose_msg  != null and  dispose_msg  != ''  and  dispose_msg  != 'null' ">
+	  			<![CDATA[ #{dispose_msg} , ]]>
+	  		</if>
+	  		<if test=" sub_order  != null and  sub_order  != ''  and  sub_order  != 'null' ">
+	  			<![CDATA[ #{sub_order} , ]]>
+	  		</if>
+	  		<if test=" complain_type  != null and  complain_type  != ''  and  complain_type  != 'null' ">
+	  			<![CDATA[ #{complain_type} , ]]>
+	  		</if>
+	  		<if test=" complain_state  != null and  complain_state  != ''  and  complain_state  != 'null' ">
+	  			<![CDATA[ #{complain_state} , ]]>
+	  		</if>
+	  		<if test=" dispose_name  != null and  dispose_name  != ''  and  dispose_name  != 'null' ">
+	  			<![CDATA[ #{dispose_name} , ]]>
+	  		</if>
+	  		<if test=" dispose_time != null and dispose_time != '' and dispose_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{dispose_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  			<![CDATA[ #{SITE} , ]]>
+	  		</if>
+	  		<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  			<![CDATA[ #{created_by} , ]]>
+	  		</if>
+	  		<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    		<![CDATA[ DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  		</if>
+	  		<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  			<![CDATA[ #{modified_by} , ]]>
+	  		</if>
+	  		<if test=" version  != null">
+	    		<![CDATA[ ${version} , ]]>
+	  		</if>
+	  		<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  			<![CDATA[ #{delflag} , ]]>
+	  		</if>
+		</trim>
+  	</insert>
+ 
+  	<update id="updateoperation" parameterType="java.util.Map">
+		<![CDATA[ UPDATE OPT_COMPLAIN A ]]>
+		<set>
+	  	<if test=" complain_num  != null and  complain_num  != ''  and  complain_num  != 'null' ">
+	  		<![CDATA[ A.COMPLAIN_NUM = #{complain_num}, ]]>
+	  	</if>
+	  	<if test=" complain_name  != null and  complain_name  != ''  and  complain_name  != 'null' ">
+	  		<![CDATA[ A.COMPLAIN_NAME = #{complain_name}, ]]>
+	  	</if>
+	  	<if test=" complain_tel  != null and  complain_tel  != ''  and  complain_tel  != 'null' ">
+	  		<![CDATA[ A.COMPLAIN_TEL = #{complain_tel}, ]]>
+	  	</if>
+	  	<if test=" complain_msg  != null and  complain_msg  != ''  and  complain_msg  != 'null' ">
+	  		<![CDATA[ A.COMPLAIN_MSG = #{complain_msg}, ]]>
+	  	</if>
+	  	<if test=" dispose_msg  != null and  dispose_msg  != ''  and  dispose_msg  != 'null' ">
+	  		<![CDATA[ A.DISPOSE_MSG = #{dispose_msg}, ]]>
+	  	</if>
+	  	<if test=" sub_order  != null and  sub_order  != ''  and  sub_order  != 'null' ">
+	  		<![CDATA[ A.SUB_ORDER = #{sub_order}, ]]>
+	  	</if>
+	  	<if test=" complain_type  != null and  complain_type  != ''  and  complain_type  != 'null' ">
+	  		<![CDATA[ A.COMPLAIN_TYPE = #{complain_type}, ]]>
+	  	</if>
+	  	<if test=" complain_state  != null and  complain_state  != ''  and  complain_state  != 'null' ">
+	  		<![CDATA[ A.COMPLAIN_STATE = #{complain_state}, ]]>
+	  	</if>
+	  	<if test=" dispose_name  != null and  dispose_name  != ''  and  dispose_name  != 'null' ">
+	  		<![CDATA[ A.DISPOSE_NAME = #{dispose_name}, ]]>
+	  	</if>
+	  	<if test=" dispose_time != null and dispose_time != '' and dispose_time  != 'null' ">
+	    	<![CDATA[ A.DISPOSE_TIME = DATE_FORMAT(#{dispose_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" site  != null and  site  != ''  and  site  != 'null' ">
+	  		<![CDATA[ A.SITE = #{site}, ]]>
+	  	</if>
+	  	<if test=" created_time != null and created_time != '' and created_time  != 'null' ">
+	    	<![CDATA[ A.CREATED_TIME = DATE_FORMAT(#{created_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" created_by  != null and  created_by  != ''  and  created_by  != 'null' ">
+	  		<![CDATA[ A.CREATED_BY = #{created_by}, ]]>
+	  	</if>
+	  	<if test=" modified_time != null and modified_time != '' and modified_time  != 'null' ">
+	    	<![CDATA[ A.MODIFIED_TIME = DATE_FORMAT(#{modified_time},'%Y-%m-%d %H:%i:%s'), ]]>
+	  	</if>
+	  	<if test=" modified_by  != null and  modified_by  != ''  and  modified_by  != 'null' ">
+	  		<![CDATA[ A.MODIFIED_BY = #{modified_by}, ]]>
+	  	</if>
+		<if test=" version  != null ">
+  			<![CDATA[ A.VERSION = ${version} , ]]>
+		</if>
+	  	<if test=" delflag  != null and  delflag  != ''  and  delflag  != 'null' ">
+	  		<![CDATA[ A.DELFLAG = #{delflag}, ]]>
+	  	</if>
+		</set>
+		<![CDATA[ where A.COMPLAIN_ID = #{complain_id}]]>
+  	</update>
+  
+  	<delete id="deleteoperation" parameterType="java.util.Map">
+		<![CDATA[ DELETE FROM OPT_COMPLAIN  where COMPLAIN_ID = #{complain_id} ]]>
+	</delete>
+  
+	<select id="findOneoperation" parameterType="java.util.Map" resultType="java.util.Map">
+		<![CDATA[ SELECT A.* FROM OPT_COMPLAIN A  ]]>
+		<include refid="operationWhereCondition" />
+  	</select>
+    
+  	<select id="findAlloperation" parameterType="java.util.Map" resultType="java.util.Map" >
+		<![CDATA[ SELECT A.* FROM OPT_COMPLAIN A ]]>
+		<include refid="operationWhereCondition" />
+  	</select>
+  	
+  	<select id="findAllMapoperation" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto" >
+		<![CDATA[ SELECT A.* FROM OPT_COMPLAIN A ]]>
+		<include refid="operationWhereCondition" />
+	</select>
+  
+  	<select id="findoperationTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[ SELECT  COUNT(1) FROM OPT_COMPLAIN A ]]>
+		<include refid="operationWhereCondition" />
+  	</select>
+  
+<!--   	<select id="queryoperationForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto"> -->
+<!-- 		<![CDATA[ SELECT A.* FROM OPT_COMPLAIN A ]]> -->
+<!-- 		<include refid="operationWhereCondition" /> -->
+<!--   	</select> -->
+  	
+ 	<!-- 注意：查询语句要重新写 -->
+  	<select id="queryComplainByConForPage" parameterType="java.util.Map" resultType="com.taikang.udp.framework.common.datastructre.impl.BaseDto">
+		 SELECT A.* FROM OPT_COMPLAIN A
+          where 1=1 
+          AND A.DELFLAG = '0' 
+        <if test=" complainNum != null and complainNum != '' and complainNum != 'null' ">
+            <![CDATA[ AND A.Complain_Num like concat('%', #{complainNum}, '%') ]]>
+        </if> 
+        <if test=" complainName != null and complainName != '' and complainName != 'null' ">
+            <![CDATA[ AND A.Complain_Name like concat('%', #{complainName}, '%') ]]>
+        </if> 
+        <if test=" complainType  != null and  complainType  != ''  and  complainType  != 'null' ">
+			<![CDATA[ AND A.COMPLAIN_TYPE = #{complainType} ]]>
+	  		</if>
+         <if test=" complainState  != null and  complainState  != ''  and  complainState  != 'null' ">
+			<![CDATA[ AND A.COMPLAIN_STATE = #{complainState}]]>
+	  		</if>
+         <if test=" site  != null and  site  != ''  and  site  != 'null' ">
+			<![CDATA[ AND A.SITE = #{site}]]>
+	  		</if>
+          ORDER BY CREATED_TIME DESC
+  	</select>
+</mapper>
